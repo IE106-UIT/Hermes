@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UIT Portal – Hệ thống Quản lý Sinh viên</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c-indigo:#4f46e5;--c-indigo-d:#3730a3;--c-indigo-l:#e0e7ff;
+  --c-cyan:#06b6d4;--c-cyan-l:#cffafe;
+  --c-emerald:#10b981;--c-emerald-l:#d1fae5;
+  --c-amber:#f59e0b;--c-amber-l:#fef3c7;
+  --c-rose:#f43f5e;--c-rose-l:#ffe4e6;
+  --c-violet:#8b5cf6;--c-violet-l:#ede9fe;
+  --c-sky:#0ea5e9;--c-sky-l:#e0f2fe;
+
+  --bg:#f0f4ff;
+  --sb:#0c0f1e;
+  --sb2:#131629;
+  --card:#ffffff;
+  --card-border:rgba(79,70,229,0.08);
+  --txt:#0f172a;
+  --txt2:#475569;
+  --txt3:#94a3b8;
+  --divider:rgba(0,0,0,0.06);
+
+  --r:14px;--r-sm:8px;--r-lg:20px;
+  --ease:.2s cubic-bezier(.4,0,.2,1);
+  --shadow:0 1px 3px rgba(79,70,229,.06),0 4px 16px rgba(79,70,229,.08);
+  --shadow-lg:0 8px 32px rgba(79,70,229,.14),0 2px 8px rgba(0,0,0,.06);
+}
+[data-theme=dark]{
+  --bg:#080b18;--card:#0f1629;--card-border:rgba(99,102,241,.12);
+  --txt:#e2e8f0;--txt2:#94a3b8;--txt3:#475569;--divider:rgba(255,255,255,.06);
+  --sb:#060813;--sb2:#0c0f1e;
+  --c-indigo-l:rgba(79,70,229,.18);--c-cyan-l:rgba(6,182,212,.15);
+  --c-emerald-l:rgba(16,185,129,.15);--c-amber-l:rgba(245,158,11,.15);
+  --c-rose-l:rgba(244,63,94,.15);--c-violet-l:rgba(139,92,246,.18);--c-sky-l:rgba(14,165,233,.15);
+}
+
+body{font-family:'Nunito Sans',sans-serif;background:var(--bg);color:var(--txt);display:flex;min-height:100vh;transition:background var(--ease),color var(--ease)}
+h1,h2,h3,h4{font-family:'Outfit',sans-serif}
+
+/* ═══ SIDEBAR ═══ */
+.sb{width:252px;min-height:100vh;background:var(--sb);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;border-right:1px solid rgba(255,255,255,.04)}
+.sb-head{padding:24px 20px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.sb-logo{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--c-indigo),var(--c-cyan));display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:14px;color:#fff;flex-shrink:0;box-shadow:0 4px 14px rgba(79,70,229,.45)}
+.sb-brand{color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;line-height:1.2}
+.sb-sub{color:rgba(255,255,255,.35);font-size:11px;font-weight:400;margin-top:1px}
+.sb-nav{flex:1;padding:12px 0;overflow-y:auto}
+.sb-section{font-size:10px;font-weight:700;letter-spacing:.09em;color:rgba(255,255,255,.2);padding:14px 22px 6px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:11px;padding:9px 22px;color:rgba(255,255,255,.45);cursor:pointer;transition:all var(--ease);font-size:13.5px;font-weight:500;position:relative;border-radius:0}
+.nav-item:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.05)}
+.nav-item.active{color:#fff;background:linear-gradient(90deg,rgba(79,70,229,.25),rgba(79,70,229,.08));border-right:none}
+.nav-item.active::before{content:'';position:absolute;left:0;top:5px;bottom:5px;width:3px;background:linear-gradient(to bottom,var(--c-indigo),var(--c-cyan));border-radius:0 3px 3px 0}
+.nav-item svg{width:17px;height:17px;opacity:.7;flex-shrink:0}
+.nav-item.active svg{opacity:1}
+.nb{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;background:var(--c-rose);color:#fff}
+.sb-foot{padding:12px 0;border-top:1px solid rgba(255,255,255,.05)}
+.sb-user{display:flex;align-items:center;gap:10px;padding:14px 22px;cursor:pointer;border-radius:0;transition:background var(--ease)}
+.sb-user:hover{background:rgba(255,255,255,.05)}
+.sb-avatar{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;color:#fff;flex-shrink:0}
+.sb-uname{font-size:13px;font-weight:600;color:#fff}
+.sb-uid{font-size:11px;color:rgba(255,255,255,.35)}
+
+/* ═══ MAIN ═══ */
+.main{margin-left:252px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+
+/* ═══ TOPBAR ═══ */
+.topbar{height:62px;background:var(--card);border-bottom:1px solid var(--divider);display:flex;align-items:center;gap:12px;padding:0 28px;position:sticky;top:0;z-index:99;backdrop-filter:blur(12px);transition:background var(--ease)}
+.page-title{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--txt);white-space:nowrap}
+.page-breadcrumb{font-size:12px;color:var(--txt3);display:flex;align-items:center;gap:4px;margin-top:1px}
+.srch{position:relative;flex:1;max-width:440px;margin:0 auto}
+.srch input{width:100%;height:38px;background:var(--bg);border:1.5px solid var(--divider);border-radius:10px;padding:0 40px 0 38px;font-size:13.5px;color:var(--txt);font-family:'Nunito Sans',sans-serif;outline:none;transition:all var(--ease)}
+.srch input:focus{border-color:var(--c-indigo);box-shadow:0 0 0 3px rgba(79,70,229,.12)}
+.srch input::placeholder{color:var(--txt3)}
+.srch .si{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--txt3)}
+.srch .sk{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;color:var(--txt3);background:var(--divider);padding:2px 6px;border-radius:4px}
+.sdrop{position:absolute;top:calc(100%+6px);left:0;right:0;background:var(--card);border:1px solid var(--card-border);border-radius:12px;box-shadow:var(--shadow-lg);z-index:300;display:none;overflow:hidden}
+.sdrop.open{display:block;animation:fadeUp .15s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.sdrop-sec{font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--txt3);padding:8px 14px 4px;text-transform:uppercase}
+.sdrop-item{display:flex;align-items:center;gap:10px;padding:9px 14px;cursor:pointer;transition:background var(--ease);font-size:13px;color:var(--txt2)}
+.sdrop-item:hover{background:var(--bg);color:var(--txt)}
+.sdrop-ic{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+.tb-actions{display:flex;align-items:center;gap:6px}
+.ib{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;color:var(--txt2);transition:all var(--ease);border:none;background:transparent;position:relative}
+.ib:hover{background:var(--bg);color:var(--txt)}
+.ib .dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--c-rose);border-radius:50%;border:2px solid var(--card)}
+
+.theme-btn{display:flex;align-items:center;gap:6px;height:38px;padding:0 12px;border-radius:10px;background:var(--bg);border:1.5px solid var(--divider);cursor:pointer;font-size:12.5px;font-weight:600;color:var(--txt2);transition:all var(--ease)}
+.theme-btn:hover{border-color:var(--c-indigo);color:var(--c-indigo)}
+
+/* ═══ PAGE SYSTEM ═══ */
+.page{display:none;padding:28px;animation:pageIn .2s ease}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══ CARDS ═══ */
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--r);padding:22px;transition:background var(--ease),border var(--ease)}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ct{font-family:'Outfit',sans-serif;font-weight:700;font-size:14.5px;color:var(--txt)}
+.cl{font-size:12.5px;color:var(--c-indigo);cursor:pointer;display:flex;align-items:center;gap:3px;font-weight:600}
+.cl:hover{text-decoration:underline}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:1fr 1fr 1fr}
+.g4{grid-template-columns:1fr 1fr 1fr 1fr}
+
+/* ═══ STAT CARDS ═══ */
+.stat-card{border-radius:var(--r);padding:20px;position:relative;overflow:hidden;cursor:default}
+.stat-card::after{content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.1)}
+.stat-card .lbl{font-size:12px;font-weight:600;opacity:.75;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em}
+.stat-card .val{font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;line-height:1;margin-bottom:6px}
+.stat-card .sub{font-size:12px;opacity:.75}
+.sc-indigo{background:linear-gradient(135deg,#4f46e5,#6366f1);color:#fff}
+.sc-cyan{background:linear-gradient(135deg,#0891b2,#06b6d4);color:#fff}
+.sc-emerald{background:linear-gradient(135deg,#059669,#10b981);color:#fff}
+.sc-amber{background:linear-gradient(135deg,#d97706,#f59e0b);color:#fff}
+.sc-violet{background:linear-gradient(135deg,#7c3aed,#8b5cf6);color:#fff}
+.sc-rose{background:linear-gradient(135deg,#e11d48,#f43f5e);color:#fff}
+
+/* ═══ HERO ═══ */
+.hero{border-radius:var(--r-lg);padding:32px 36px;position:relative;overflow:hidden;margin-bottom:24px;background:linear-gradient(135deg,#1e1b4b 0%,#312e81 40%,#4f46e5 75%,#06b6d4 100%)}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.4),transparent 70%);pointer-events:none}
+.hero::after{content:'';position:absolute;left:40%;bottom:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(6,182,212,.3),transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hero h1{font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#fff;margin-bottom:8px;line-height:1.25}
+.hero p{font-size:14px;color:rgba(255,255,255,.7);max-width:400px;line-height:1.6}
+.hero-pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.hero-pill{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:12px;font-weight:600;padding:5px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(8px);cursor:pointer;transition:all var(--ease)}
+.hero-pill:hover{background:rgba(255,255,255,.25)}
+.hero-stats{display:flex;gap:16px;flex-shrink:0}
+.hs{background:rgba(255,255,255,.12);backdrop-filter:blur(12px);border-radius:14px;padding:14px 20px;border:1px solid rgba(255,255,255,.18);text-align:center;min-width:100px}
+.hs .v{font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;color:#fff}
+.hs .l{font-size:11px;color:rgba(255,255,255,.65);margin-top:2px}
+
+/* ═══ SCHEDULE ═══ */
+.sch-item{display:flex;gap:14px;padding:14px;border-radius:10px;cursor:pointer;transition:all var(--ease);border:1px solid transparent}
+.sch-item:hover{background:var(--bg);border-color:var(--card-border)}
+.sch-item.live{background:var(--c-emerald-l);border-color:rgba(16,185,129,.2)}
+.sch-dot{flex-shrink:0;width:46px;border-radius:10px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 4px;font-family:'Outfit',sans-serif}
+.sch-item.live .sch-dot{background:rgba(16,185,129,.15)}
+.sch-dot .dd{font-size:22px;font-weight:800;line-height:1;color:var(--txt)}
+.sch-dot .ca{font-size:9px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.04em;margin-top:2px}
+.sch-name{font-weight:700;font-size:14px;color:var(--txt);margin-bottom:6px}
+.sch-meta{display:flex;gap:14px;flex-wrap:wrap}
+.sch-meta span{font-size:12px;color:var(--txt2);display:flex;align-items:center;gap:4px}
+.sch-badge{font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:100px;flex-shrink:0;align-self:flex-start}
+.badge-live{background:var(--c-emerald-l);color:var(--c-emerald)}
+.badge-soon{background:var(--c-indigo-l);color:var(--c-indigo)}
+.badge-done{background:var(--divider);color:var(--txt3)}
+[data-theme=dark] .badge-live{background:rgba(16,185,129,.15)}
+[data-theme=dark] .badge-soon{background:rgba(79,70,229,.15)}
+
+/* ═══ NOTIF ═══ */
+.notif-item{padding:13px;border-radius:10px;cursor:pointer;border-left:3px solid transparent;transition:all var(--ease);margin-bottom:8px}
+.notif-item:hover{background:var(--bg)}
+.ni-danger{border-color:var(--c-rose);background:var(--c-rose-l)}
+[data-theme=dark] .ni-danger{background:rgba(244,63,94,.08)}
+.ni-warn{border-color:var(--c-amber)}
+.ni-info{border-color:var(--c-indigo)}
+.chip{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;letter-spacing:.04em;text-transform:uppercase}
+.ch-danger{background:var(--c-rose-l);color:var(--c-rose)}
+.ch-warn{background:var(--c-amber-l);color:var(--c-amber)}
+.ch-info{background:var(--c-indigo-l);color:var(--c-indigo)}
+.ch-cyan{background:var(--c-cyan-l);color:var(--c-cyan)}
+.ch-green{background:var(--c-emerald-l);color:var(--c-emerald)}
+[data-theme=dark] .ch-danger{background:rgba(244,63,94,.15)}
+[data-theme=dark] .ch-warn{background:rgba(245,158,11,.15)}
+[data-theme=dark] .ch-info{background:rgba(79,70,229,.15)}
+[data-theme=dark] .ch-cyan{background:rgba(6,182,212,.15)}
+[data-theme=dark] .ch-green{background:rgba(16,185,129,.15)}
+.ni-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:5px}
+.ni-title{font-size:13px;font-weight:700;color:var(--txt);margin-top:4px}
+.ni-time{font-size:11px;color:var(--txt3)}
+
+/* ═══ QUICK ACCESS ═══ */
+.qa-item{display:flex;flex-direction:column;align-items:center;gap:9px;padding:18px 8px;border-radius:12px;cursor:pointer;border:1.5px solid var(--divider);background:var(--card);transition:all var(--ease)}
+.qa-item:hover{border-color:var(--c-indigo);transform:translateY(-2px);box-shadow:0 6px 20px rgba(79,70,229,.15)}
+.qa-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all var(--ease)}
+.qa-item:hover .qa-icon{transform:scale(1.1)}
+.qa-lbl{font-size:12px;font-weight:700;color:var(--txt2);text-align:center;line-height:1.3}
+
+/* ═══ GRADES TABLE ═══ */
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px 14px;font-size:11.5px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--divider)}
+td{padding:13px 14px;font-size:13.5px;color:var(--txt);border-bottom:1px solid var(--divider)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg)}
+.grade-A{color:var(--c-emerald);font-weight:700}
+.grade-B{color:var(--c-indigo);font-weight:700}
+.grade-C{color:var(--c-amber);font-weight:700}
+.grade-F{color:var(--c-rose);font-weight:700}
+.grade-bar{height:5px;border-radius:100px;background:var(--divider);overflow:hidden;width:80px}
+.grade-fill{height:100%;border-radius:100px}
+
+/* ═══ SCHEDULE GRID ═══ */
+.week-grid{display:grid;grid-template-columns:auto repeat(6,1fr);gap:0;border:1px solid var(--divider);border-radius:var(--r);overflow:hidden}
+.wg-head{background:var(--bg);padding:10px;text-align:center;font-size:12px;font-weight:700;color:var(--txt2);border-bottom:1px solid var(--divider);border-right:1px solid var(--divider)}
+.wg-head.today{background:var(--c-indigo-l);color:var(--c-indigo)}
+.wg-time{padding:8px 12px;font-size:11px;color:var(--txt3);font-weight:600;border-bottom:1px solid var(--divider);border-right:1px solid var(--divider);background:var(--bg);text-align:right;white-space:nowrap}
+.wg-cell{padding:4px;border-bottom:1px solid var(--divider);border-right:1px solid var(--divider);min-height:52px}
+.wg-event{border-radius:7px;padding:6px 8px;font-size:11px;font-weight:600;line-height:1.3;cursor:pointer;transition:opacity var(--ease);height:100%}
+.wg-event:hover{opacity:.85}
+.ev-indigo{background:var(--c-indigo-l);color:var(--c-indigo)}
+.ev-cyan{background:var(--c-cyan-l);color:var(--c-cyan)}
+.ev-emerald{background:var(--c-emerald-l);color:var(--c-emerald)}
+.ev-violet{background:var(--c-violet-l);color:var(--c-violet)}
+.ev-amber{background:var(--c-amber-l);color:var(--c-amber)}
+[data-theme=dark] .ev-indigo{background:rgba(79,70,229,.18)}
+[data-theme=dark] .ev-cyan{background:rgba(6,182,212,.15)}
+[data-theme=dark] .ev-emerald{background:rgba(16,185,129,.15)}
+[data-theme=dark] .ev-violet{background:rgba(139,92,246,.18)}
+[data-theme=dark] .ev-amber{background:rgba(245,158,11,.15)}
+
+/* ═══ COURSE REGISTER ═══ */
+.course-card{border:1.5px solid var(--divider);border-radius:12px;padding:18px;background:var(--card);transition:all var(--ease)}
+.course-card:hover{border-color:var(--c-indigo);box-shadow:0 4px 20px rgba(79,70,229,.1)}
+.course-card.selected{border-color:var(--c-indigo);background:var(--c-indigo-l)}
+[data-theme=dark] .course-card.selected{background:rgba(79,70,229,.12)}
+.course-name{font-family:'Outfit',sans-serif;font-weight:700;font-size:14.5px;color:var(--txt);margin-bottom:6px}
+.course-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.course-slots{font-size:12px;color:var(--txt2);margin-bottom:12px}
+.slots-bar{height:5px;border-radius:100px;background:var(--divider);overflow:hidden;margin-top:4px}
+.slots-fill{height:100%;border-radius:100px;background:var(--c-emerald)}
+.slots-fill.warn{background:var(--c-amber)}
+.slots-fill.full{background:var(--c-rose)}
+
+/* ═══ FINANCE ═══ */
+.finance-stat{border-radius:var(--r);padding:20px 24px;border:1px solid var(--card-border);background:var(--card);display:flex;align-items:center;gap:16px}
+.finance-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.finance-lbl{font-size:12px;color:var(--txt2);font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.finance-val{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--txt)}
+.pay-item{display:flex;align-items:center;gap:14px;padding:14px;border-radius:10px;border-bottom:1px solid var(--divider)}
+.pay-item:last-child{border-bottom:none}
+.pay-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.pay-name{font-size:13.5px;font-weight:600;color:var(--txt)}
+.pay-date{font-size:12px;color:var(--txt3);margin-top:1px}
+.pay-amount{margin-left:auto;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px}
+.pay-paid{color:var(--c-emerald)}
+.pay-due{color:var(--c-rose)}
+
+/* ═══ NOTIF PANEL ═══ */
+.np{position:fixed;top:62px;right:0;width:380px;max-height:calc(100vh - 80px);background:var(--card);border-left:1px solid var(--divider);border-bottom-left-radius:var(--r);box-shadow:-4px 8px 32px rgba(0,0,0,.12);z-index:500;transform:translateX(110%);transition:transform .25s cubic-bezier(.4,0,.2,1);overflow-y:auto}
+.np.open{transform:translateX(0)}
+.np-head{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--divider);position:sticky;top:0;background:var(--card);z-index:1}
+.np-head h3{font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:var(--txt)}
+.np-item{display:flex;gap:12px;padding:14px 20px;border-bottom:1px solid var(--divider);cursor:pointer;transition:background var(--ease)}
+.np-item:hover{background:var(--bg)}
+.np-item.unread{background:var(--c-indigo-l)}
+[data-theme=dark] .np-item.unread{background:rgba(79,70,229,.08)}
+.np-dot{width:8px;height:8px;border-radius:50%;background:var(--c-indigo);flex-shrink:0;margin-top:4px}
+.np-dot.read{background:transparent;border:1.5px solid var(--divider)}
+.np-title{font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px}
+.np-body{font-size:12px;color:var(--txt2);line-height:1.5;margin-bottom:4px}
+.np-time{font-size:11px;color:var(--txt3)}
+
+/* ═══ MODAL ═══ */
+.overlay{position:fixed;inset:0;background:rgba(8,11,24,.65);z-index:1000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.overlay.open{display:flex;animation:fadeIn .15s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--card);border-radius:var(--r-lg);padding:32px;max-width:440px;width:90%;box-shadow:0 24px 60px rgba(0,0,0,.35);animation:modalIn .2s ease}
+@keyframes modalIn{from{transform:translateY(12px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+.modal-ic{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px}
+.modal h3{font-family:'Outfit',sans-serif;font-weight:800;font-size:18px;color:var(--txt);margin-bottom:10px}
+.modal p{font-size:14px;color:var(--txt2);line-height:1.65;margin-bottom:22px}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end}
+.btn{padding:10px 20px;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;border:none;font-family:'Nunito Sans',sans-serif;transition:all var(--ease);display:inline-flex;align-items:center;gap:7px}
+.btn-ghost{background:var(--bg);color:var(--txt2);border:1.5px solid var(--divider)}
+.btn-ghost:hover{border-color:var(--txt2)}
+.btn-primary{background:linear-gradient(135deg,var(--c-indigo),var(--c-indigo-d));color:#fff;box-shadow:0 4px 14px rgba(79,70,229,.35)}
+.btn-primary:hover{box-shadow:0 6px 20px rgba(79,70,229,.45);transform:translateY(-1px)}
+.btn-danger{background:linear-gradient(135deg,var(--c-rose),#e11d48);color:#fff;box-shadow:0 4px 14px rgba(244,63,94,.3)}
+.btn-success{background:linear-gradient(135deg,var(--c-emerald),#059669);color:#fff;box-shadow:0 4px 14px rgba(16,185,129,.3)}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--sb);color:#fff;padding:13px 18px;border-radius:12px;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.35);transform:translateY(24px);opacity:0;transition:all .25s ease;z-index:2000;max-width:340px;border:1px solid rgba(255,255,255,.1)}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ═══ PROGRESS ═══ */
+.prog-track{height:8px;background:var(--divider);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;border-radius:100px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+/* ═══ SETTINGS ═══ */
+.setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid var(--divider)}
+.setting-row:last-child{border-bottom:none}
+.setting-lbl{font-size:14px;font-weight:600;color:var(--txt)}
+.setting-desc{font-size:12.5px;color:var(--txt3);margin-top:2px}
+.toggle{width:44px;height:24px;background:var(--divider);border-radius:100px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
+.toggle::after{content:'';width:18px;height:18px;background:#fff;border-radius:50%;position:absolute;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.toggle.on{background:var(--c-indigo)}
+.toggle.on::after{transform:translateX(20px)}
+select.setting-select{height:36px;border-radius:8px;border:1.5px solid var(--divider);background:var(--bg);color:var(--txt);font-size:13px;padding:0 10px;outline:none;cursor:pointer;font-family:'Nunito Sans',sans-serif}
+select.setting-select:focus{border-color:var(--c-indigo)}
+
+/* ═══ TABS ═══ */
+.tabs{display:flex;gap:4px;background:var(--bg);border-radius:10px;padding:4px;margin-bottom:20px;border:1px solid var(--divider)}
+.tab{flex:1;padding:8px;border-radius:7px;text-align:center;cursor:pointer;font-size:13px;font-weight:600;color:var(--txt2);transition:all var(--ease)}
+.tab.active{background:var(--card);color:var(--c-indigo);box-shadow:var(--shadow)}
+
+/* ═══ INPUT ═══ */
+input[type=text],input[type=search]{font-family:'Nunito Sans',sans-serif}
+.input{width:100%;height:42px;background:var(--bg);border:1.5px solid var(--divider);border-radius:10px;padding:0 14px;font-size:13.5px;color:var(--txt);font-family:'Nunito Sans',sans-serif;outline:none;transition:all var(--ease)}
+.input:focus{border-color:var(--c-indigo);box-shadow:0 0 0 3px rgba(79,70,229,.1)}
+
+/* ═══ ACTIVITY ═══ */
+.act-item{display:flex;gap:14px;padding:14px;border-radius:10px;cursor:pointer;border:1.5px solid var(--divider);transition:all var(--ease)}
+.act-item:hover{border-color:var(--c-indigo);background:var(--c-indigo-l)}
+.act-img{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.act-name{font-weight:700;font-size:14px;color:var(--txt);margin-bottom:3px}
+.act-meta{font-size:12px;color:var(--txt2)}
+.act-points{margin-left:auto;font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:var(--c-indigo)}
+
+/* ═══ PROFILE ═══ */
+.prof-header{background:linear-gradient(135deg,#1e1b4b,#312e81,#4f46e5);border-radius:var(--r-lg);padding:28px;display:flex;gap:20px;align-items:center;margin-bottom:20px;position:relative;overflow:hidden}
+.prof-header::before{content:'';position:absolute;right:-40px;bottom:-40px;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.06)}
+.prof-av{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#fff;flex-shrink:0;border:3px solid rgba(255,255,255,.3);position:relative;z-index:1}
+.prof-name{font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#fff;margin-bottom:4px}
+.prof-id{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:8px}
+.prof-tags{display:flex;gap:8px;flex-wrap:wrap}
+.prof-tag{background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:11.5px;font-weight:600;padding:4px 12px;border-radius:100px;border:1px solid rgba(255,255,255,.2)}
+.info-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--divider);align-items:center}
+.info-row:last-child{border-bottom:none}
+.info-key{font-size:13px;color:var(--txt3);font-weight:600}
+.info-val{font-size:13.5px;font-weight:600;color:var(--txt);text-align:right}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(79,70,229,.3);border-radius:100px}
+</style>
+</head>
+<body>
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<aside class="sb">
+  <div class="sb-head">
+    <div class="sb-logo">UIT</div>
+    <div><div class="sb-brand">UIT Portal</div><div class="sb-sub">Quản lý sinh viên</div></div>
+  </div>
+
+  <nav class="sb-nav">
+    <div class="sb-section">Tổng quan</div>
+    <div class="nav-item active" data-page="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Trang chủ
+    </div>
+    <div class="sb-section">Học vụ</div>
+    <div class="nav-item" data-page="schedule">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+      Thời khóa biểu
+    </div>
+    <div class="nav-item" data-page="grades">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Kết quả học tập
+      <span class="nb">2</span>
+    </div>
+    <div class="nav-item" data-page="register">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Đăng ký môn học
+    </div>
+    <div class="sb-section">Dịch vụ</div>
+    <div class="nav-item" data-page="finance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Học phí
+    </div>
+    <div class="nav-item" data-page="docs">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+      Hồ sơ & Giấy tờ
+    </div>
+    <div class="nav-item" data-page="extracurr">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Ngoại khóa
+    </div>
+    <div class="sb-section">Tài khoản</div>
+    <div class="nav-item" data-page="profile">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Hồ sơ cá nhân
+    </div>
+    <div class="nav-item" data-page="settings">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+      Cài đặt
+    </div>
+  </nav>
+
+  <div class="sb-foot">
+    <div class="sb-user">
+      <div class="sb-avatar">NA</div>
+      <div><div class="sb-uname">Nguyễn Văn A</div><div class="sb-uid">SV – 21520001</div></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════ MAIN ══════════ -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div style="min-width:0">
+      <div class="page-title" id="pageTitle">Trang chủ</div>
+      <div class="page-breadcrumb">
+        <span>UIT Portal</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        <span id="breadcrumb">Trang chủ</span>
+      </div>
+    </div>
+    <div class="srch">
+      <svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Tìm kiếm… (Ctrl+K)" id="sInput" autocomplete="off">
+      <span class="sk">⌘K</span>
+      <div class="sdrop" id="sDrop">
+        <div class="sdrop-sec">Truy cập nhanh</div>
+        <div class="sdrop-item" onclick="goPage('schedule')"><div class="sdrop-ic" style="background:var(--c-indigo-l)">📅</div>Thời khóa biểu hôm nay</div>
+        <div class="sdrop-item" onclick="goPage('grades')"><div class="sdrop-ic" style="background:var(--c-emerald-l)">📊</div>Kết quả học tập – HK1</div>
+        <div class="sdrop-item" onclick="goPage('register')"><div class="sdrop-ic" style="background:var(--c-cyan-l)">📚</div>Đăng ký môn học HK2</div>
+        <div class="sdrop-item" onclick="goPage('finance')"><div class="sdrop-ic" style="background:var(--c-amber-l)">💳</div>Tra cứu học phí</div>
+        <div class="sdrop-sec">Thông báo</div>
+        <div class="sdrop-item" onclick="openPanel()"><div class="sdrop-ic" style="background:var(--c-rose-l)">🔔</div>Đăng ký bổ sung HK2 – Hạn hôm nay!</div>
+      </div>
+    </div>
+    <div class="tb-actions">
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
+        <svg id="themeIco" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span id="themeTxt">Giao diện tối</span>
+      </button>
+      <button class="ib" title="Tải xuống" onclick="toast('📥','Tính năng xuất file PDF / Excel sẵn sàng')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+      <button class="ib" title="Thông báo" id="nBtn" onclick="openPanel()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="dot" id="nDot"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══ PAGE: HOME ══ -->
+  <div class="page active" id="page-home">
+    <div class="hero">
+      <div class="hero-content">
+        <div>
+          <h1>Chào buổi sáng, Văn A! ✨</h1>
+          <p>Học kỳ 1 năm 3 đang diễn ra. Hôm nay bạn có 2 lớp học — cố lên nhé!</p>
+          <div class="hero-pills">
+            <span class="hero-pill" onclick="goPage('schedule')">📅 Xem lịch học</span>
+            <span class="hero-pill" onclick="goPage('grades')">📊 Xem điểm số</span>
+            <span class="hero-pill" onclick="goPage('register')">✏️ Đăng ký môn</span>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><div class="v">3.62</div><div class="l">GPA tích lũy</div></div>
+          <div class="hs"><div class="v">95</div><div class="l">Tín chỉ</div></div>
+          <div class="hs"><div class="v">7</div><div class="l">Môn HK này</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="grid g4" style="margin-bottom:20px">
+      <div class="stat-card sc-indigo">
+        <div class="lbl">GPA hệ 4</div>
+        <div class="val">3.62</div>
+        <div class="sub">▲ +0.08 so HK trước</div>
+      </div>
+      <div class="stat-card sc-cyan">
+        <div class="lbl">Tín chỉ tích lũy</div>
+        <div class="val">95</div>
+        <div class="sub">68% chương trình</div>
+      </div>
+      <div class="stat-card sc-emerald">
+        <div class="lbl">Điểm rèn luyện</div>
+        <div class="val">87</div>
+        <div class="sub">Loại: Tốt</div>
+      </div>
+      <div class="stat-card sc-amber">
+        <div class="lbl">Môn học kỳ này</div>
+        <div class="val">7</div>
+        <div class="sub">21 tín chỉ</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 320px;gap:20px;margin-bottom:20px">
+      <!-- Schedule -->
+      <div class="card">
+        <div class="ch">
+          <div style="display:flex;align-items:center;gap:8px">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-indigo)" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+            <span class="ct">Lịch học hôm nay</span>
+            <span style="font-size:11.5px;color:var(--txt3);font-weight:500">Thứ Hai, 19/04/2026</span>
+          </div>
+          <span class="cl" onclick="goPage('schedule')">Xem TKB <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+        <div class="sch-item live" onclick="toast('📘','Phòng C.201 – CS1 | ThS. Lê Văn B')">
+          <div class="sch-dot"><div class="dd">07</div><div class="ca">Ca 1</div></div>
+          <div style="flex:1">
+            <div class="sch-name">Cấu trúc dữ liệu và Giải thuật</div>
+            <div class="sch-meta">
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>07:30 – 09:50</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>C.201 – CS1</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ThS. Lê Văn B</span>
+            </div>
+          </div>
+          <span class="sch-badge badge-live">● Đang học</span>
+        </div>
+        <div class="sch-item" onclick="toast('💻','Phòng C.304 – CS1 | TS. Trần Thị C')">
+          <div class="sch-dot"><div class="dd">10</div><div class="ca">Ca 2</div></div>
+          <div style="flex:1">
+            <div class="sch-name">Kiến trúc máy tính</div>
+            <div class="sch-meta">
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>10:00 – 12:20</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>C.304 – CS1</span>
+              <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>TS. Trần Thị C</span>
+            </div>
+          </div>
+          <span class="sch-badge badge-soon">Sắp tới</span>
+        </div>
+        <div style="margin-top:10px;padding:10px 14px;background:var(--c-emerald-l);border-radius:8px;display:flex;align-items:center;justify-content:space-between">
+          <span style="font-size:12.5px;color:var(--c-emerald);font-weight:600">✓ Không có lịch thi trong tuần này</span>
+          <span style="font-size:12px;color:var(--txt3)">Tuần 13 / 20</span>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="card">
+        <div class="ch">
+          <div style="display:flex;align-items:center;gap:8px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--c-rose)" stroke-width="2.5"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <span class="ct">Thông báo</span>
+          </div>
+          <span class="cl" onclick="openPanel()">Tất cả →</span>
+        </div>
+        <div class="notif-item ni-danger">
+          <div class="ni-hdr"><span class="chip ch-danger">Hạn chót</span><span class="ni-time">Hôm nay</span></div>
+          <div class="ni-title">Đăng ký bổ sung HK2 – K16, K17</div>
+          <div style="font-size:12px;color:var(--txt2);margin-top:3px">Hạn 21/04/2026 lúc 23:59</div>
+        </div>
+        <div class="notif-item ni-warn">
+          <div class="ni-hdr"><span class="chip ch-warn">Học phí</span><span class="ni-time">2 ngày trước</span></div>
+          <div class="ni-title">Còn 5.200.000 VNĐ chưa thanh toán</div>
+        </div>
+        <div class="notif-item ni-info">
+          <div class="ni-hdr"><span class="chip ch-info">Khảo sát</span><span class="ni-time">3 ngày trước</span></div>
+          <div class="ni-title">Đánh giá chất lượng giảng dạy HK1</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom row -->
+    <div style="display:grid;grid-template-columns:260px 1fr 1fr;gap:20px">
+      <!-- GPA summary -->
+      <div class="card">
+        <div class="ch"><span class="ct">Học lực</span><span class="cl" onclick="goPage('grades')">Chi tiết →</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;padding:10px 0 18px">
+          <svg width="110" height="110" viewBox="0 0 110 110">
+            <circle cx="55" cy="55" r="42" fill="none" stroke="var(--divider)" stroke-width="10"/>
+            <circle cx="55" cy="55" r="42" fill="none" stroke="url(#gpag)" stroke-width="10" stroke-dasharray="226" stroke-dashoffset="52" stroke-linecap="round" transform="rotate(-90 55 55)"/>
+            <defs><linearGradient id="gpag" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#4f46e5"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs>
+            <text x="55" y="50" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="18" fill="var(--txt)">3.62</text>
+            <text x="55" y="66" text-anchor="middle" font-family="Nunito Sans" font-size="10" fill="var(--txt3)">GPA / 4.0</text>
+          </svg>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span style="color:var(--txt2);font-weight:600">Tín chỉ tích lũy</span><strong style="color:var(--txt)">95/140</strong></div>
+            <div class="prog-track"><div class="prog-fill" style="width:68%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-bottom:5px"><span style="color:var(--txt2);font-weight:600">HK hiện tại</span><strong style="color:var(--txt)">21 TC</strong></div>
+            <div class="prog-track"><div class="prog-fill" style="width:15%;background:var(--c-amber)"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick access -->
+      <div class="card">
+        <div class="ch"><span class="ct">Truy cập nhanh</span></div>
+        <div class="grid g4" style="gap:10px">
+          <div class="qa-item" onclick="openModal('modalReg')">
+            <div class="qa-icon" style="background:var(--c-indigo-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-indigo)" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
+            <span class="qa-lbl">Đăng ký môn</span>
+          </div>
+          <div class="qa-item" onclick="goPage('finance')">
+            <div class="qa-icon" style="background:var(--c-amber-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-amber)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <span class="qa-lbl">Học phí</span>
+          </div>
+          <div class="qa-item" onclick="toast('📄','Xuất bảng điểm PDF thành công!')">
+            <div class="qa-icon" style="background:var(--c-cyan-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-cyan)" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+            <span class="qa-lbl">Xuất bảng điểm</span>
+          </div>
+          <div class="qa-item" onclick="toast('📚','Mở Thư viện số UIT')">
+            <div class="qa-icon" style="background:var(--c-violet-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-violet)" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+            <span class="qa-lbl">Thư viện số</span>
+          </div>
+          <div class="qa-item" onclick="goPage('schedule')">
+            <div class="qa-icon" style="background:var(--c-indigo-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-indigo)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg></div>
+            <span class="qa-lbl">Lịch thi</span>
+          </div>
+          <div class="qa-item" onclick="goPage('extracurr')">
+            <div class="qa-icon" style="background:var(--c-rose-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-rose)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <span class="qa-lbl">Điểm rèn luyện</span>
+          </div>
+          <div class="qa-item" onclick="goPage('docs')">
+            <div class="qa-icon" style="background:var(--c-emerald-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-emerald)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <span class="qa-lbl">Hồ sơ</span>
+          </div>
+          <div class="qa-item" onclick="toast('🔔','Mở cài đặt thông báo')">
+            <div class="qa-icon" style="background:var(--c-sky-l)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--c-sky)" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+            <span class="qa-lbl">Thông báo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- News -->
+      <div class="card">
+        <div class="ch"><span class="ct">Tin tức nổi bật</span><span class="cl">Xem tất cả →</span></div>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--divider);cursor:pointer" onclick="toast('🏆','Đội tuyển UIT vô địch Hackathon 2026!')">
+            <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,#fef3c7,#fde68a);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🏆</div>
+            <div><div style="font-size:10px;font-weight:700;color:var(--c-amber);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">Sự kiện</div><div style="font-size:13px;font-weight:700;color:var(--txt);line-height:1.4;margin-bottom:3px">Đội UIT đoạt giải Nhất Hackathon SV 2026</div><div style="font-size:11px;color:var(--txt3)">12 Tháng 4, 2026</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--divider);cursor:pointer" onclick="toast('🤖','Hội thảo AI & Ứng dụng thực tiễn')">
+            <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--c-indigo-l),#c7d2fe);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🤖</div>
+            <div><div style="font-size:10px;font-weight:700;color:var(--c-indigo);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">Hội thảo</div><div style="font-size:13px;font-weight:700;color:var(--txt);line-height:1.4;margin-bottom:3px">Hội thảo về Trí tuệ Nhân tạo & ứng dụng</div><div style="font-size:11px;color:var(--txt3)">10 Tháng 4, 2026</div></div>
+          </div>
+          <div style="display:flex;gap:12px;padding:11px 0;cursor:pointer" onclick="toast('🎓','Thông báo học bổng khuyến khích HK2')">
+            <div style="width:52px;height:52px;border-radius:10px;background:linear-gradient(135deg,var(--c-emerald-l),#a7f3d0);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🎓</div>
+            <div><div style="font-size:10px;font-weight:700;color:var(--c-emerald);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px">Học bổng</div><div style="font-size:13px;font-weight:700;color:var(--txt);line-height:1.4;margin-bottom:3px">Xét học bổng khuyến khích HK2 2025-2026</div><div style="font-size:11px;color:var(--txt3)">8 Tháng 4, 2026</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: SCHEDULE ══ -->
+  <div class="page" id="page-schedule">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div>
+        <div style="font-size:13px;color:var(--txt2);margin-bottom:2px;font-weight:600">Học kỳ 1 – Năm học 2025–2026</div>
+        <h2 style="font-family:'Outfit',sans-serif;font-size:20px;font-weight:800;color:var(--txt)">Thời khóa biểu</h2>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-ghost" onclick="toast('📄','Xuất TKB dạng PDF')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Xuất PDF</button>
+        <button class="btn btn-primary">Tuần 13 (14–19/04)</button>
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="week-grid">
+        <div class="wg-head">Tiết</div>
+        <div class="wg-head today">T2<br><span style="font-size:10px;font-weight:700;background:var(--c-indigo);color:#fff;padding:1px 6px;border-radius:100px">19</span></div>
+        <div class="wg-head">T3<br><span style="font-size:10px;color:var(--txt3)">20</span></div>
+        <div class="wg-head">T4<br><span style="font-size:10px;color:var(--txt3)">21</span></div>
+        <div class="wg-head">T5<br><span style="font-size:10px;color:var(--txt3)">22</span></div>
+        <div class="wg-head">T6<br><span style="font-size:10px;color:var(--txt3)">23</span></div>
+        <div class="wg-head">T7<br><span style="font-size:10px;color:var(--txt3)">24</span></div>
+
+        <div class="wg-time">07:30<br>–<br>09:50</div>
+        <div class="wg-cell"><div class="wg-event ev-indigo" onclick="toast('📘','CTDL&GT – C.201 CS1 – ThS. Lê Văn B')">Cấu trúc DL<br>& Giải thuật<br>C.201</div></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-emerald" onclick="toast('🧠','Trí tuệ nhân tạo – C.105 CS1 – TS. Nguyễn D')">Trí tuệ<br>Nhân tạo<br>C.105</div></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-cyan" onclick="toast('🌐','MMT – C.302 CS1 – ThS. Phạm E')">Mạng máy<br>tính<br>C.302</div></div>
+        <div class="wg-cell"></div>
+
+        <div class="wg-time">10:00<br>–<br>12:20</div>
+        <div class="wg-cell"><div class="wg-event ev-violet" onclick="toast('💻','Kiến trúc MT – C.304 CS1 – TS. Trần Thị C')">Kiến trúc<br>máy tính<br>C.304</div></div>
+        <div class="wg-cell"><div class="wg-event ev-emerald" onclick="toast('🧮','XSTK – B.110 CS1 – PGS. Hoàng F')">Xác suất<br>Thống kê<br>B.110</div></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-amber" onclick="toast('⚙️','Hệ điều hành – C.201 CS1 – TS. Lý G')">Hệ điều<br>hành<br>C.201</div></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-indigo" onclick="toast('📊','CTDL&GT Lab – D.201 CS1')">CTDL&GT<br>Lab<br>D.201</div></div>
+
+        <div class="wg-time">13:00<br>–<br>15:20</div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-indigo" onclick="toast('💬','KTTM – B.101 CS1 – TS. Mai H')">Kỹ thuật<br>truyền tin<br>B.101</div></div>
+        <div class="wg-cell"><div class="wg-event ev-violet" onclick="toast('📐','ĐSTT – B.105 CS1 – GS. Phú I')">Đại số<br>tuyến tính<br>B.105</div></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-cyan" onclick="toast('🌐','MMT Lab – D.305 CS1')">MMT Lab<br>D.305</div></div>
+        <div class="wg-cell"></div>
+
+        <div class="wg-time">15:30<br>–<br>17:50</div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"><div class="wg-event ev-amber" onclick="toast('⚙️','HĐH Lab – D.201 CS1')">HĐH Lab<br>D.201</div></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"></div>
+        <div class="wg-cell"></div>
+      </div>
+    </div>
+    <div class="grid g4" style="margin-top:20px">
+      <div class="card" style="display:flex;gap:10px;align-items:center"><div style="width:12px;height:12px;border-radius:3px;background:var(--c-indigo);flex-shrink:0"></div><span style="font-size:12.5px;font-weight:600;color:var(--txt2)">Cấu trúc DL / KTTM / Lab</span></div>
+      <div class="card" style="display:flex;gap:10px;align-items:center"><div style="width:12px;height:12px;border-radius:3px;background:var(--c-emerald);flex-shrink:0"></div><span style="font-size:12.5px;font-weight:600;color:var(--txt2)">Trí tuệ NT / XSTK</span></div>
+      <div class="card" style="display:flex;gap:10px;align-items:center"><div style="width:12px;height:12px;border-radius:3px;background:var(--c-violet);flex-shrink:0"></div><span style="font-size:12.5px;font-weight:600;color:var(--txt2)">Kiến trúc MT / ĐSTT</span></div>
+      <div class="card" style="display:flex;gap:10px;align-items:center"><div style="width:12px;height:12px;border-radius:3px;background:var(--c-amber);flex-shrink:0"></div><span style="font-size:12.5px;font-weight:600;color:var(--txt2)">Hệ điều hành / Lab</span></div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: GRADES ══ -->
+  <div class="page" id="page-grades">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+      <div class="stat-card sc-indigo"><div class="lbl">GPA Tích lũy</div><div class="val">3.62</div><div class="sub">▲ +0.08 so HK trước</div></div>
+      <div class="stat-card sc-emerald"><div class="lbl">GPA HK này</div><div class="val">3.71</div><div class="sub">21 tín chỉ đăng ký</div></div>
+      <div class="stat-card sc-cyan"><div class="lbl">Tín chỉ tích lũy</div><div class="val">95</div><div class="sub">/ 140 TC chương trình</div></div>
+      <div class="stat-card sc-amber"><div class="lbl">Điểm TB chữ</div><div class="val">B+</div><div class="sub">Học lực: Giỏi</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px">
+      <div class="card">
+        <div class="ch">
+          <span class="ct">Bảng điểm học kỳ 1 – 2025/2026</span>
+          <button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="toast('📄','Xuất bảng điểm PDF')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Xuất PDF
+          </button>
+        </div>
+        <table>
+          <thead><tr><th>Môn học</th><th>TC</th><th>GK</th><th>CK</th><th>TB</th><th>Thang 4</th><th>Xếp loại</th></tr></thead>
+          <tbody>
+            <tr onclick="toast('📘','CTDL&GT – 3TC – GK:8.5 CK:9.0')">
+              <td style="font-weight:600">Cấu trúc DL & Giải thuật</td><td>3</td><td>8.5</td><td>9.0</td><td>8.85</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:88%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div><span>3.7</span></div></td>
+              <td><span class="chip ch-info">A</span></td>
+            </tr>
+            <tr onclick="toast('💻','Kiến trúc MT – 3TC')">
+              <td style="font-weight:600">Kiến trúc máy tính</td><td>3</td><td>7.5</td><td>8.0</td><td>7.85</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:78%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div><span>3.3</span></div></td>
+              <td><span class="chip ch-cyan">B+</span></td>
+            </tr>
+            <tr onclick="toast('🧠','Trí tuệ NT – 3TC')">
+              <td style="font-weight:600">Trí tuệ nhân tạo</td><td>3</td><td>9.0</td><td>9.5</td><td>9.35</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:95%;background:linear-gradient(90deg,var(--c-emerald),#34d399)"></div></div><span>4.0</span></div></td>
+              <td><span class="chip ch-green">A+</span></td>
+            </tr>
+            <tr onclick="toast('🌐','Mạng MT – 3TC')">
+              <td style="font-weight:600">Mạng máy tính</td><td>3</td><td>7.0</td><td>7.5</td><td>7.35</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:73%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div><span>3.0</span></div></td>
+              <td><span class="chip ch-cyan">B</span></td>
+            </tr>
+            <tr onclick="toast('⚙️','Hệ điều hành – 3TC')">
+              <td style="font-weight:600">Hệ điều hành</td><td>3</td><td>8.0</td><td>8.5</td><td>8.35</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:83%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div><span>3.5</span></div></td>
+              <td><span class="chip ch-info">A-</span></td>
+            </tr>
+            <tr onclick="toast('🧮','XSTK – 3TC')">
+              <td style="font-weight:600">Xác suất – Thống kê</td><td>3</td><td>6.5</td><td>7.0</td><td>6.85</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:68%;background:linear-gradient(90deg,var(--c-amber),#fbbf24)"></div></div><span>2.7</span></div></td>
+              <td><span class="chip ch-warn">C+</span></td>
+            </tr>
+            <tr onclick="toast('📐','ĐSTT – 3TC')">
+              <td style="font-weight:600">Đại số tuyến tính</td><td>3</td><td>7.8</td><td>8.2</td><td>8.06</td>
+              <td><div style="display:flex;align-items:center;gap:8px"><div class="grade-bar"><div class="grade-fill" style="width:80%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div><span>3.3</span></div></td>
+              <td><span class="chip ch-cyan">B+</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- GPA history -->
+      <div class="card">
+        <div class="ch"><span class="ct">GPA theo học kỳ</span></div>
+        <svg viewBox="0 0 260 180" width="100%">
+          <defs><linearGradient id="chartG" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#4f46e5" stop-opacity=".3"/><stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/></linearGradient></defs>
+          <line x1="20" y1="20" x2="20" y2="155" stroke="var(--divider)" stroke-width="1"/>
+          <line x1="20" y1="155" x2="255" y2="155" stroke="var(--divider)" stroke-width="1"/>
+          <text x="14" y="24" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="end">4.0</text>
+          <text x="14" y="62" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="end">3.5</text>
+          <text x="14" y="100" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="end">3.0</text>
+          <text x="14" y="138" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="end">2.5</text>
+          <line x1="20" y1="62" x2="255" y2="62" stroke="var(--divider)" stroke-width="0.5" stroke-dasharray="4,3"/>
+          <line x1="20" y1="100" x2="255" y2="100" stroke="var(--divider)" stroke-width="0.5" stroke-dasharray="4,3"/>
+          <!-- gpa: HK1=3.2 HK2=3.35 HK3=3.40 HK4=3.54 HK5=3.62 -->
+          <!-- y = 155 - (gpa-2)*76 -->
+          <polygon points="20,155 55,59 97,48 138,43 180,33 222,27 222,155" fill="url(#chartG)"/>
+          <polyline points="55,59 97,48 138,43 180,33 222,27" fill="none" stroke="var(--c-indigo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="55" cy="59" r="4" fill="var(--c-indigo)"/>
+          <circle cx="97" cy="48" r="4" fill="var(--c-indigo)"/>
+          <circle cx="138" cy="43" r="4" fill="var(--c-indigo)"/>
+          <circle cx="180" cy="33" r="4" fill="var(--c-indigo)"/>
+          <circle cx="222" cy="27" r="4" fill="var(--c-indigo)"/>
+          <text x="55" y="73" font-family="Outfit" font-size="8" fill="var(--txt2)" text-anchor="middle">3.20</text>
+          <text x="97" y="62" font-family="Outfit" font-size="8" fill="var(--txt2)" text-anchor="middle">3.35</text>
+          <text x="138" y="57" font-family="Outfit" font-size="8" fill="var(--txt2)" text-anchor="middle">3.40</text>
+          <text x="180" y="47" font-family="Outfit" font-size="8" fill="var(--txt2)" text-anchor="middle">3.54</text>
+          <text x="222" y="41" font-family="Outfit" font-size="8" fill="var(--c-indigo)" text-anchor="middle" font-weight="700">3.62</text>
+          <text x="55" y="168" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="middle">HK1</text>
+          <text x="97" y="168" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="middle">HK2</text>
+          <text x="138" y="168" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="middle">HK3</text>
+          <text x="180" y="168" font-family="Outfit" font-size="8" fill="var(--txt3)" text-anchor="middle">HK4</text>
+          <text x="222" y="168" font-family="Outfit" font-size="8" fill="var(--c-indigo)" text-anchor="middle" font-weight="700">HK5</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px">
+          <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span style="color:var(--txt2);font-weight:600">Tiến độ chương trình</span><strong style="color:var(--txt)">95/140 TC (68%)</strong></div><div class="prog-track"><div class="prog-fill" style="width:68%;background:linear-gradient(90deg,var(--c-indigo),var(--c-cyan))"></div></div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+            <span class="chip ch-green">Tốt nghiệp loại Giỏi</span>
+            <span class="chip ch-info">Dự kiến tốt nghiệp: 2027</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: REGISTER ══ -->
+  <div class="page" id="page-register">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div><div style="font-size:13px;color:var(--txt2);font-weight:600;margin-bottom:2px">Học kỳ 2 – 2025/2026</div><h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:var(--txt)">Đăng ký môn học</h2></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="chip ch-danger" style="font-size:12px;padding:5px 12px">Hạn đăng ký: 25/04/2026</span>
+        <button class="btn btn-success" id="submitBtn" disabled onclick="openModal('modalConfirm')">Xác nhận đăng ký (0)</button>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px">
+      <div>
+        <div style="display:flex;gap:10px;margin-bottom:16px">
+          <div class="srch" style="max-width:100%;flex:1">
+            <svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" placeholder="Tìm kiếm môn học…" oninput="filterCourses(this.value)">
+          </div>
+          <select class="setting-select" style="width:auto"><option>Tất cả ngành</option><option>CNTT</option><option>MMT</option></select>
+        </div>
+        <div class="grid g2 g-courses" style="gap:12px" id="courseList">
+          <div class="course-card" data-name="Học máy" data-selected="0" onclick="toggleCourse(this)">
+            <div class="course-name">Học máy (Machine Learning)</div>
+            <div class="course-meta"><span class="chip ch-info">IT4040</span><span class="chip ch-cyan">3 TC</span><span class="chip ch-green">Mở</span></div>
+            <div class="course-slots">Sĩ số: <strong>38/60</strong> sinh viên<div class="slots-bar"><div class="slots-fill" style="width:63%"></div></div></div>
+            <div style="font-size:12px;color:var(--txt2)">📅 Thứ 2 | 07:30 – 09:50 | A.201 CS1 | TS. Nguyễn D</div>
+          </div>
+          <div class="course-card" data-name="Nhập môn IoT" data-selected="0" onclick="toggleCourse(this)">
+            <div class="course-name">Nhập môn IoT</div>
+            <div class="course-meta"><span class="chip ch-info">IT4041</span><span class="chip ch-cyan">2 TC</span><span class="chip ch-green">Mở</span></div>
+            <div class="course-slots">Sĩ số: <strong>51/60</strong> sinh viên<div class="slots-bar"><div class="slots-fill warn" style="width:85%"></div></div></div>
+            <div style="font-size:12px;color:var(--txt2)">📅 Thứ 3 | 10:00 – 11:50 | B.302 CS2</div>
+          </div>
+          <div class="course-card" data-name="An toàn mạng" data-selected="0" onclick="toggleCourse(this)">
+            <div class="course-name">An toàn mạng máy tính</div>
+            <div class="course-meta"><span class="chip ch-info">IT4042</span><span class="chip ch-cyan">3 TC</span><span class="chip ch-green">Mở</span></div>
+            <div class="course-slots">Sĩ số: <strong>27/60</strong> sinh viên<div class="slots-bar"><div class="slots-fill" style="width:45%"></div></div></div>
+            <div style="font-size:12px;color:var(--txt2)">📅 Thứ 4 | 13:00 – 15:20 | C.301 CS1</div>
+          </div>
+          <div class="course-card" data-name="Kỹ nghệ phần mềm" data-selected="0" onclick="toggleCourse(this)">
+            <div class="course-name">Kỹ nghệ phần mềm</div>
+            <div class="course-meta"><span class="chip ch-info">IT4043</span><span class="chip ch-cyan">3 TC</span><span class="chip ch-warn">Gần đầy</span></div>
+            <div class="course-slots">Sĩ số: <strong>57/60</strong> sinh viên<div class="slots-bar"><div class="slots-fill full" style="width:95%"></div></div></div>
+            <div style="font-size:12px;color:var(--txt2)">📅 Thứ 5 | 07:30 – 09:50 | C.204 CS1</div>
+          </div>
+          <div class="course-card" data-name="Xử lý ảnh" data-selected="0" onclick="toggleCourse(this)">
+            <div class="course-name">Xử lý ảnh số</div>
+            <div class="course-meta"><span class="chip ch-info">IT4044</span><span class="chip ch-cyan">3 TC</span><span class="chip ch-green">Mở</span></div>
+            <div class="course-slots">Sĩ số: <strong>18/45</strong> sinh viên<div class="slots-bar"><div class="slots-fill" style="width:40%"></div></div></div>
+            <div style="font-size:12px;color:var(--txt2)">📅 Thứ 6 | 10:00 – 12:20 | D.101 CS1</div>
+          </div>
+          <div class="course-card" data-name="Kiến trúc hệ thống" data-selected="0" onclick="toggleCourse(this)">
+            <div class="course-name">Kiến trúc hệ thống phân tán</div>
+            <div class="course-meta"><span class="chip ch-info">IT4045</span><span class="chip ch-cyan">3 TC</span><span class="chip ch-green">Mở</span></div>
+            <div class="course-slots">Sĩ số: <strong>42/60</strong> sinh viên<div class="slots-bar"><div class="slots-fill" style="width:70%"></div></div></div>
+            <div style="font-size:12px;color:var(--txt2)">📅 Thứ 7 | 13:00 – 15:20 | C.402 CS2</div>
+          </div>
+        </div>
+      </div>
+      <!-- Cart -->
+      <div class="card" style="align-self:flex-start;position:sticky;top:80px">
+        <div class="ch"><span class="ct">Môn đã chọn</span><span id="cartCount" class="chip ch-info">0 môn</span></div>
+        <div id="cartList" style="min-height:80px;display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+          <div style="text-align:center;padding:20px;color:var(--txt3);font-size:13px">Chưa chọn môn nào</div>
+        </div>
+        <div style="border-top:1px solid var(--divider);padding-top:12px;display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--txt2);font-weight:600">Tổng tín chỉ đã chọn</span><strong id="totalTC" style="color:var(--c-indigo)">0 TC</strong></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px"><span style="color:var(--txt2);font-weight:600">Giới hạn HK này</span><strong style="color:var(--txt)">24 TC</strong></div>
+          <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px" id="regBtn" disabled onclick="openModal('modalConfirm')">Xác nhận đăng ký</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: FINANCE ══ -->
+  <div class="page" id="page-finance">
+    <div class="grid g3" style="margin-bottom:20px">
+      <div class="finance-stat"><div class="finance-icon" style="background:var(--c-rose-l)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-rose)" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div class="finance-lbl">Cần thanh toán</div><div class="finance-val" style="color:var(--c-rose)">5.200.000 ₫</div></div></div>
+      <div class="finance-stat"><div class="finance-icon" style="background:var(--c-emerald-l)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-emerald)" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div><div class="finance-lbl">Đã thanh toán</div><div class="finance-val" style="color:var(--c-emerald)">10.400.000 ₫</div></div></div>
+      <div class="finance-stat"><div class="finance-icon" style="background:var(--c-indigo-l)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--c-indigo)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div><div class="finance-lbl">Tổng học phí HK1</div><div class="finance-val">15.600.000 ₫</div></div></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 300px;gap:20px">
+      <div class="card">
+        <div class="ch"><span class="ct">Lịch sử thanh toán</span><button class="btn btn-ghost" style="font-size:12px;padding:7px 14px" onclick="toast('📄','Xuất lịch sử dạng Excel')">Xuất Excel</button></div>
+        <div>
+          <div class="pay-item"><div class="pay-icon" style="background:var(--c-emerald-l)">💳</div><div><div class="pay-name">Học phí HK1 – Đợt 1</div><div class="pay-date">15/09/2025</div></div><div class="pay-amount pay-paid">–5.200.000 ₫</div></div>
+          <div class="pay-item"><div class="pay-icon" style="background:var(--c-emerald-l)">💳</div><div><div class="pay-name">Học phí HK1 – Đợt 2</div><div class="pay-date">02/11/2025</div></div><div class="pay-amount pay-paid">–5.200.000 ₫</div></div>
+          <div class="pay-item" style="background:var(--c-rose-l);border-radius:10px;border-bottom:none">
+            <div class="pay-icon" style="background:var(--c-rose-l)">⚠️</div>
+            <div><div class="pay-name">Học phí HK1 – Đợt 3 (Chưa thanh toán)</div><div class="pay-date" style="color:var(--c-rose)">Hạn: 30/04/2026</div></div>
+            <div class="pay-amount pay-due">5.200.000 ₫</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ct">Thanh toán nhanh</span></div>
+        <div style="background:linear-gradient(135deg,var(--c-rose-l),#fff);border:1.5px solid rgba(244,63,94,.2);border-radius:12px;padding:16px;margin-bottom:16px">
+          <div style="font-size:12px;font-weight:700;color:var(--c-rose);margin-bottom:6px">⚠️ CẦN THANH TOÁN NGAY</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:var(--txt);margin-bottom:4px">5.200.000 ₫</div>
+          <div style="font-size:12px;color:var(--txt2)">Học phí HK1 – Đợt 3<br>Hạn: 30/04/2026</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <button class="btn btn-success" style="width:100%;justify-content:center" onclick="openModal('modalPay')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Thanh toán online
+          </button>
+          <button class="btn btn-ghost" style="width:100%;justify-content:center" onclick="toast('📍','Hướng dẫn thanh toán tại quầy...')">Thanh toán tại quầy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: DOCS ══ -->
+  <div class="page" id="page-docs">
+    <div class="tabs"><div class="tab active" onclick="switchTab(this,'docs')">Yêu cầu giấy tờ</div><div class="tab" onclick="switchTab(this,'docs')">Lịch sử yêu cầu</div><div class="tab" onclick="switchTab(this,'docs')">Hướng dẫn</div></div>
+    <div class="grid g3" style="margin-bottom:20px">
+      <div class="course-card" onclick="openModal('modalDoc')"><div style="font-size:28px;margin-bottom:10px">🎓</div><div class="course-name">Bảng điểm chính thức</div><div style="font-size:12.5px;color:var(--txt2);margin-top:4px">Cấp trong 2–3 ngày làm việc. Có công chứng.</div></div>
+      <div class="course-card" onclick="openModal('modalDoc')"><div style="font-size:28px;margin-bottom:10px">📋</div><div class="course-name">Giấy xác nhận sinh viên</div><div style="font-size:12.5px;color:var(--txt2);margin-top:4px">Cấp ngay trong ngày. Tiếng Việt hoặc Tiếng Anh.</div></div>
+      <div class="course-card" onclick="openModal('modalDoc')"><div style="font-size:28px;margin-bottom:10px">🏫</div><div class="course-name">Giấy giới thiệu thực tập</div><div style="font-size:12.5px;color:var(--txt2);margin-top:4px">Cần cung cấp tên công ty thực tập.</div></div>
+      <div class="course-card" onclick="openModal('modalDoc')"><div style="font-size:28px;margin-bottom:10px">📜</div><div class="course-name">Bằng tốt nghiệp (bản sao)</div><div style="font-size:12.5px;color:var(--txt2);margin-top:4px">Áp dụng cho sinh viên đã tốt nghiệp.</div></div>
+      <div class="course-card" onclick="openModal('modalDoc')"><div style="font-size:28px;margin-bottom:10px">🔒</div><div class="course-name">Trích lục điểm môn học</div><div style="font-size:12.5px;color:var(--txt2);margin-top:4px">Điểm từng môn cụ thể có xác nhận.</div></div>
+      <div class="course-card" onclick="openModal('modalDoc')"><div style="font-size:28px;margin-bottom:10px">📑</div><div class="course-name">Đơn nghỉ học tạm thời</div><div style="font-size:12.5px;color:var(--txt2);margin-top:4px">Nộp kèm lý do và hồ sơ liên quan.</div></div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: EXTRACURR ══ -->
+  <div class="page" id="page-extracurr">
+    <div class="grid g4" style="margin-bottom:20px">
+      <div class="stat-card sc-violet"><div class="lbl">Điểm rèn luyện</div><div class="val">87</div><div class="sub">Loại: Tốt</div></div>
+      <div class="stat-card sc-indigo"><div class="lbl">Hoạt động tham gia</div><div class="val">12</div><div class="sub">Năm học 2025-2026</div></div>
+      <div class="stat-card sc-cyan"><div class="lbl">Giờ tình nguyện</div><div class="val">34h</div><div class="sub">Vượt chỉ tiêu 14h</div></div>
+      <div class="stat-card sc-emerald"><div class="lbl">Giải thưởng</div><div class="val">3</div><div class="sub">Cấp trường & cấp ĐHQG</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:20px">
+      <div class="card">
+        <div class="ch"><span class="ct">Hoạt động đã tham gia</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="act-item"><div class="act-img" style="background:linear-gradient(135deg,var(--c-amber-l),#fde68a)">🏆</div><div style="flex:1"><div class="act-name">Hackathon Sinh viên UIT 2026</div><div class="act-meta">12/04/2026 · Giải Nhất · Cấp trường</div></div><div class="act-points">+15 đ</div></div>
+          <div class="act-item"><div class="act-img" style="background:linear-gradient(135deg,var(--c-indigo-l),#c7d2fe)">💻</div><div style="flex:1"><div class="act-name">ICPC Programming Contest 2026</div><div class="act-meta">22/03/2026 · Top 10 · Cấp quốc gia</div></div><div class="act-points">+12 đ</div></div>
+          <div class="act-item"><div class="act-img" style="background:linear-gradient(135deg,var(--c-emerald-l),#a7f3d0)">🌱</div><div style="flex:1"><div class="act-name">Ngày hội tình nguyện – Green Spring</div><div class="act-meta">15/03/2026 · 8 giờ tình nguyện</div></div><div class="act-points">+8 đ</div></div>
+          <div class="act-item"><div class="act-img" style="background:linear-gradient(135deg,var(--c-cyan-l),#a5f3fc)">🎤</div><div style="flex:1"><div class="act-name">Diễn đàn Khởi nghiệp sinh viên</div><div class="act-meta">20/02/2026 · Diễn giả · Cấp trường</div></div><div class="act-points">+10 đ</div></div>
+          <div class="act-item"><div class="act-img" style="background:linear-gradient(135deg,var(--c-violet-l),#ddd6fe)">🏐</div><div style="flex:1"><div class="act-name">Giải thể thao UIT Cup 2026 – Bóng chuyền</div><div class="act-meta">10/01/2026 · Giải Ba · Cấp trường</div></div><div class="act-points">+5 đ</div></div>
+        </div>
+      </div>
+      <div class="card" style="align-self:flex-start">
+        <div class="ch"><span class="ct">Phân bổ điểm</span></div>
+        <svg viewBox="0 0 220 200" width="100%">
+          <text x="110" y="100" text-anchor="middle" font-family="Outfit" font-weight="800" font-size="22" fill="var(--txt)">87</text>
+          <text x="110" y="118" text-anchor="middle" font-family="Nunito Sans" font-size="11" fill="var(--txt3)">/ 100 điểm</text>
+          <circle cx="110" cy="100" r="70" fill="none" stroke="var(--divider)" stroke-width="18"/>
+          <circle cx="110" cy="100" r="70" fill="none" stroke="#4f46e5" stroke-width="18" stroke-dasharray="383" stroke-dashoffset="50" stroke-linecap="round" transform="rotate(-90 110 100)"/>
+          <circle cx="110" cy="100" r="55" fill="none" stroke="var(--divider)" stroke-width="10"/>
+          <circle cx="110" cy="100" r="55" fill="none" stroke="#06b6d4" stroke-width="10" stroke-dasharray="301" stroke-dashoffset="60" stroke-linecap="round" transform="rotate(-90 110 100)"/>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+          <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:var(--c-indigo);display:inline-block"></span>Học tập</span><strong>40/45</strong></div>
+          <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:var(--c-cyan);display:inline-block"></span>Hoạt động</span><strong>30/35</strong></div>
+          <div style="display:flex;justify-content:space-between;font-size:12.5px"><span style="display:flex;align-items:center;gap:6px"><span style="width:10px;height:10px;border-radius:50%;background:var(--c-emerald);display:inline-block"></span>Ý thức</span><strong>17/20</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: PROFILE ══ -->
+  <div class="page" id="page-profile">
+    <div class="prof-header">
+      <div class="prof-av">NA</div>
+      <div style="position:relative;z-index:1">
+        <div class="prof-name">Nguyễn Văn A</div>
+        <div class="prof-id">MSSV: 21520001 · Khoa Công nghệ Thông tin</div>
+        <div class="prof-tags"><span class="prof-tag">Năm 3</span><span class="prof-tag">Hệ chính quy</span><span class="prof-tag">GPA: 3.62</span></div>
+      </div>
+      <div style="margin-left:auto;position:relative;z-index:1"><button class="btn btn-ghost" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)" onclick="toast('✏️','Mở form chỉnh sửa hồ sơ')">Chỉnh sửa hồ sơ</button></div>
+    </div>
+    <div class="grid g2" style="gap:20px">
+      <div class="card"><div class="ch"><span class="ct">Thông tin cá nhân</span></div>
+        <div class="info-row"><span class="info-key">Họ và tên</span><span class="info-val">Nguyễn Văn A</span></div>
+        <div class="info-row"><span class="info-key">Ngày sinh</span><span class="info-val">01/01/2003</span></div>
+        <div class="info-row"><span class="info-key">CCCD / CMND</span><span class="info-val">079203010001</span></div>
+        <div class="info-row"><span class="info-key">Giới tính</span><span class="info-val">Nam</span></div>
+        <div class="info-row"><span class="info-key">Email SV</span><span class="info-val" style="color:var(--c-indigo)">21520001@gm.uit.edu.vn</span></div>
+        <div class="info-row"><span class="info-key">Điện thoại</span><span class="info-val">0901 234 567</span></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Thông tin học vụ</span></div>
+        <div class="info-row"><span class="info-key">Mã sinh viên</span><span class="info-val">21520001</span></div>
+        <div class="info-row"><span class="info-key">Lớp</span><span class="info-val">CNTT2021-K2</span></div>
+        <div class="info-row"><span class="info-key">Chuyên ngành</span><span class="info-val">Kỹ thuật phần mềm</span></div>
+        <div class="info-row"><span class="info-key">Khóa học</span><span class="info-val">2021 – 2025</span></div>
+        <div class="info-row"><span class="info-key">Trạng thái</span><span class="info-val"><span class="chip ch-green">Đang học</span></span></div>
+        <div class="info-row"><span class="info-key">Cố vấn học tập</span><span class="info-val">TS. Nguyễn Văn X</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PAGE: SETTINGS ══ -->
+  <div class="page" id="page-settings">
+    <div class="grid g2" style="gap:20px">
+      <div class="card"><div class="ch"><span class="ct">Giao diện</span></div>
+        <div class="setting-row"><div><div class="setting-lbl">Giao diện tối (Dark Mode)</div><div class="setting-desc">Bảo vệ mắt khi dùng ban đêm</div></div><div class="toggle" id="darkToggle" onclick="toggleTheme();this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div><div class="setting-lbl">Cỡ chữ</div><div class="setting-desc">Điều chỉnh cỡ chữ hiển thị</div></div><select class="setting-select" onchange="changeFontSize(this.value)"><option value="13">Nhỏ (13px)</option><option value="14" selected>Vừa (14px)</option><option value="15">Lớn (15px)</option><option value="16">Rất lớn (16px)</option></select></div>
+        <div class="setting-row"><div><div class="setting-lbl">Màu chủ đạo</div><div class="setting-desc">Thay đổi màu accent</div></div>
+          <div style="display:flex;gap:6px">
+            <div style="width:22px;height:22px;border-radius:50%;background:#4f46e5;cursor:pointer;border:2px solid var(--c-indigo);box-shadow:0 0 0 2px white" onclick="setAccent('--c-indigo','#4f46e5','--c-indigo-d','#3730a3')"></div>
+            <div style="width:22px;height:22px;border-radius:50%;background:#0891b2;cursor:pointer" onclick="setAccent('--c-indigo','#0891b2','--c-indigo-d','#0e7490')"></div>
+            <div style="width:22px;height:22px;border-radius:50%;background:#059669;cursor:pointer" onclick="setAccent('--c-indigo','#059669','--c-indigo-d','#047857')"></div>
+            <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;cursor:pointer" onclick="setAccent('--c-indigo','#7c3aed','--c-indigo-d','#6d28d9')"></div>
+            <div style="width:22px;height:22px;border-radius:50%;background:#e11d48;cursor:pointer" onclick="setAccent('--c-indigo','#e11d48','--c-indigo-d','#be123c')"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Thông báo</span></div>
+        <div class="setting-row"><div><div class="setting-lbl">Nhắc nhở lịch học</div><div class="setting-desc">Thông báo trước 30 phút</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div><div class="setting-lbl">Thông báo hạn chót</div><div class="setting-desc">Nhắc trước 3 ngày</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div><div class="setting-lbl">Cập nhật điểm số</div><div class="setting-desc">Khi có điểm mới</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div><div class="setting-lbl">Tin tức trường</div><div class="setting-desc">Thông báo sự kiện mới</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Bảo mật</span></div>
+        <div class="setting-row"><div><div class="setting-lbl">Xác thực 2 yếu tố (2FA)</div><div class="setting-desc">Tăng bảo mật tài khoản</div></div><div class="toggle" onclick="toast('🔐','Bật xác thực 2 yếu tố...');this.classList.toggle('on')"></div></div>
+        <div class="setting-row"><div><div class="setting-lbl">Đăng nhập Google</div><div class="setting-desc">Liên kết tài khoản Google ĐHQG</div></div><button class="btn btn-ghost" style="font-size:12px;padding:6px 14px" onclick="toast('🔗','Liên kết với Google thành công!')">Kết nối</button></div>
+        <div class="setting-row"><div><div class="setting-lbl">Đổi mật khẩu</div></div><button class="btn btn-ghost" style="font-size:12px;padding:6px 14px" onclick="toast('🔑','Đã gửi email đổi mật khẩu')">Đổi mật khẩu</button></div>
+      </div>
+      <div class="card"><div class="ch"><span class="ct">Ngôn ngữ & Khu vực</span></div>
+        <div class="setting-row"><div><div class="setting-lbl">Ngôn ngữ giao diện</div></div><select class="setting-select" onchange="toast('🌐','Đổi ngôn ngữ: '+this.options[this.selectedIndex].text)"><option>Tiếng Việt</option><option>English</option></select></div>
+        <div class="setting-row"><div><div class="setting-lbl">Định dạng ngày</div></div><select class="setting-select"><option>DD/MM/YYYY</option><option>MM/DD/YYYY</option></select></div>
+        <div class="setting-row"><div><div class="setting-lbl">Múi giờ</div></div><select class="setting-select"><option>GMT+7 (Việt Nam)</option></select></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ══ NOTIF PANEL ══ -->
+<div class="np" id="np">
+  <div class="np-head"><h3>Thông báo</h3><span style="font-size:12px;color:var(--c-indigo);cursor:pointer;font-weight:600" onclick="markAll()">Đọc tất cả</span></div>
+  <div class="np-item unread" onclick="markRead(this)"><div class="np-dot"></div><div><div class="np-title">Đăng ký bổ sung môn học HK2</div><div class="np-body">Sinh viên K16, K17 đăng ký bổ sung HK2. Hạn cuối 21/04 lúc 23:59.</div><div class="np-time">Hôm nay, 08:00</div></div></div>
+  <div class="np-item unread" onclick="markRead(this)"><div class="np-dot"></div><div><div class="np-title">Nhắc nhở học phí HK1 – Đợt 3</div><div class="np-body">Còn 5.200.000 ₫ chưa thanh toán. Hạn 30/04/2026.</div><div class="np-time">17/04, 09:30</div></div></div>
+  <div class="np-item unread" onclick="markRead(this)"><div class="np-dot"></div><div><div class="np-title">Điểm môn Trí tuệ Nhân tạo đã cập nhật</div><div class="np-body">Điểm tổng kết: 9.35 (A+). GPA của bạn tăng lên 3.62.</div><div class="np-time">15/04, 14:00</div></div></div>
+  <div class="np-item" onclick="markRead(this)"><div class="np-dot read"></div><div><div class="np-title">Lịch thi cuối kỳ HK2 đã công bố</div><div class="np-body">Kiểm tra lịch thi và địa điểm thi của từng môn.</div><div class="np-time">14/04, 10:00</div></div></div>
+  <div class="np-item" onclick="markRead(this)"><div class="np-dot read"></div><div><div class="np-title">Xét học bổng khuyến khích HK2</div><div class="np-body">Nộp đơn xét học bổng trước 15/05/2026.</div><div class="np-time">12/04, 08:00</div></div></div>
+</div>
+
+<!-- ══ MODALS ══ -->
+<div class="overlay" id="modalReg" onclick="if(event.target===this)closeModal('modalReg')">
+  <div class="modal">
+    <div class="modal-ic" style="background:var(--c-indigo-l)">📚</div>
+    <h3>Vào trang Đăng ký môn học</h3>
+    <p>Bạn sắp truy cập trang đăng ký môn học HK2 năm học 2025–2026.<br><br>Lưu ý: Sau khi đăng ký thành công, bạn cần đóng học phí trong vòng <strong>7 ngày</strong> để xác nhận suất học.</p>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalReg')">Hủy</button><button class="btn btn-primary" onclick="closeModal('modalReg');goPage('register')">Tiếp tục →</button></div>
+  </div>
+</div>
+<div class="overlay" id="modalConfirm" onclick="if(event.target===this)closeModal('modalConfirm')">
+  <div class="modal">
+    <div class="modal-ic" style="background:var(--c-emerald-l)">✅</div>
+    <h3>Xác nhận đăng ký môn học</h3>
+    <p id="confirmText">Bạn đang đăng ký <strong id="confirmCount">0 môn học</strong> với tổng <strong id="confirmTC">0 tín chỉ</strong>.<br><br>Sau khi xác nhận, hệ thống sẽ ghi nhận và không thể chỉnh sửa trong 24 giờ. Bạn chắc chắn muốn tiếp tục?</p>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalConfirm')">Quay lại</button><button class="btn btn-success" onclick="submitReg()">Xác nhận đăng ký</button></div>
+  </div>
+</div>
+<div class="overlay" id="modalPay" onclick="if(event.target===this)closeModal('modalPay')">
+  <div class="modal">
+    <div class="modal-ic" style="background:var(--c-emerald-l)">💳</div>
+    <h3>Thanh toán học phí online</h3>
+    <p>Số tiền cần thanh toán: <strong>5.200.000 ₫</strong><br><br>Chọn phương thức thanh toán:</p>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px">
+      <div class="course-card" onclick="this.closest('.overlay').querySelectorAll('.course-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected')"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">🏦</span><span style="font-weight:700">Internet Banking / Chuyển khoản</span></div></div>
+      <div class="course-card" onclick="this.closest('.overlay').querySelectorAll('.course-card').forEach(c=>c.classList.remove('selected'));this.classList.add('selected')"><div style="display:flex;align-items:center;gap:10px"><span style="font-size:20px">📱</span><span style="font-weight:700">Ví điện tử (MoMo, ZaloPay, VNPAY)</span></div></div>
+    </div>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalPay')">Hủy</button><button class="btn btn-success" onclick="closeModal('modalPay');toast('✅','Chuyển đến cổng thanh toán...')">Thanh toán ngay</button></div>
+  </div>
+</div>
+<div class="overlay" id="modalDoc" onclick="if(event.target===this)closeModal('modalDoc')">
+  <div class="modal">
+    <div class="modal-ic" style="background:var(--c-indigo-l)">📄</div>
+    <h3>Yêu cầu giấy tờ</h3>
+    <p>Nhập số lượng bản cần cấp và mục đích sử dụng để hoàn tất yêu cầu.</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px">
+      <div><div style="font-size:12.5px;font-weight:700;color:var(--txt2);margin-bottom:5px">Số lượng bản</div><input class="input" type="text" placeholder="VD: 2 bản" value="1"></div>
+      <div><div style="font-size:12.5px;font-weight:700;color:var(--txt2);margin-bottom:5px">Mục đích sử dụng</div><input class="input" type="text" placeholder="VD: Xin học bổng, Thực tập..."></div>
+      <div><div style="font-size:12.5px;font-weight:700;color:var(--txt2);margin-bottom:5px">Ngôn ngữ</div><select class="setting-select" style="width:100%"><option>Tiếng Việt</option><option>English</option><option>Song ngữ</option></select></div>
+    </div>
+    <div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal('modalDoc')">Hủy</button><button class="btn btn-primary" onclick="closeModal('modalDoc');toast('✅','Đã gửi yêu cầu! Nhận kết quả trong 2-3 ngày làm việc.')">Gửi yêu cầu</button></div>
+  </div>
+</div>
+
+<!-- ══ TOAST ══ -->
+<div class="toast" id="toastEl"><span id="toastIco">✅</span><span id="toastMsg">OK</span></div>
+
+<script>
+const pages={home:'Trang chủ',schedule:'Thời khóa biểu',grades:'Kết quả học tập',register:'Đăng ký môn học',finance:'Học phí',docs:'Hồ sơ & Giấy tờ',extracurr:'Ngoại khóa',profile:'Hồ sơ cá nhân',settings:'Cài đặt'};
+let dark=false,unread=3,cart=[],panelOpen=false;
+
+function goPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.querySelector('[data-page='+id+']').classList.add('active');
+  document.getElementById('pageTitle').textContent=pages[id]||id;
+  document.getElementById('breadcrumb').textContent=pages[id]||id;
+  if(panelOpen){togglePanel(false);}
+}
+document.querySelectorAll('.nav-item[data-page]').forEach(n=>n.addEventListener('click',()=>goPage(n.dataset.page)));
+
+function toggleTheme(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  document.getElementById('themeTxt').textContent=dark?'Giao diện sáng':'Giao diện tối';
+  document.getElementById('themeIco').innerHTML=dark?'<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>':'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+}
+
+function openPanel(){panelOpen=true;document.getElementById('np').classList.add('open');}
+function togglePanel(v){panelOpen=v===undefined?!panelOpen:v;document.getElementById('np').classList.toggle('open',panelOpen);}
+
+function markRead(el){
+  const d=el.querySelector('.np-dot');
+  if(d&&!d.classList.contains('read')){d.classList.add('read');el.classList.remove('unread');unread=Math.max(0,unread-1);document.getElementById('nDot').style.display=unread?'block':'none';}
+}
+function markAll(){document.querySelectorAll('.np-item').forEach(i=>{i.classList.remove('unread');const d=i.querySelector('.np-dot');if(d)d.classList.add('read')});unread=0;document.getElementById('nDot').style.display='none';toast('✅','Đã đánh dấu tất cả là đã đọc');}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+let toastT;
+function toast(ico,msg){
+  clearTimeout(toastT);
+  document.getElementById('toastIco').textContent=ico;
+  document.getElementById('toastMsg').textContent=msg;
+  const el=document.getElementById('toastEl');
+  el.classList.add('show');
+  toastT=setTimeout(()=>el.classList.remove('show'),3200);
+}
+
+// Search
+const sInput=document.getElementById('sInput'),sDrop=document.getElementById('sDrop');
+sInput.addEventListener('focus',()=>sDrop.classList.add('open'));
+sInput.addEventListener('blur',()=>setTimeout(()=>sDrop.classList.remove('open'),200));
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();sInput.focus();}
+  if(e.key==='Escape'){sInput.blur();sDrop.classList.remove('open');document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));togglePanel(false);}
+});
+
+// Course registration
+function toggleCourse(el){
+  const name=el.dataset.name;
+  const isSelected=el.dataset.selected==='1';
+  const tcText=el.querySelector('.ch-cyan')?.textContent||'3 TC';
+  const tc=parseInt(tcText)||3;
+  if(isSelected){
+    el.dataset.selected='0';
+    el.classList.remove('selected');
+    cart=cart.filter(c=>c.name!==name);
+  } else {
+    el.dataset.selected='1';
+    el.classList.add('selected');
+    cart.push({name,tc});
+  }
+  updateCart();
+}
+function updateCart(){
+  const total=cart.reduce((s,c)=>s+c.tc,0);
+  const list=document.getElementById('cartList');
+  const btn=document.getElementById('regBtn');
+  const sbtn=document.getElementById('submitBtn');
+  document.getElementById('cartCount').textContent=cart.length+' môn';
+  document.getElementById('totalTC').textContent=total+' TC';
+  document.getElementById('confirmCount').textContent=cart.length+' môn học';
+  document.getElementById('confirmTC').textContent=total+' tín chỉ';
+  if(sbtn){sbtn.textContent='Xác nhận đăng ký ('+cart.length+')';sbtn.disabled=cart.length===0;}
+  if(btn)btn.disabled=cart.length===0;
+  if(cart.length===0){list.innerHTML='<div style="text-align:center;padding:20px;color:var(--txt3);font-size:13px">Chưa chọn môn nào</div>';return;}
+  list.innerHTML=cart.map(c=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:var(--c-indigo-l);border-radius:8px;font-size:13px"><span style="font-weight:600;color:var(--txt)">${c.name}</span><span style="color:var(--c-indigo);font-weight:700">${c.tc} TC</span></div>`).join('');
+}
+function filterCourses(q){
+  document.querySelectorAll('#courseList .course-card').forEach(c=>{
+    c.style.display=c.dataset.name.toLowerCase().includes(q.toLowerCase())?'':'none';
+  });
+}
+function submitReg(){
+  closeModal('modalConfirm');
+  const names=cart.map(c=>c.name).join(', ');
+  cart=[];
+  document.querySelectorAll('#courseList .course-card').forEach(c=>{c.dataset.selected='0';c.classList.remove('selected');});
+  updateCart();
+  toast('🎉','Đăng ký thành công! Vui lòng đóng học phí trong 7 ngày.');
+}
+
+function switchTab(el,page){
+  const tabs=el.closest('.tabs').querySelectorAll('.tab');
+  tabs.forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+function changeFontSize(v){document.body.style.fontSize=v+'px';}
+function setAccent(v1,c1,v2,c2){document.documentElement.style.setProperty(v1,c1);document.documentElement.style.setProperty(v2,c2);toast('🎨','Màu chủ đạo đã thay đổi!')}
+
+document.getElementById('nDot').style.display=unread?'block':'none';
+</script>
+</body>
+</html>
