@@ -480,9 +480,459 @@ tr:hover td{background:var(--surface2)}
 }
 html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 #toast.show{transform:translateY(0);opacity:1}
+
+/* ═══════════════════════════════════════════════════════════════
+   LOGIN SCREEN
+═══════════════════════════════════════════════════════════════ */
+#login-screen{
+  position:fixed;inset:0;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  background:#05080f;
+}
+#login-screen.fade-out{
+  animation:loginFadeOut .55s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes loginFadeOut{
+  0%{opacity:1;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.04);pointer-events:none}
+}
+/* Animated gradient mesh background */
+.login-bg{
+  position:absolute;inset:0;overflow:hidden;
+}
+.login-bg-blob{
+  position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;
+  animation:blobFloat 8s ease-in-out infinite alternate;
+}
+.login-bg-blob:nth-child(1){width:520px;height:520px;background:radial-gradient(circle,#2e4fff,#0d1a6b);top:-140px;left:-100px;animation-delay:0s}
+.login-bg-blob:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,#7c3aed,#3b1a7a);bottom:-120px;right:-80px;animation-delay:-3s}
+.login-bg-blob:nth-child(3){width:280px;height:280px;background:radial-gradient(circle,#0898a0,#023f42);bottom:20%;left:20%;animation-delay:-5.5s;opacity:.35}
+@keyframes blobFloat{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(30px,20px) scale(1.06)}
+}
+/* Dot grid overlay */
+.login-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+/* Glass card */
+.login-card{
+  position:relative;z-index:1;
+  width:420px;max-width:calc(100vw - 32px);
+  background:rgba(255,255,255,.04);
+  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;
+  padding:40px 36px;
+  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05) inset;
+  animation:cardIn .6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(32px) scale(.94)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+/* Logo */
+.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.login-logo-mark{
+  width:44px;height:44px;border-radius:14px;
+  background:var(--brand);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:#fff;
+  box-shadow:0 8px 24px rgba(46,79,255,.5);
+  flex-shrink:0;
+}
+.login-logo-text h2{font-size:18px;font-weight:900;color:#fff;line-height:1.15}
+.login-logo-text p{font-size:12px;color:rgba(255,255,255,.45);margin-top:1px}
+/* Heading */
+.login-heading{margin-bottom:24px}
+.login-heading h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
+.login-heading p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.55}
+/* Form fields */
+.lf-group{margin-bottom:16px}
+.lf-label{display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:7px;letter-spacing:.03em}
+.lf-input-wrap{position:relative}
+.lf-input-wrap svg{
+  position:absolute;left:13px;top:50%;transform:translateY(-50%);
+  width:15px;height:15px;color:rgba(255,255,255,.3);pointer-events:none;
+  transition:color .2s;
+}
+.lf-input{
+  width:100%;height:46px;
+  background:rgba(255,255,255,.07);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:11px;
+  padding:0 38px;
+  font-size:14px;font-weight:500;color:#fff;
+  font-family:'Be Vietnam Pro',sans-serif;
+  outline:none;
+  transition:border .2s,background .2s,box-shadow .2s;
+}
+.lf-input::placeholder{color:rgba(255,255,255,.25);font-weight:400}
+.lf-input:focus{
+  border-color:var(--brand);background:rgba(46,79,255,.1);
+  box-shadow:0 0 0 3px rgba(46,79,255,.2);
+}
+.lf-input:focus + svg,.lf-input-wrap:focus-within svg{color:var(--brand)}
+/* swap icon order so icon is before input in DOM but we need svg AFTER for sibling ~ trick → easier to put svg first */
+.lf-input-wrap .lf-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:rgba(255,255,255,.3);pointer-events:none;transition:color .2s}
+.lf-input-wrap:focus-within .lf-ico{color:rgba(46,79,255,1)}
+.lf-input{padding-left:40px}
+.lf-pw-toggle{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:transparent;border:none;cursor:pointer;
+  color:rgba(255,255,255,.3);padding:4px;border-radius:6px;
+  transition:color .15s;display:flex;align-items:center;
+}
+.lf-pw-toggle:hover{color:rgba(255,255,255,.7)}
+/* Remember + Forgot */
+.lf-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.lf-check-wrap{display:flex;align-items:center;gap:8px;cursor:pointer}
+.lf-check{width:16px;height:16px;border-radius:5px;border:1.5px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;accent-color:var(--brand)}
+.lf-check-lbl{font-size:12.5px;color:rgba(255,255,255,.5);font-weight:500;user-select:none}
+.lf-forgot{font-size:12.5px;color:rgba(139,164,255,.9);font-weight:600;cursor:pointer;transition:color .15s}
+.lf-forgot:hover{color:#fff}
+/* Submit btn */
+.lf-btn{
+  width:100%;height:48px;border-radius:12px;
+  background:var(--brand);border:none;cursor:pointer;
+  font-size:15px;font-weight:800;color:#fff;
+  font-family:'Be Vietnam Pro',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 8px 24px rgba(46,79,255,.45);
+  position:relative;overflow:hidden;
+}
+.lf-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
+}
+.lf-btn:hover{background:var(--brand-d);transform:translateY(-1px);box-shadow:0 12px 32px rgba(46,79,255,.55)}
+.lf-btn:active{transform:translateY(0)}
+.lf-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.lf-btn .lf-spinner{
+  width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);
+  border-top-color:#fff;border-radius:50%;
+  animation:spin .7s linear infinite;display:none;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Error state */
+.lf-error{
+  background:rgba(224,45,91,.12);border:1px solid rgba(224,45,91,.3);
+  border-radius:9px;padding:10px 13px;
+  font-size:12.5px;color:#ff8aaa;font-weight:600;
+  margin-bottom:16px;display:none;
+  animation:shake .35s ease;
+}
+.lf-error.show{display:flex;align-items:center;gap:8px}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+/* Demo hint */
+.lf-demo{
+  margin-top:20px;padding:12px 14px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.lf-demo-ico{font-size:14px;flex-shrink:0;margin-top:1px}
+.lf-demo p{font-size:11.5px;color:rgba(255,255,255,.35);line-height:1.6}
+.lf-demo strong{color:rgba(255,255,255,.6);cursor:pointer}
+.lf-demo strong:hover{color:#fff;text-decoration:underline}
+/* Divider */
+.lf-divider{display:flex;align-items:center;gap:12px;margin:20px 0}
+.lf-divider span{font-size:12px;color:rgba(255,255,255,.2);white-space:nowrap}
+.lf-divider::before,.lf-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
+/* Social login */
+.lf-soc{
+  width:100%;height:42px;border-radius:10px;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);
+  color:rgba(255,255,255,.75);font-size:13.5px;font-weight:600;
+  font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background .15s,border .15s;
+  margin-bottom:10px;
+}
+.lf-soc:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+
+/* ── Logout confirmation modal ── */
+#logout-modal{
+  position:fixed;inset:0;z-index:8888;
+  background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;
+}
+#logout-modal.show{display:flex;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.logout-dialog{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:20px;padding:32px;width:340px;max-width:calc(100vw - 32px);
+  box-shadow:var(--shadow-md);animation:cardIn .3s ease both;
+  text-align:center;
+}
+.logout-dialog .ld-ico{font-size:36px;margin-bottom:12px}
+.logout-dialog h3{font-size:18px;font-weight:800;color:var(--txt);margin-bottom:6px}
+.logout-dialog p{font-size:13px;color:var(--txt2);line-height:1.55;margin-bottom:24px}
+.ld-btns{display:flex;gap:10px}
+.ld-btns button{flex:1;height:42px;border-radius:10px;font-size:14px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:all .15s}
+.ld-cancel{background:var(--surface2);border:1.5px solid var(--border);color:var(--txt)}
+.ld-cancel:hover{border-color:var(--border2)}
+.ld-confirm{background:var(--rose);border:none;color:#fff}
+.ld-confirm:hover{background:#c8264f}
+
+/* ── Notification panel ── */
+#notif-panel{
+  position:fixed;top:66px;right:16px;z-index:500;
+  width:360px;max-width:calc(100vw - 32px);
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;box-shadow:var(--shadow-md);
+  display:none;overflow:hidden;
+  animation:slideDown .2s cubic-bezier(.34,1.56,.64,1);
+}
+#notif-panel.show{display:block}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.np-hdr{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.np-hdr h4{font-size:14px;font-weight:800;color:var(--txt)}
+.np-mark-all{font-size:12px;font-weight:700;color:var(--brand);cursor:pointer}
+.np-item{padding:13px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;display:flex;gap:12px}
+.np-item:last-child{border-bottom:none}
+.np-item:hover{background:var(--surface2)}
+.np-item.unread{background:var(--brand-l)}
+.np-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.np-item-body p{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:2px;line-height:1.4}
+.np-item-body span{font-size:11.5px;color:var(--txt3)}
+
+/* ── Search overlay ── */
+#search-overlay{
+  position:fixed;inset:0;z-index:600;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
+  display:none;flex-direction:column;align-items:center;
+  padding-top:80px;
+}
+#search-overlay.show{display:flex;animation:fadeIn .15s ease}
+.so-box{
+  width:600px;max-width:calc(100vw - 32px);
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow-md);
+  animation:cardIn .25s ease;
+}
+.so-input-row{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.so-input-row svg{color:var(--txt3);flex-shrink:0}
+.so-input{flex:1;border:none;background:transparent;font-size:16px;font-family:'Be Vietnam Pro',sans-serif;color:var(--txt);outline:none}
+.so-input::placeholder{color:var(--txt3)}
+.so-esc{font-size:11px;color:var(--txt3);background:var(--border);padding:2px 7px;border-radius:5px;flex-shrink:0;font-weight:600}
+.so-results{max-height:360px;overflow-y:auto}
+.so-section{padding:8px 0}
+.so-section-lbl{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;padding:6px 18px}
+.so-item{display:flex;align-items:center;gap:12px;padding:10px 18px;cursor:pointer;transition:background .1s}
+.so-item:hover,.so-item.focused{background:var(--brand-l)}
+.so-ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--surface2);flex-shrink:0}
+.so-item-lbl{font-size:13.5px;font-weight:600;color:var(--txt)}
+.so-item-sub{font-size:12px;color:var(--txt3)}
+
+/* ── Profile dropdown ── */
+#profile-dropdown{
+  position:fixed;top:66px;right:16px;z-index:500;
+  width:240px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;box-shadow:var(--shadow-md);
+  display:none;overflow:hidden;
+  animation:slideDown .2s cubic-bezier(.34,1.56,.64,1);
+}
+#profile-dropdown.show{display:block}
+.pd-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center}
+.pd-av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.pd-name{font-size:13px;font-weight:700;color:var(--txt)}
+.pd-uid{font-size:11px;color:var(--txt3)}
+.pd-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--txt2);transition:background .1s}
+.pd-item:hover{background:var(--surface2);color:var(--txt)}
+.pd-item svg{width:15px;height:15px;color:var(--txt3);flex-shrink:0}
+.pd-item.danger{color:var(--rose)}
+.pd-item.danger svg{color:var(--rose)}
+.pd-divider{height:1px;background:var(--border);margin:4px 0}
 </style>
 </head>
 <body>
+
+<!-- ══ LOGIN SCREEN ══════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-bg">
+    <div class="login-bg-blob"></div>
+    <div class="login-bg-blob"></div>
+    <div class="login-bg-blob"></div>
+  </div>
+  <div class="login-card">
+    <!-- Logo -->
+    <div class="login-logo">
+      <div class="login-logo-mark">UIT</div>
+      <div class="login-logo-text">
+        <h2>UIT Portal</h2>
+        <p>Trường ĐH Công nghệ Thông tin</p>
+      </div>
+    </div>
+    <!-- Heading -->
+    <div class="login-heading">
+      <h3>Đăng nhập</h3>
+      <p>Sử dụng tài khoản sinh viên để truy cập hệ thống</p>
+    </div>
+    <!-- Error box -->
+    <div class="lf-error" id="loginError">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span id="loginErrorMsg">MSSV hoặc mật khẩu không đúng.</span>
+    </div>
+    <!-- MSSV -->
+    <div class="lf-group">
+      <label class="lf-label" for="lf-mssv">Mã số sinh viên (MSSV)</label>
+      <div class="lf-input-wrap">
+        <svg class="lf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <input class="lf-input" id="lf-mssv" type="text" placeholder="VD: 24521044" autocomplete="username" inputmode="numeric" maxlength="10" onkeydown="if(event.key==='Enter')document.getElementById('lf-pw').focus()"/>
+      </div>
+    </div>
+    <!-- Password -->
+    <div class="lf-group">
+      <label class="lf-label" for="lf-pw">Mật khẩu</label>
+      <div class="lf-input-wrap">
+        <svg class="lf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <input class="lf-input" id="lf-pw" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+        <button class="lf-pw-toggle" id="pwToggle" onclick="togglePw()" type="button" tabindex="-1">
+          <svg id="pwEye" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+      </div>
+    </div>
+    <!-- Remember + Forgot -->
+    <div class="lf-row">
+      <label class="lf-check-wrap">
+        <input type="checkbox" class="lf-check" id="lf-remember"/>
+        <span class="lf-check-lbl">Ghi nhớ đăng nhập</span>
+      </label>
+      <span class="lf-forgot" onclick="toast('🔑','Vui lòng liên hệ phòng CNTT để đặt lại mật khẩu.')">Quên mật khẩu?</span>
+    </div>
+    <!-- Submit -->
+    <button class="lf-btn" id="loginBtn" onclick="doLogin()">
+      <span id="loginBtnText">Đăng nhập</span>
+      <div class="lf-spinner" id="loginSpinner"></div>
+      <svg id="loginArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <!-- Divider -->
+    <div class="lf-divider"><span>hoặc đăng nhập bằng</span></div>
+    <!-- Social -->
+    <button class="lf-soc" onclick="doSocialLogin('Google')">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Đăng nhập với Google (@uit.edu.vn)
+    </button>
+    <button class="lf-soc" onclick="doSocialLogin('Microsoft')">
+      <svg width="18" height="18" viewBox="0 0 24 24"><rect x="1" y="1" width="10" height="10" fill="#f25022"/><rect x="13" y="1" width="10" height="10" fill="#7fba00"/><rect x="1" y="13" width="10" height="10" fill="#00a4ef"/><rect x="13" y="13" width="10" height="10" fill="#ffb900"/></svg>
+      Đăng nhập với Microsoft 365
+    </button>
+    <!-- Demo hint -->
+    <div class="lf-demo">
+      <div class="lf-demo-ico">💡</div>
+      <p><strong>Demo nhanh:</strong> MSSV <strong onclick="fillDemo()">24521044</strong> · Mật khẩu <strong onclick="fillDemo()">uit2024</strong><br>Hoặc bấm vào để điền tự động.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ LOGOUT MODAL ════════════════════════════════════════════ -->
+<div id="logout-modal">
+  <div class="logout-dialog">
+    <div class="ld-ico">👋</div>
+    <h3>Đăng xuất?</h3>
+    <p>Bạn có chắc muốn đăng xuất khỏi UIT Portal không?<br>Dữ liệu phiên làm việc sẽ được lưu lại.</p>
+    <div class="ld-btns">
+      <button class="ld-cancel" onclick="closeLogoutModal()">Hủy bỏ</button>
+      <button class="ld-confirm" onclick="confirmLogout()">Đăng xuất</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NOTIFICATION PANEL ══════════════════════════════════════ -->
+<div id="notif-panel">
+  <div class="np-hdr">
+    <h4>Thông báo <span style="background:var(--rose);color:#fff;font-size:10px;padding:2px 7px;border-radius:100px;margin-left:6px">3</span></h4>
+    <span class="np-mark-all" onclick="markAllRead()">Đánh dấu đã đọc</span>
+  </div>
+  <div class="np-item unread" onclick="closeNotifPanel();showPage('grades',null)">
+    <div class="np-dot" style="background:var(--rose)"></div>
+    <div class="np-item-body">
+      <p>📊 Điểm HK2 đã được cập nhật</p>
+      <span>IT007 · Hệ điều hành — vừa xong</span>
+    </div>
+  </div>
+  <div class="np-item unread" onclick="closeNotifPanel()">
+    <div class="np-dot" style="background:var(--amber)"></div>
+    <div class="np-item-body">
+      <p>⚠️ Nhắc nhở: Hạn nộp học phí</p>
+      <span>HK2 — còn 3 ngày · 30/04/2026</span>
+    </div>
+  </div>
+  <div class="np-item unread" onclick="closeNotifPanel()">
+    <div class="np-dot" style="background:var(--brand)"></div>
+    <div class="np-item-body">
+      <p>📅 Lịch thi cuối kỳ đã được đăng</p>
+      <span>Xem lịch thi HK2 2025–2026</span>
+    </div>
+  </div>
+  <div class="np-item" onclick="closeNotifPanel()">
+    <div class="np-dot" style="background:var(--green)"></div>
+    <div class="np-item-body">
+      <p>✅ Đăng ký môn thành công</p>
+      <span>IT007, JAN06, CE232 · 3 môn · 2 ngày trước</span>
+    </div>
+  </div>
+  <div style="padding:12px 18px;text-align:center;border-top:1px solid var(--border)">
+    <span style="font-size:12.5px;font-weight:700;color:var(--brand);cursor:pointer" onclick="closeNotifPanel();showPage('notifications',null)">Xem tất cả thông báo →</span>
+  </div>
+</div>
+
+<!-- ══ SEARCH OVERLAY ══════════════════════════════════════════ -->
+<div id="search-overlay" onclick="closeSearch(event)">
+  <div class="so-box" onclick="event.stopPropagation()">
+    <div class="so-input-row">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="so-input" id="so-input" placeholder="Tìm kiếm môn học, dịch vụ, tài liệu…" oninput="renderSearch(this.value)" onkeydown="handleSearchKey(event)"/>
+      <span class="so-esc" onclick="closeSearch()">ESC</span>
+    </div>
+    <div class="so-results" id="so-results">
+      <div class="so-section">
+        <div class="so-section-lbl">Truy cập nhanh</div>
+        <div class="so-item" onclick="closeSearch();showPage('schedule',null)"><div class="so-ic" style="background:var(--brand-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="so-item-lbl">Thời khóa biểu</div><div class="so-item-sub">HK2 · 2025–2026</div></div></div>
+        <div class="so-item" onclick="closeSearch();showPage('grades',null)"><div class="so-ic" style="background:var(--green-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="so-item-lbl">Kết quả học tập</div><div class="so-item-sub">Xem điểm, bảng điểm</div></div></div>
+        <div class="so-item" onclick="closeSearch();showPage('finance',null)"><div class="so-ic" style="background:var(--amber-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/></svg></div><div><div class="so-item-lbl">Học phí</div><div class="so-item-sub">Tra cứu, thanh toán</div></div></div>
+        <div class="so-item" onclick="closeSearch();showPage('exam',null)"><div class="so-ic" style="background:var(--rose-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="so-item-lbl">Lịch thi</div><div class="so-item-sub">Tra cứu lịch thi cuối kỳ</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROFILE DROPDOWN ════════════════════════════════════════ -->
+<div id="profile-dropdown">
+  <div class="pd-header">
+    <div class="pd-av">TM</div>
+    <div>
+      <div class="pd-name">Trần Đức Mạnh</div>
+      <div class="pd-uid">24521044 · KTTT K24</div>
+    </div>
+  </div>
+  <div class="pd-item" onclick="closeProfileDropdown();showPage('profile',null)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Hồ sơ cá nhân
+  </div>
+  <div class="pd-item" onclick="closeProfileDropdown();showPage('settings',null)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+    Cài đặt
+  </div>
+  <div class="pd-item" onclick="closeProfileDropdown();toggleTheme()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    Chế độ sáng / tối
+  </div>
+  <div class="pd-divider"></div>
+  <div class="pd-item danger" onclick="closeProfileDropdown();openLogoutModal()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+    Đăng xuất
+  </div>
+</div>
 
 <!-- ══ SIDEBAR ══════════════════════════════════════════════════ -->
 <aside id="sidebar">
@@ -567,13 +1017,17 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
   </div>
 
   <div class="sb-footer">
-    <div class="sb-user-row">
+    <div class="sb-user-row" onclick="toggleProfileDropdown()">
       <div class="sb-av">TM</div>
       <div class="sb-user-info">
         <div class="name">Trần Đức Mạnh</div>
         <div class="uid">MSSV: 24521044</div>
       </div>
     </div>
+    <button class="nav-link" style="color:var(--rose);margin-top:4px" onclick="openLogoutModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span class="nl-text">Đăng xuất</span>
+    </button>
   </div>
 </aside>
 
@@ -591,9 +1045,9 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
     </button>
 
     <!-- Search -->
-    <div class="tb-search">
+    <div class="tb-search" onclick="openSearch()">
       <svg class="s-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" placeholder="Tìm kiếm môn học, dịch vụ… (Ctrl K)" id="sInput" autocomplete="off"/>
+      <input type="text" placeholder="Tìm kiếm môn học, dịch vụ… (Ctrl K)" id="sInput" autocomplete="off" readonly onclick="openSearch()"/>
       <span class="s-kbd">⌘K</span>
     </div>
 
@@ -603,12 +1057,12 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
         <svg id="themeIco" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       </button>
       <!-- Notifications -->
-      <button class="tb-btn" onclick="showPage('notifications',null)" title="Thông báo">
+      <button class="tb-btn" id="notifBtn" onclick="toggleNotifPanel()" title="Thông báo">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-        <span class="dot"></span>
+        <span class="dot" id="notifDot"></span>
       </button>
       <!-- User -->
-      <div class="tb-user" onclick="showPage('profile',null)">
+      <div class="tb-user" id="profileBtn" onclick="toggleProfileDropdown()">
         <div class="tb-user-av">TM</div>
         <div>
           <div class="tb-user-name">Trần Đức Mạnh</div>
@@ -1062,10 +1516,189 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 <div id="toast"><span id="toastIco">✅</span><span id="toastMsg">OK</span></div>
 
 <script>
+// ─── Auth / Login ────────────────────────────────────────────
+const USERS = {
+  '24521044': { password: 'uit2024', name: 'Trần Đức Mạnh', initials: 'TM', major: 'KTTT K24', role: 'student' },
+  '22520001': { password: 'admin',   name: 'Admin UIT',     initials: 'AD', major: 'Quản trị', role: 'admin'   },
+};
+let currentUser = null;
+
+function doLogin() {
+  const mssv = document.getElementById('lf-mssv').value.trim();
+  const pw   = document.getElementById('lf-pw').value;
+  const errEl = document.getElementById('loginError');
+  errEl.classList.remove('show');
+  if (!mssv || !pw) {
+    showLoginError('Vui lòng nhập đầy đủ MSSV và mật khẩu.'); return;
+  }
+  // Show spinner
+  const btn = document.getElementById('loginBtn');
+  btn.disabled = true;
+  document.getElementById('loginBtnText').textContent = 'Đang xác thực…';
+  document.getElementById('loginSpinner').style.display = 'block';
+  document.getElementById('loginArrow').style.display  = 'none';
+  // Simulate network delay
+  setTimeout(() => {
+    const user = USERS[mssv];
+    if (user && user.password === pw) {
+      currentUser = { mssv, ...user };
+      if (document.getElementById('lf-remember').checked) {
+        localStorage.setItem('uit_mssv', mssv);
+        localStorage.setItem('uit_pw', pw);
+      }
+      loginSuccess();
+    } else {
+      btn.disabled = false;
+      document.getElementById('loginBtnText').textContent = 'Đăng nhập';
+      document.getElementById('loginSpinner').style.display = 'none';
+      document.getElementById('loginArrow').style.display  = '';
+      showLoginError('MSSV hoặc mật khẩu không đúng. Vui lòng thử lại.');
+    }
+  }, 900);
+}
+
+function showLoginError(msg) {
+  document.getElementById('loginErrorMsg').textContent = msg;
+  document.getElementById('loginError').classList.add('show');
+}
+
+function loginSuccess() {
+  const screen = document.getElementById('login-screen');
+  screen.classList.add('fade-out');
+  setTimeout(() => { screen.style.display = 'none'; }, 560);
+  toast('🎉', `Xin chào, ${currentUser.name}!`);
+}
+
+function fillDemo() {
+  document.getElementById('lf-mssv').value = '24521044';
+  document.getElementById('lf-pw').value   = 'uit2024';
+  document.getElementById('loginError').classList.remove('show');
+  document.getElementById('lf-pw').focus();
+}
+
+function togglePw() {
+  const inp = document.getElementById('lf-pw');
+  const eye = document.getElementById('pwEye');
+  if (inp.type === 'password') {
+    inp.type = 'text';
+    eye.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
+  } else {
+    inp.type = 'password';
+    eye.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  }
+}
+
+function doSocialLogin(provider) {
+  toast('🔒', `Đăng nhập ${provider} đang được triển khai…`);
+}
+
+// Auto-fill if remembered
+window.addEventListener('DOMContentLoaded', () => {
+  const s = localStorage.getItem('uit_mssv'), p = localStorage.getItem('uit_pw');
+  if (s && p) {
+    document.getElementById('lf-mssv').value = s;
+    document.getElementById('lf-pw').value   = p;
+    document.getElementById('lf-remember').checked = true;
+  }
+});
+
+// ─── Logout ──────────────────────────────────────────────────
+function openLogoutModal() {
+  document.getElementById('logout-modal').classList.add('show');
+}
+function closeLogoutModal() {
+  document.getElementById('logout-modal').classList.remove('show');
+}
+function confirmLogout() {
+  localStorage.removeItem('uit_mssv');
+  localStorage.removeItem('uit_pw');
+  currentUser = null;
+  closeLogoutModal();
+  // Reset login form
+  document.getElementById('lf-mssv').value = '';
+  document.getElementById('lf-pw').value   = '';
+  document.getElementById('loginError').classList.remove('show');
+  document.getElementById('loginBtn').disabled = false;
+  document.getElementById('loginBtnText').textContent = 'Đăng nhập';
+  document.getElementById('loginSpinner').style.display = 'none';
+  document.getElementById('loginArrow').style.display = '';
+  const screen = document.getElementById('login-screen');
+  screen.classList.remove('fade-out');
+  screen.style.display = 'flex';
+  toast('👋', 'Đã đăng xuất thành công.');
+}
+
+// ─── Notification Panel ──────────────────────────────────────
+let notifOpen = false;
+function toggleNotifPanel() {
+  notifOpen = !notifOpen;
+  document.getElementById('notif-panel').classList.toggle('show', notifOpen);
+  if (notifOpen) closeProfileDropdown();
+}
+function closeNotifPanel() {
+  notifOpen = false;
+  document.getElementById('notif-panel').classList.remove('show');
+}
+function markAllRead() {
+  document.querySelectorAll('.np-item.unread').forEach(i => i.classList.remove('unread'));
+  document.getElementById('notifDot').style.display = 'none';
+  toast('✅', 'Đã đánh dấu tất cả đã đọc.');
+}
+
+// ─── Profile Dropdown ────────────────────────────────────────
+let profileOpen = false;
+function toggleProfileDropdown() {
+  profileOpen = !profileOpen;
+  document.getElementById('profile-dropdown').classList.toggle('show', profileOpen);
+  if (profileOpen) closeNotifPanel();
+}
+function closeProfileDropdown() {
+  profileOpen = false;
+  document.getElementById('profile-dropdown').classList.remove('show');
+}
+
+// ─── Search Overlay ──────────────────────────────────────────
+const SEARCH_ITEMS = [
+  { icon:'📅', label:'Thời khóa biểu', sub:'HK2 · 2025–2026', page:'schedule', color:'var(--brand-l)', sc:'var(--brand)' },
+  { icon:'📊', label:'Kết quả học tập', sub:'Xem điểm, bảng điểm', page:'grades', color:'var(--green-l)', sc:'var(--green)' },
+  { icon:'💳', label:'Học phí', sub:'Tra cứu, thanh toán', page:'finance', color:'var(--amber-l)', sc:'var(--amber)' },
+  { icon:'📋', label:'Đăng ký môn học', sub:'HK2 2025–2026', page:'register', color:'var(--violet-l)', sc:'var(--violet)' },
+  { icon:'🛡️', label:'Lịch thi', sub:'Thi cuối kỳ HK2', page:'exam', color:'var(--rose-l)', sc:'var(--rose)' },
+  { icon:'🌟', label:'Ngoại khóa & DRL', sub:'Điểm rèn luyện', page:'extracurr', color:'var(--teal-l)', sc:'var(--teal)' },
+  { icon:'📄', label:'Hồ sơ & Giấy tờ', sub:'Yêu cầu xác nhận', page:'docs', color:'var(--amber-l)', sc:'var(--amber)' },
+  { icon:'❤️', label:'Bảo hiểm Y tế', sub:'Thông tin BHYT', page:'health', color:'var(--rose-l)', sc:'var(--rose)' },
+  { icon:'📰', label:'Tin tức – Hoạt động', sub:'Thông báo trường', page:'news', color:'var(--brand-l)', sc:'var(--brand)' },
+  { icon:'👤', label:'Hồ sơ cá nhân', sub:'MSSV 24521044', page:'profile', color:'var(--surface2)', sc:'var(--txt3)' },
+];
+let searchOpen = false;
+function openSearch() {
+  searchOpen = true;
+  document.getElementById('search-overlay').classList.add('show');
+  setTimeout(() => document.getElementById('so-input').focus(), 80);
+  renderSearch('');
+}
+function closeSearch(e) {
+  if (e && e.target !== document.getElementById('search-overlay')) return;
+  searchOpen = false;
+  document.getElementById('search-overlay').classList.remove('show');
+  document.getElementById('so-input').value = '';
+}
+function renderSearch(q) {
+  const res = document.getElementById('so-results');
+  const items = q ? SEARCH_ITEMS.filter(i => i.label.toLowerCase().includes(q.toLowerCase()) || i.sub.toLowerCase().includes(q.toLowerCase())) : SEARCH_ITEMS;
+  if (!items.length) { res.innerHTML = '<div style="padding:24px;text-align:center;color:var(--txt3)">Không tìm thấy kết quả</div>'; return; }
+  res.innerHTML = `<div class="so-section"><div class="so-section-lbl">${q ? 'Kết quả tìm kiếm' : 'Tất cả tính năng'}</div>${
+    items.map(i => `<div class="so-item" onclick="closeSearch({target:null});showPage('${i.page}',null)"><div class="so-ic" style="background:${i.color};font-size:16px">${i.icon}</div><div><div class="so-item-lbl">${i.label}</div><div class="so-item-sub">${i.sub}</div></div></div>`).join('')
+  }</div>`;
+}
+function handleSearchKey(e) {
+  if (e.key === 'Escape') { searchOpen=false; document.getElementById('search-overlay').classList.remove('show'); }
+}
+
 // ─── State ──────────────────────────────────────────────────
 let isDark = false;
-let sidebarOpen = false;  // mobile
-let sidebarCollapsed = false; // desktop
+let sidebarOpen = false;
+let sidebarCollapsed = false;
 const isDesktop = () => window.innerWidth >= 1024;
 
 // ─── Theme ──────────────────────────────────────────────────
@@ -1077,7 +1710,6 @@ function toggleTheme() {
     : '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
   localStorage.setItem('dark', isDark);
 }
-// load saved theme
 if (localStorage.getItem('dark') === 'true') toggleTheme();
 
 // ─── Sidebar ────────────────────────────────────────────────
@@ -1098,20 +1730,13 @@ function closeSidebar() {
 }
 function toggleSidebar() {
   if (isDesktop()) {
-    // Desktop: collapse/expand
     sidebarCollapsed = !sidebarCollapsed;
     document.getElementById('sidebar').classList.toggle('collapsed', sidebarCollapsed);
     document.body.classList.toggle('sb-collapsed', sidebarCollapsed);
-    document.body.classList.toggle('menu-open', sidebarCollapsed); // for hamburger anim
   } else {
-    // Mobile: open drawer
     sidebarOpen ? closeSidebar() : openSidebar();
   }
 }
-
-// Show close btn on mobile
-document.getElementById('sbCloseBtn').style.cssText = '@media(max-width:1023px){display:flex}';
-// Make close btn responsive
 function updateCloseBtn() {
   const btn = document.getElementById('sbCloseBtn');
   btn.style.display = window.innerWidth < 1024 ? 'flex' : 'none';
@@ -1124,21 +1749,15 @@ window.addEventListener('resize', () => {
 
 // ─── Page navigation ────────────────────────────────────────
 function showPage(pg, btn) {
-  // hide all pages
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const el = document.getElementById('pg-' + pg);
   if (el) el.classList.add('active');
-
-  // update sidebar nav
   document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
   const activeNav = document.querySelector(`.nav-link[data-page="${pg}"]`);
   if (activeNav) activeNav.classList.add('active');
-
-  // update bottom nav
   document.querySelectorAll('.bn-btn[data-pg]').forEach(b => b.classList.remove('active'));
   const activeBn = document.querySelector(`.bn-btn[data-pg="${pg}"]`);
   if (activeBn) activeBn.classList.add('active');
-
   if (!isDesktop()) closeSidebar();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1163,16 +1782,25 @@ function toast(ico, msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
 }
 
+// ─── Global click close ──────────────────────────────────────
+document.addEventListener('click', (e) => {
+  if (notifOpen && !e.target.closest('#notif-panel') && !e.target.closest('#notifBtn')) closeNotifPanel();
+  if (profileOpen && !e.target.closest('#profile-dropdown') && !e.target.closest('#profileBtn') && !e.target.closest('.sb-user-row')) closeProfileDropdown();
+  if (document.getElementById('logout-modal').classList.contains('show') && e.target === document.getElementById('logout-modal')) closeLogoutModal();
+});
+
 // ─── Keyboard ───────────────────────────────────────────────
 document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-    e.preventDefault();
-    document.getElementById('sInput').focus();
-  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
   if (e.key === 'Escape') {
     closeSidebar();
-    document.getElementById('sInput').blur();
+    closeNotifPanel();
+    closeProfileDropdown();
+    if (searchOpen) { searchOpen=false; document.getElementById('search-overlay').classList.remove('show'); }
+    if (document.getElementById('logout-modal').classList.contains('show')) closeLogoutModal();
   }
+  // Enter on login screen
+  if (document.getElementById('login-screen').style.display !== 'none' && e.key === 'Enter') doLogin();
 });
 </script>
 </body>
