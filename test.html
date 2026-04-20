@@ -10,55 +10,55 @@
 /* ─── Reset & Root ─────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* ── Pastel palette ── */
-  --bg:       #f5f3ff;
+  /* ── Pastel — clean blue/slate base ── */
+  --bg:       #f2f5fc;
   --surface:  #ffffff;
-  --surface2: #faf9ff;
-  --border:   #e8e4f8;
-  --border2:  #d5cfef;
-  --txt:      #2d2540;
-  --txt2:     #5e5380;
-  --txt3:     #9e94be;
-  /* brand: soft periwinkle blue */
-  --brand:    #7B6EF6;
-  --brand-d:  #6358e0;
-  --brand-l:  #f0eeff;
-  --brand-m:  #d4cffc;
-  /* green: mint */
-  --green:    #3db89c;
-  --green-l:  #eafaf6;
-  /* amber: peachy gold */
-  --amber:    #e6933a;
-  --amber-l:  #fff5ea;
-  /* rose: blush pink */
-  --rose:     #e8628a;
-  --rose-l:   #fff0f5;
-  /* violet: lavender */
-  --violet:   #9b72cf;
-  --violet-l: #f4eeff;
-  /* teal: sky */
-  --teal:     #3aabbd;
-  --teal-l:   #e8f8fb;
+  --surface2: #f7f9ff;
+  --border:   #e3e9f8;
+  --border2:  #ccd4ed;
+  --txt:      #1e2340;
+  --txt2:     #4a5580;
+  --txt3:     #8893b8;
+  /* brand: soft sky-blue */
+  --brand:    #4f7ef7;
+  --brand-d:  #3860d8;
+  --brand-l:  #edf2ff;
+  --brand-m:  #c5d5fc;
+  /* green: sage */
+  --green:    #2baa82;
+  --green-l:  #e8faf4;
+  /* amber: warm gold */
+  --amber:    #d97c2a;
+  --amber-l:  #fff4e6;
+  /* rose: soft pink */
+  --rose:     #e0526a;
+  --rose-l:   #fef0f3;
+  /* violet: soft lavender */
+  --violet:   #8b68d8;
+  --violet-l: #f2eeff;
+  /* teal */
+  --teal:     #1fa8b8;
+  --teal-l:   #e6f8fb;
   /* coral */
-  --coral:    #f08080;
-  --coral-l:  #fff1f1;
+  --coral:    #eb7070;
+  --coral-l:  #fff0f0;
   --r:        12px;
   --r-lg:     18px;
   --sb-w:     256px;
   --sb-w-sm:  68px;
   --topbar-h: 60px;
-  --shadow:   0 1px 4px rgba(80,60,150,.06),0 4px 20px rgba(80,60,150,.08);
-  --shadow-md:0 6px 28px rgba(80,60,150,.12),0 2px 8px rgba(80,60,150,.07);
+  --shadow:   0 1px 3px rgba(40,60,140,.05),0 4px 16px rgba(40,60,140,.07);
+  --shadow-md:0 6px 24px rgba(40,60,140,.10),0 2px 6px rgba(40,60,140,.06);
 }
 html.dark{
-  --bg:#1a1628; --surface:#221d35; --surface2:#2a2440;
-  --border:#32284e; --border2:#3d3360;
-  --txt:#ede9ff; --txt2:#9d93c4; --txt3:#5a5080;
-  --brand-l:rgba(123,110,246,.14); --brand-m:rgba(123,110,246,.3);
-  --green-l:rgba(61,184,156,.12); --amber-l:rgba(230,147,58,.12);
-  --rose-l:rgba(232,98,138,.12); --violet-l:rgba(155,114,207,.12);
-  --teal-l:rgba(58,171,189,.12);
-  --shadow:0 1px 4px rgba(0,0,0,.3),0 4px 20px rgba(0,0,0,.25);
+  --bg:#14182a; --surface:#1c2038; --surface2:#232842;
+  --border:#2c3358; --border2:#384070;
+  --txt:#e8ecff; --txt2:#8893c4; --txt3:#4a5280;
+  --brand-l:rgba(79,126,247,.14); --brand-m:rgba(79,126,247,.28);
+  --green-l:rgba(43,170,130,.12); --amber-l:rgba(217,124,42,.12);
+  --rose-l:rgba(224,82,106,.12); --violet-l:rgba(139,104,216,.12);
+  --teal-l:rgba(31,168,184,.12);
+  --shadow:0 1px 4px rgba(0,0,0,.28),0 4px 18px rgba(0,0,0,.22);
 }
 body{
   font-family:'Be Vietnam Pro',sans-serif;
@@ -89,11 +89,11 @@ body{
 }
 .sb-mark{
   width:34px;height:34px;border-radius:10px;
-  background:var(--brand);
+  background:linear-gradient(135deg,var(--brand),#7ba0ff);
   display:flex;align-items:center;justify-content:center;
   font-size:12px;font-weight:800;color:#fff;
   flex-shrink:0;
-  box-shadow:0 4px 12px rgba(46,79,255,.35);
+  box-shadow:0 4px 14px rgba(79,126,247,.3);
 }
 .sb-brand{overflow:hidden;white-space:nowrap;transition:opacity .2s,width .28s}
 .sb-brand h1{font-size:14.5px;font-weight:800;color:var(--txt);line-height:1.2}
@@ -122,8 +122,8 @@ body{
 }
 #sidebar.collapsed .sb-section-label{opacity:0}
 .nav-link{
-  display:flex;align-items:center;gap:11px;
-  padding:9px 10px;border-radius:9px;
+  display:flex;align-items:center;gap:0;
+  padding:9px 12px;border-radius:9px;
   cursor:pointer;border:none;background:transparent;
   width:100%;text-align:left;
   font-size:13.5px;font-weight:500;color:var(--txt2);
@@ -134,10 +134,21 @@ body{
 .nav-link.active{background:var(--brand-l);color:var(--brand);font-weight:700}
 .nav-link.active::before{
   content:'';position:absolute;left:0;top:6px;bottom:6px;
-  width:3px;background:var(--brand);border-radius:0 3px 3px 0;
+  width:3px;background:var(--brand);border-radius:0 3px 3px 0;box-shadow:2px 0 8px rgba(79,126,247,.35);
 }
-.nav-link svg{width:17px;height:17px;flex-shrink:0;opacity:.75}
-.nav-link.active svg{opacity:1}
+/* nav svgs removed */
+
+/* Collapsed sidebar: short labels */
+.nl-short{
+  display:none;
+  font-size:9.5px;font-weight:800;
+  color:var(--brand);
+  min-width:28px;text-align:center;flex-shrink:0;
+  letter-spacing:.02em;
+}
+#sidebar.collapsed .nl-short{display:block}
+#sidebar.collapsed .nl-badge{display:none}
+
 .nav-link .nl-text{transition:opacity .2s,width .28s;overflow:hidden}
 #sidebar.collapsed .nl-text{opacity:0;width:0}
 .nav-link .nl-badge{
@@ -154,8 +165,8 @@ body{
   padding:10px 8px;border-top:1px solid var(--border);flex-shrink:0;
 }
 .sb-user-row{
-  display:flex;align-items:center;gap:11px;
-  padding:9px 10px;border-radius:9px;
+  display:flex;align-items:center;gap:0;
+  padding:9px 12px;border-radius:9px;
   cursor:pointer;overflow:hidden;
   transition:background .15s;
 }
@@ -242,18 +253,57 @@ body.menu-open #hbg .hbg-lines span:nth-child(3){transform:translateY(-5.5px) ro
   display:flex;align-items:center;justify-content:center;
   transition:background .15s,color .15s;position:relative;
 }
+/* New clean icon button */
+.tb-icon-btn{
+  width:36px;height:36px;border-radius:9px;
+  border:none;background:transparent;
+  cursor:pointer;color:var(--txt2);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s;
+  position:relative;flex-shrink:0;
+}
+.tb-icon-btn:hover{background:var(--surface2);color:var(--brand)}
+/* User profile chip */
+.tb-user-chip{
+  display:flex;align-items:center;gap:9px;
+  padding:5px 10px 5px 5px;border-radius:10px;
+  border:1.5px solid var(--border);
+  background:var(--surface2);
+  cursor:pointer;
+  transition:border-color .15s,background .15s;
+  max-width:200px;
+}
+.tb-user-chip:hover{border-color:var(--brand-m);background:var(--brand-l)}
+.tb-av{
+  width:28px;height:28px;border-radius:7px;
+  background:linear-gradient(135deg,var(--brand),#7ba0ff);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#fff;flex-shrink:0;
+}
+.tb-user-meta{display:flex;flex-direction:column;align-items:flex-start;min-width:0}
+.tb-user-name{font-size:13px;font-weight:700;color:var(--txt);line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
+.tb-user-sub{font-size:10.5px;color:var(--txt3);white-space:nowrap}
+@media(max-width:639px){
+  .tb-user-meta{display:none}
+  .tb-user-chip{padding:5px;gap:0}
+}
+/* Login button for guest */
+.tb-login-btn{
+  display:flex;align-items:center;gap:7px;
+  padding:7px 16px;border-radius:9px;
+  background:var(--brand);color:#fff;
+  border:none;cursor:pointer;
+  font-size:13px;font-weight:700;
+  font-family:'Be Vietnam Pro',sans-serif;
+  transition:background .15s,transform .15s;
+  white-space:nowrap;
+}
+.tb-login-btn:hover{background:var(--brand-d);transform:translateY(-1px)}
+.tb-login-btn svg{width:14px;height:14px;flex-shrink:0}
 .tb-btn:hover{background:var(--surface2);color:var(--txt)}
 .tb-btn .dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--rose);border-radius:50%;border:2px solid var(--surface)}
-.tb-user{
-  display:flex;align-items:center;gap:9px;
-  padding:5px 10px 5px 6px;border-radius:9px;cursor:pointer;
-  border:1.5px solid var(--border);background:var(--surface2);
-  transition:border .15s,background .15s;
-}
-.tb-user:hover{border-color:var(--brand-m);background:var(--brand-l)}
-.tb-user-av{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--brand),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
-.tb-user-name{font-size:13px;font-weight:700;color:var(--txt)}
-.tb-user-id{font-size:10px;color:var(--txt3)}
+/* tb-user moved to tb-user-chip */
+.tb-user-id{font-size:10px;color:var(--txt3)} /* legacy */
 
 /* ─── Page content area ────────────────────────────────────── */
 #page-wrap{flex:1;overflow-y:auto}
@@ -271,7 +321,7 @@ body.menu-open #hbg .hbg-lines span:nth-child(3){transform:translateY(-5.5px) ro
 /* Hero */
 .hero{
   border-radius:var(--r-lg);
-  background:linear-gradient(135deg,#7B6EF6 0%,#a78bfa 45%,#c4b5fd 100%);
+  background:linear-gradient(135deg,#4f7ef7 0%,#6e9bff 45%,#90b4ff 100%);
   padding:32px 36px;
   position:relative;overflow:hidden;
 }
@@ -382,7 +432,7 @@ body.menu-open #hbg .hbg-lines span:nth-child(3){transform:translateY(-5.5px) ro
 /* ─── Footer ───────────────────────────────────────────────── */
 footer{
   margin-top:32px;
-  background:var(--txt);
+  background:#1a2240;
   color:rgba(255,255,255,.7);
   padding:40px 24px 24px;
 }
@@ -400,6 +450,35 @@ footer{
 .footer-tags{display:flex;gap:6px;flex-wrap:wrap}
 .ftag{font-size:11px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);padding:3px 9px;border-radius:100px}
 
+
+/* ── Guest banner ── */
+.home-guest-banner{
+  background:var(--brand-l);
+  border:1.5px dashed var(--brand-m);
+  border-radius:var(--r-lg);
+  padding:20px 24px;
+}
+.hgb-inner{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.hgb-icon{font-size:28px;flex-shrink:0}
+.hgb-title{font-size:14.5px;font-weight:800;color:var(--txt);margin-bottom:3px}
+.hgb-sub{font-size:12.5px;color:var(--txt2);line-height:1.55;max-width:480px}
+.hgb-btn{
+  margin-left:auto;flex-shrink:0;
+  display:flex;align-items:center;gap:7px;
+  padding:9px 20px;border-radius:10px;
+  background:var(--brand);color:#fff;
+  border:none;cursor:pointer;
+  font-size:13px;font-weight:700;
+  font-family:'Be Vietnam Pro',sans-serif;
+  transition:background .15s,transform .15s;white-space:nowrap;
+}
+.hgb-btn:hover{background:var(--brand-d);transform:translateY(-1px)}
+.hgb-btn svg{width:14px;height:14px}
+@media(max-width:639px){
+  .hgb-btn{margin-left:0;width:100%}
+}
 /* ─── Progress ring ────────────────────────────────────────── */
 .prog-track{height:6px;background:var(--surface2);border-radius:100px;overflow:hidden;margin-top:5px}
 .prog-fill{height:100%;border-radius:100px}
@@ -496,73 +575,70 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 ═══════════════════════════════════════════════════════════════ */
 #login-screen{
   position:fixed;inset:0;z-index:9999;
-  display:flex;align-items:center;justify-content:center;
+  display:none;align-items:center;justify-content:center;
   overflow:hidden;
-  background:#05080f;
+  background:linear-gradient(150deg,#eef2ff 0%,#f4f7ff 40%,#e8f3ff 100%);
 }
+#login-screen.visible{display:flex!important}
 #login-screen.fade-out{
-  animation:loginFadeOut .55s cubic-bezier(.4,0,.2,1) forwards;
+  animation:loginFadeOut .45s cubic-bezier(.4,0,.2,1) forwards;
 }
 @keyframes loginFadeOut{
   0%{opacity:1;transform:scale(1)}
-  100%{opacity:0;transform:scale(1.04);pointer-events:none}
+  100%{opacity:0;transform:scale(1.02);pointer-events:none}
 }
-/* Animated gradient mesh background */
-.login-bg{
-  position:absolute;inset:0;overflow:hidden;
-}
+/* Soft blobs */
+.login-bg{position:absolute;inset:0;overflow:hidden}
 .login-bg-blob{
-  position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;
-  animation:blobFloat 8s ease-in-out infinite alternate;
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;
+  animation:blobFloat 9s ease-in-out infinite alternate;
 }
-.login-bg-blob:nth-child(1){width:520px;height:520px;background:radial-gradient(circle,#7B6EF6,#4f3db5);top:-140px;left:-100px;animation-delay:0s}
-.login-bg-blob:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,#e8628a,#9b2060);bottom:-120px;right:-80px;animation-delay:-3s}
-.login-bg-blob:nth-child(3){width:280px;height:280px;background:radial-gradient(circle,#3aabbd,#1a6b78);bottom:20%;left:20%;animation-delay:-5.5s;opacity:.35}
+.login-bg-blob:nth-child(1){width:480px;height:480px;background:radial-gradient(circle,#a5b8ff,#6e8ff8);top:-160px;left:-100px;animation-delay:0s}
+.login-bg-blob:nth-child(2){width:360px;height:360px;background:radial-gradient(circle,#fbb6ce,#f472a8);bottom:-100px;right:-60px;animation-delay:-3.5s}
+.login-bg-blob:nth-child(3){width:240px;height:240px;background:radial-gradient(circle,#a7f3d0,#34d399);bottom:25%;left:22%;animation-delay:-6s;opacity:.25}
 @keyframes blobFloat{
   0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(30px,20px) scale(1.06)}
+  100%{transform:translate(24px,16px) scale(1.05)}
 }
-/* Dot grid overlay */
 .login-bg::after{
   content:'';position:absolute;inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
+  background-image:radial-gradient(rgba(79,126,247,.07) 1px,transparent 1px);
   background-size:28px 28px;
 }
-/* Glass card */
+/* White card */
 .login-card{
   position:relative;z-index:1;
   width:420px;max-width:calc(100vw - 32px);
-  background:rgba(255,255,255,.04);
-  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
-  border:1px solid rgba(255,255,255,.1);
+  background:#ffffff;
+  border:1px solid #dce6fc;
   border-radius:24px;
   padding:40px 36px;
-  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05) inset;
-  animation:cardIn .6s cubic-bezier(.34,1.56,.64,1) both;
+  box-shadow:0 20px 60px rgba(79,126,247,.13),0 4px 20px rgba(0,0,0,.06);
+  animation:cardIn .5s cubic-bezier(.34,1.56,.64,1) both;
 }
 @keyframes cardIn{
-  from{opacity:0;transform:translateY(32px) scale(.94)}
+  from{opacity:0;transform:translateY(28px) scale(.95)}
   to{opacity:1;transform:translateY(0) scale(1)}
 }
 /* Logo */
 .login-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
 .login-logo-mark{
   width:44px;height:44px;border-radius:14px;
-  background:var(--brand);
+  background:linear-gradient(135deg,var(--brand),#7ba0ff);
   display:flex;align-items:center;justify-content:center;
   font-size:14px;font-weight:900;color:#fff;
-  box-shadow:0 8px 24px rgba(46,79,255,.5);
+  box-shadow:0 6px 18px rgba(79,126,247,.38);
   flex-shrink:0;
 }
-.login-logo-text h2{font-size:18px;font-weight:900;color:#fff;line-height:1.15}
-.login-logo-text p{font-size:12px;color:rgba(255,255,255,.45);margin-top:1px}
+.login-logo-text h2{font-size:18px;font-weight:900;color:var(--txt);line-height:1.15}
+.login-logo-text p{font-size:12px;color:var(--txt3);margin-top:1px}
 /* Heading */
 .login-heading{margin-bottom:24px}
-.login-heading h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
-.login-heading p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.55}
+.login-heading h3{font-size:22px;font-weight:800;color:var(--txt);margin-bottom:4px}
+.login-heading p{font-size:13px;color:var(--txt2);line-height:1.55}
 /* Form fields */
 .lf-group{margin-bottom:16px}
-.lf-label{display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:7px;letter-spacing:.03em}
+.lf-label{display:block;font-size:12px;font-weight:700;color:var(--txt2);margin-bottom:7px;letter-spacing:.03em}
 .lf-input-wrap{position:relative}
 .lf-input-wrap svg{
   position:absolute;left:13px;top:50%;transform:translateY(-50%);
@@ -571,8 +647,8 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 }
 .lf-input{
   width:100%;height:46px;
-  background:rgba(255,255,255,.07);
-  border:1.5px solid rgba(255,255,255,.1);
+  background:#f7f9ff;
+  border:1.5px solid #dce6fc;
   border-radius:11px;
   padding:0 38px;
   font-size:14px;font-weight:500;color:#fff;
@@ -603,7 +679,7 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 .lf-check{width:16px;height:16px;border-radius:5px;border:1.5px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;accent-color:var(--brand)}
 .lf-check-lbl{font-size:12.5px;color:rgba(255,255,255,.5);font-weight:500;user-select:none}
 .lf-forgot{font-size:12.5px;color:rgba(139,164,255,.9);font-weight:600;cursor:pointer;transition:color .15s}
-.lf-forgot:hover{color:#fff}
+.lf-forgot:hover{color:var(--brand-d)}
 /* Submit btn */
 .lf-btn{
   width:100%;height:48px;border-radius:12px;
@@ -665,7 +741,7 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
   transition:background .15s,border .15s;
   margin-bottom:10px;
 }
-.lf-soc:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.lf-soc:hover{background:var(--brand-l);border-color:var(--brand-m)}
 
 /* ── Logout confirmation modal ── */
 #logout-modal{
@@ -762,6 +838,30 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 .pd-item.danger{color:var(--rose)}
 .pd-item.danger svg{color:var(--rose)}
 .pd-divider{height:1px;background:var(--border);margin:4px 0}
+
+/* ── Login card comprehensive light override ── */
+.login-card, .login-card * { color: var(--txt); }
+.login-card .login-logo-text h2 { color: var(--txt); }
+.login-card .login-logo-text p  { color: var(--txt3); }
+.login-card .login-heading h3   { color: var(--txt); }
+.login-card .login-heading p    { color: var(--txt2); }
+.login-card .lf-label           { color: var(--txt2); }
+.login-card .lf-input           { color: var(--txt); background:#f7f9ff; border-color:var(--border); }
+.login-card .lf-input::placeholder { color: var(--txt3); }
+.login-card .lf-ico             { color: var(--txt3); }
+.login-card .lf-pw-toggle       { color: var(--txt3); }
+.login-card .lf-pw-toggle:hover { color: var(--brand); }
+.login-card .lf-check-lbl       { color: var(--txt2); }
+.login-card .lf-forgot          { color: var(--brand); }
+.login-card .lf-forgot:hover    { color: var(--brand-d); }
+.login-card .lf-divider         { color: var(--txt3); }
+.login-card .lf-soc             { color: var(--txt2); background:var(--surface2); border-color:var(--border); }
+.login-card .lf-soc:hover       { color: var(--brand); background:var(--brand-l); border-color:var(--brand-m); }
+.login-card .lf-demo p          { color: var(--txt2); }
+.login-card .lf-demo strong     { color: var(--brand); }
+.login-card .lf-error           { color: var(--rose); }
+/* Keep button text white */
+.login-card .lf-btn             { color: #fff !important; }
 </style>
 </head>
 <body>
@@ -781,6 +881,7 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
         <h2>UIT Portal</h2>
         <p>Trường ĐH Công nghệ Thông tin</p>
       </div>
+      <button onclick="closeLoginScreen()" title="Quay lại" style="margin-left:auto;background:var(--border);border:none;border-radius:8px;width:30px;height:30px;cursor:pointer;color:var(--txt2);font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s" onmouseover="this.style.background='var(--brand-m)'" onmouseout="this.style.background='var(--border)'">×</button>
     </div>
     <!-- Heading -->
     <div class="login-heading">
@@ -926,20 +1027,16 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
     </div>
   </div>
   <div class="pd-item" onclick="closeProfileDropdown();showPage('profile',null)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Hồ sơ cá nhân
   </div>
   <div class="pd-item" onclick="closeProfileDropdown();showPage('settings',null)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
     Cài đặt
   </div>
   <div class="pd-item" onclick="closeProfileDropdown();toggleTheme()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
     Chế độ sáng / tối
   </div>
   <div class="pd-divider"></div>
   <div class="pd-item danger" onclick="closeProfileDropdown();openLogoutModal()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
     Đăng xuất
   </div>
 </div>
@@ -962,66 +1059,53 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
     <!-- Main -->
     <div class="sb-section-label">Tổng quan</div>
     <button class="nav-link active" data-page="home" onclick="showPage('home',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="nl-text">Trang chủ</span>
+      <span class="nl-short">TC</span><span class="nl-text">Trang chủ</span>
     </button>
     <button class="nav-link" data-page="news" onclick="showPage('news',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/><rect x="14" y="12" width="7" height="7" rx="1"/></svg>
-      <span class="nl-text">Tin tức</span>
+      <span class="nl-short">TT</span><span class="nl-text">Tin tức</span>
     </button>
 
     <!-- Học vụ -->
     <div class="sb-section-label">Học vụ</div>
     <button class="nav-link" data-page="schedule" onclick="showPage('schedule',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-      <span class="nl-text">Thời khóa biểu</span>
+      <span class="nl-short">TKB</span><span class="nl-text">Thời khóa biểu</span>
     </button>
     <button class="nav-link" data-page="grades" onclick="showPage('grades',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-      <span class="nl-text">Kết quả học tập</span>
+      <span class="nl-short">KQ</span><span class="nl-text">Kết quả học tập</span>
       <span class="nl-badge">2</span>
     </button>
     <button class="nav-link" data-page="register" onclick="showPage('register',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      <span class="nl-text">Đăng ký môn học</span>
+      <span class="nl-short">ĐK</span><span class="nl-text">Đăng ký môn học</span>
     </button>
     <button class="nav-link" data-page="exam" onclick="showPage('exam',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span class="nl-text">Lịch thi</span>
+      <span class="nl-short">LT</span><span class="nl-text">Lịch thi</span>
     </button>
 
     <!-- Dịch vụ -->
     <div class="sb-section-label">Dịch vụ</div>
     <button class="nav-link" data-page="finance" onclick="showPage('finance',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      <span class="nl-text">Học phí</span>
+      <span class="nl-short">HP</span><span class="nl-text">Học phí</span>
     </button>
     <button class="nav-link" data-page="docs" onclick="showPage('docs',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-      <span class="nl-text">Hồ sơ & Giấy tờ</span>
+      <span class="nl-short">HS</span><span class="nl-text">Hồ sơ & Giấy tờ</span>
     </button>
     <button class="nav-link" data-page="extracurr" onclick="showPage('extracurr',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <span class="nl-text">Ngoại khóa & DRL</span>
+      <span class="nl-short">RL</span><span class="nl-text">Ngoại khóa & DRL</span>
     </button>
     <button class="nav-link" data-page="health" onclick="showPage('health',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-      <span class="nl-text">Bảo hiểm Y tế</span>
+      <span class="nl-short">BH</span><span class="nl-text">Bảo hiểm Y tế</span>
     </button>
 
     <!-- Tài khoản -->
     <div class="sb-section-label">Tài khoản</div>
     <button class="nav-link" data-page="profile" onclick="showPage('profile',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="nl-text">Hồ sơ cá nhân</span>
+      <span class="nl-short">HO</span><span class="nl-text">Hồ sơ cá nhân</span>
     </button>
     <button class="nav-link" data-page="settings" onclick="showPage('settings',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-      <span class="nl-text">Cài đặt</span>
+      <span class="nl-short">CD</span><span class="nl-text">Cài đặt</span>
     </button>
     <button class="nav-link" data-page="notifications" onclick="showPage('notifications',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-      <span class="nl-text">Thông báo</span>
+      <span class="nl-short">TB</span><span class="nl-text">Thông báo</span>
       <span class="nl-badge">3</span>
     </button>
   </div>
@@ -1035,7 +1119,6 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
       </div>
     </div>
     <button class="nav-link" style="color:var(--rose);margin-top:4px" onclick="openLogoutModal()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       <span class="nl-text">Đăng xuất</span>
     </button>
   </div>
@@ -1062,23 +1145,33 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
     </div>
 
     <div class="tb-actions">
-      <!-- Dark / light -->
-      <button class="tb-btn" onclick="toggleTheme()" title="Chế độ sáng/tối">
-        <svg id="themeIco" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+
+      <!-- 1. Dark / Light mode toggle (always visible) -->
+      <button class="tb-icon-btn" id="themeBtn" onclick="toggleTheme()" title="Chế độ sáng/tối">
+        <svg id="themeIco" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       </button>
-      <!-- Notifications -->
-      <button class="tb-btn" id="notifBtn" onclick="toggleNotifPanel()" title="Thông báo">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+
+      <!-- 2. Guest: Login button -->
+      <button class="tb-login-btn" id="guestLoginBtn" onclick="openLoginScreen()" style="display:none">
+        Đăng nhập
+      </button>
+
+      <!-- 3. Logged in: Notifications -->
+      <button class="tb-icon-btn" id="notifBtn" onclick="toggleNotifPanel()" title="Thông báo" style="display:none; position:relative">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
         <span class="dot" id="notifDot"></span>
       </button>
-      <!-- User -->
-      <div class="tb-user" id="profileBtn" onclick="toggleProfileDropdown()">
-        <div class="tb-user-av">TM</div>
-        <div>
-          <div class="tb-user-name">Trần Đức Mạnh</div>
-          <div class="tb-user-id">KTTT · HK2 2025–26</div>
+
+      <!-- 4. Logged in: User profile chip -->
+      <button class="tb-user-chip" id="profileBtn" onclick="toggleProfileDropdown()" style="display:none">
+        <div class="tb-av" id="tb-av-text">TM</div>
+        <div class="tb-user-meta">
+          <span class="tb-user-name">Trần Đức Mạnh</span>
+          <span class="tb-user-sub">KTTT · K24</span>
         </div>
-      </div>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--txt3);flex-shrink:0"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+
     </div>
   </header>
 
@@ -1090,28 +1183,45 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
       <div class="home-inner">
 
         <!-- 1. HERO BANNER -->
-        <section class="hero" aria-label="Chào mừng">
-          <div class="hero-inner">
-            <div>
-              <h1>Chào buổi sáng, Đức Mạnh! 👋</h1>
-              <p>Thứ Hai, 20/04/2026 · Học kỳ 2 năm 2025–2026.<br>Hôm nay bạn có <strong style="color:#fff">2 lớp học</strong> — chúc học tốt!</p>
-              <div class="hero-pills">
-                <span class="hpill" onclick="showPage('schedule',null)">📅 Xem TKB</span>
-                <span class="hpill" onclick="showPage('grades',null)">📊 Kết quả</span>
-                <span class="hpill" onclick="showPage('register',null)">📝 Đăng ký môn</span>
-                <span class="hpill" onclick="showPage('finance',null)">💳 Học phí</span>
+      <div class="hero">
+        <div class="hero-inner">
+          <!-- GUEST view -->
+          <div id="hero-guest" class="hero-text">
+            <p class="hero-date" style="color:rgba(255,255,255,.65);font-size:12.5px;margin-bottom:6px">Thứ Hai, 20 tháng 4, 2026</p>
+            <h1>Chào mừng đến UIT Portal 👋</h1>
+            <p>Hệ thống quản lý sinh viên Trường ĐH Công nghệ Thông tin – ĐHQG TP.HCM. Đăng nhập để xem lịch học, điểm số và các dịch vụ dành cho bạn.</p>
+            <div class="hero-pills">
+              <div class="hpill" onclick="openLoginScreen()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:inline;margin-right:5px;vertical-align:-2px"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>Đăng nhập
               </div>
-            </div>
-            <div class="hero-stats">
-              <div class="hstat"><div class="v">7.88</div><div class="l">ĐTB HK1</div></div>
-              <div class="hstat"><div class="v">3.62</div><div class="l">GPA / 4.0</div></div>
-              <div class="hstat"><div class="v">95</div><div class="l">TC tích lũy</div></div>
-              <div class="hstat"><div class="v">87</div><div class="l">DRL</div></div>
+              <div class="hpill" onclick="showPage('news',null)">📰 Tin tức</div>
+              <div class="hpill" onclick="showPage('schedule',null)">📅 Lịch học</div>
             </div>
           </div>
-        </section>
+          <!-- LOGGED IN view -->
+          <div id="hero-user" class="hero-text" style="display:none">
+            <p class="hero-date" style="color:rgba(255,255,255,.65);font-size:12.5px;margin-bottom:6px">Thứ Hai, 20 tháng 4, 2026</p>
+            <h1>Chào buổi sáng, <span id="hero-name">Đức Mạnh</span>! ✨</h1>
+            <p>Học kỳ 2 – 2025/2026. Hôm nay bạn có <strong style="color:#fff">2 lớp học</strong>. Chúc học tốt!</p>
+            <div class="hero-pills">
+              <div class="hpill" onclick="showPage('schedule',null)">📅 Xem TKB</div>
+              <div class="hpill" onclick="showPage('grades',null)">📊 Kết quả</div>
+              <div class="hpill" onclick="showPage('finance',null)">💳 Học phí</div>
+            </div>
+          </div>
+          <!-- Stats (always visible for logged in, hidden for guest) -->
+          <div class="hero-stats" id="hero-stats" style="display:none">
+            <div class="hstat"><div class="v" id="stat-gpa">7.88</div><div class="l">ĐTB HK1</div></div>
+            <div class="hstat"><div class="v" id="stat-gpa4">3.62</div><div class="l">GPA / 4.0</div></div>
+            <div class="hstat"><div class="v">95</div><div class="l">TC tích lũy</div></div>
+            <div class="hstat"><div class="v">7</div><div class="l">Môn HK2</div></div>
+          </div>
+        </div>
+      </div>
 
-        <!-- 2. ROW: Lịch học | Thông báo -->
+      <!-- 2. ROW: Lịch học | Thông báo (login required) -->
+        <div id="home-auth-section" style="display:none">
+
         <div class="row-2">
 
           <!-- Lịch học hôm nay -->
@@ -1200,6 +1310,23 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
               <div class="notif-title">Đánh giá chất lượng giảng dạy HK1</div>
               <div class="notif-time">Hạn 30/04/2026</div>
             </div>
+          </div>
+        </div>
+
+                </div>
+
+        <!-- Guest placeholder (shown when not logged in) -->
+        <div id="home-guest-banner" class="home-guest-banner">
+          <div class="hgb-inner">
+            <div class="hgb-icon">🔐</div>
+            <div>
+              <div class="hgb-title">Đăng nhập để xem đầy đủ thông tin</div>
+              <div class="hgb-sub">Lịch học hôm nay, thông báo quan trọng và kết quả học tập của bạn sẽ hiển thị sau khi đăng nhập.</div>
+            </div>
+            <button class="hgb-btn" onclick="openLoginScreen()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Đăng nhập ngay
+            </button>
           </div>
         </div>
 
@@ -1712,7 +1839,7 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
     <div class="page" id="pg-extracurr"><div class="page-inner">
       <div class="page-hdr"><h2>Ngoại khóa & Điểm rèn luyện</h2><p>HK1 – 2025–2026 · MSSV: 24521044</p></div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px">
-        <div class="card" style="padding:18px;text-align:center;border-top:4px solid var(--brand)"><div style="font-size:32px;font-weight:900;color:var(--brand)">87</div><div style="font-size:12px;color:var(--txt2);margin-top:4px">Điểm rèn luyện</div><div style="font-size:11px;color:var(--green);font-weight:700;margin-top:2px">Xuất sắc</div></div>
+        <div class="card" style="padding:18px;text-align:center;border-top:3px solid var(--brand)"><div style="font-size:32px;font-weight:900;color:var(--brand)">87</div><div style="font-size:12px;color:var(--txt2);margin-top:4px">Điểm rèn luyện</div><div style="font-size:11px;color:var(--green);font-weight:700;margin-top:2px">Xuất sắc</div></div>
         <div class="card" style="padding:18px;text-align:center;border-top:4px solid var(--green)"><div style="font-size:32px;font-weight:900;color:var(--green)">5</div><div style="font-size:12px;color:var(--txt2);margin-top:4px">Hoạt động tham gia</div></div>
         <div class="card" style="padding:18px;text-align:center;border-top:4px solid var(--violet)"><div style="font-size:32px;font-weight:900;color:var(--violet)">Top 10%</div><div style="font-size:12px;color:var(--txt2);margin-top:4px">Xếp hạng lớp</div></div>
       </div>
@@ -1824,23 +1951,23 @@ html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
 <!-- ══ MOBILE BOTTOM NAV ════════════════════════════════════════ -->
 <nav id="bnav">
   <button class="bn-btn active" data-pg="home" onclick="showPage('home',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    
     Trang chủ
   </button>
   <button class="bn-btn" data-pg="schedule" onclick="showPage('schedule',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
+    
     TKB
   </button>
   <button class="bn-btn" data-pg="grades" onclick="showPage('grades',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    
     Kết quả
   </button>
   <button class="bn-btn" data-pg="finance" onclick="showPage('finance',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    
     Học phí
   </button>
   <button class="bn-btn" onclick="openSidebar()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    
     Menu
   </button>
 </nav>
@@ -1896,10 +2023,9 @@ function showLoginError(msg) {
 }
 
 function loginSuccess() {
-  const screen = document.getElementById('login-screen');
-  screen.classList.add('fade-out');
-  setTimeout(() => { screen.style.display = 'none'; }, 560);
-  toast('🎉', `Xin chào, ${currentUser.name}!`);
+  closeLoginScreen();
+  applyAuthState(true);
+  toast('🎉', `Xin chào, ${currentUser.firstName}!`);
 }
 
 function fillDemo() {
@@ -1925,15 +2051,7 @@ function doSocialLogin(provider) {
   toast('🔒', `Đăng nhập ${provider} đang được triển khai…`);
 }
 
-// Auto-fill if remembered
-window.addEventListener('DOMContentLoaded', () => {
-  const s = localStorage.getItem('uit_mssv'), p = localStorage.getItem('uit_pw');
-  if (s && p) {
-    document.getElementById('lf-mssv').value = s;
-    document.getElementById('lf-pw').value   = p;
-    document.getElementById('lf-remember').checked = true;
-  }
-});
+
 
 // ─── Logout ──────────────────────────────────────────────────
 function openLogoutModal() {
@@ -1955,9 +2073,7 @@ function confirmLogout() {
   document.getElementById('loginBtnText').textContent = 'Đăng nhập';
   document.getElementById('loginSpinner').style.display = 'none';
   document.getElementById('loginArrow').style.display = '';
-  const screen = document.getElementById('login-screen');
-  screen.classList.remove('fade-out');
-  screen.style.display = 'flex';
+  applyAuthState(false);
   toast('👋', 'Đã đăng xuất thành công.');
 }
 
@@ -2032,7 +2148,82 @@ function handleSearchKey(e) {
 let isDark = false;
 let sidebarOpen = false;
 let sidebarCollapsed = false;
+let isLoggedIn = false;
 const isDesktop = () => window.innerWidth >= 1024;
+
+// ─── Open/close login screen ────────────────────────────────
+function openLoginScreen() {
+  const s = document.getElementById('login-screen');
+  s.classList.remove('fade-out');
+  s.classList.add('visible');
+}
+function closeLoginScreen() {
+  const s = document.getElementById('login-screen');
+  s.classList.add('fade-out');
+  setTimeout(() => {
+    s.classList.remove('visible','fade-out');
+  }, 460);
+}
+
+// ─── Apply login state to UI ─────────────────────────────────
+function applyAuthState(loggedIn) {
+  isLoggedIn = loggedIn;
+  // topbar
+  const guestBtn   = document.getElementById('guestLoginBtn');
+  const notifBtn   = document.getElementById('notifBtn');
+  const profileBtn = document.getElementById('profileBtn');
+  if (guestBtn)   guestBtn.style.display   = loggedIn ? 'none' : 'flex';
+  if (notifBtn)   notifBtn.style.display   = loggedIn ? 'flex' : 'none';
+  if (profileBtn) profileBtn.style.display = loggedIn ? 'flex' : 'none';
+  // Update user chip
+  const tbName = document.querySelector('.tb-user-name');
+  const tbSub  = document.querySelector('.tb-user-sub');
+  const tbAv   = document.getElementById('tb-av-text');
+  if (tbName) tbName.textContent = loggedIn && currentUser ? currentUser.name : 'Khách';
+  if (tbSub)  tbSub.textContent  = loggedIn && currentUser ? currentUser.mssv + ' · KTTT K24' : '';
+  if (tbAv)   tbAv.textContent   = loggedIn && currentUser ? 'TM' : '?';
+  // hero
+  const hGuest = document.getElementById('hero-guest');
+  const hUser  = document.getElementById('hero-user');
+  const hStats = document.getElementById('hero-stats');
+  if (hGuest) hGuest.style.display = loggedIn ? 'none' : 'block';
+  if (hUser)  hUser.style.display  = loggedIn ? 'block' : 'none';
+  if (hStats) hStats.style.display = loggedIn ? 'flex' : 'none';
+  // auth sections
+  const authSec  = document.getElementById('home-auth-section');
+  const guestBanner = document.getElementById('home-guest-banner');
+  if (authSec)   authSec.style.display   = loggedIn ? 'block' : 'none';
+  if (guestBanner) guestBanner.style.display = loggedIn ? 'none' : 'block';
+  // sidebar user info
+  document.querySelectorAll('.sb-user-name,.pd-name').forEach(el => {
+    if (el) el.textContent = loggedIn && currentUser ? currentUser.name : 'Khách';
+  });
+  document.querySelectorAll('.sb-user-id,.pd-uid').forEach(el => {
+    if (el) el.textContent = loggedIn && currentUser ? currentUser.mssv + ' · KTTT K24' : '—';
+  });
+  // avatar initials
+  const sbAv = document.getElementById('sb-av-icon');
+  if (sbAv) sbAv.textContent = loggedIn && currentUser ? 'TM' : '?';
+  // topbar user row visibility
+  document.querySelectorAll('.tb-user-name,.tb-user-id').forEach(el => {
+    if (el) el.style.display = loggedIn ? 'block' : 'none';
+  });
+  // hero name
+  const heroName = document.getElementById('hero-name');
+  if (heroName && currentUser) heroName.textContent = currentUser.firstName;
+}
+
+// init as guest
+window.addEventListener('DOMContentLoaded', () => {
+  // auto-fill remembered credentials
+  const s = localStorage.getItem('uit_mssv'), p = localStorage.getItem('uit_pw');
+  if (s && p) {
+    document.getElementById('lf-mssv').value = s;
+    document.getElementById('lf-pw').value   = p;
+    document.getElementById('lf-remember').checked = true;
+  }
+  applyAuthState(false);
+});
 
 // ─── Theme ──────────────────────────────────────────────────
 function toggleTheme() {
@@ -2133,1813 +2324,7 @@ document.addEventListener('keydown', e => {
     if (document.getElementById('logout-modal').classList.contains('show')) closeLogoutModal();
   }
   // Enter on login screen
-  if (document.getElementById('login-screen').style.display !== 'none' && e.key === 'Enter') doLogin();
-});
-</script>
-</body>
-</html><!DOCTYPE html>
-<html lang="vi" class="light">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>UIT Portal</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<style>
-/* ─── Reset & Root ─────────────────────────────────────────── */
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:       #f2f4f8;
-  --surface:  #ffffff;
-  --surface2: #f7f8fc;
-  --border:   #e6e9f4;
-  --border2:  #d4d9ec;
-  --txt:      #0f1523;
-  --txt2:     #4b5577;
-  --txt3:     #8c95b4;
-  --brand:    #2e4fff;
-  --brand-d:  #1a3ae8;
-  --brand-l:  #edf0ff;
-  --brand-m:  #c7d0ff;
-  --green:    #1aad6b;
-  --green-l:  #e6f9f1;
-  --amber:    #e08a00;
-  --amber-l:  #fff8e6;
-  --rose:     #e02d5b;
-  --rose-l:   #ffeef3;
-  --violet:   #7c3aed;
-  --violet-l: #f0ebff;
-  --teal:     #0898a0;
-  --teal-l:   #e5f7f8;
-  --r:        12px;
-  --r-lg:     18px;
-  --sb-w:     256px;
-  --sb-w-sm:  68px;
-  --topbar-h: 60px;
-  --shadow:   0 1px 3px rgba(30,40,100,.07),0 4px 16px rgba(30,40,100,.06);
-  --shadow-md:0 6px 24px rgba(30,40,100,.1),0 2px 8px rgba(30,40,100,.06);
-}
-html.dark{
-  --bg:#0c0f1d; --surface:#131829; --surface2:#181e30;
-  --border:#1e2540; --border2:#252d47;
-  --txt:#e8ecf7; --txt2:#8492b8; --txt3:#465270;
-  --brand-l:rgba(46,79,255,.14); --brand-m:rgba(46,79,255,.3);
-  --green-l:rgba(26,173,107,.12); --amber-l:rgba(224,138,0,.12);
-  --rose-l:rgba(224,45,91,.12); --violet-l:rgba(124,58,237,.12);
-  --teal-l:rgba(8,152,160,.12);
-  --shadow:0 1px 3px rgba(0,0,0,.25),0 4px 16px rgba(0,0,0,.2);
-}
-body{
-  font-family:'Be Vietnam Pro',sans-serif;
-  background:var(--bg);color:var(--txt);
-  min-height:100dvh;display:flex;
-  transition:background .2s,color .2s;
-  overflow-x:hidden;
-}
-
-/* ─── Sidebar ──────────────────────────────────────────────── */
-#sidebar{
-  width:var(--sb-w);
-  background:var(--surface);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;bottom:0;
-  z-index:200;
-  transition:width .28s cubic-bezier(.4,0,.2,1),transform .28s cubic-bezier(.4,0,.2,1);
-  overflow:hidden;
-}
-#sidebar.collapsed{width:var(--sb-w-sm)}
-#sidebar .sb-logo{
-  height:var(--topbar-h);
-  display:flex;align-items:center;gap:12px;
-  padding:0 16px;
-  border-bottom:1px solid var(--border);
-  flex-shrink:0;overflow:hidden;
-}
-.sb-mark{
-  width:34px;height:34px;border-radius:10px;
-  background:var(--brand);
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:800;color:#fff;
-  flex-shrink:0;
-  box-shadow:0 4px 12px rgba(46,79,255,.35);
-}
-.sb-brand{overflow:hidden;white-space:nowrap;transition:opacity .2s,width .28s}
-.sb-brand h1{font-size:14.5px;font-weight:800;color:var(--txt);line-height:1.2}
-.sb-brand p{font-size:10.5px;color:var(--txt3);margin-top:1px}
-#sidebar.collapsed .sb-brand{opacity:0;width:0}
-#sidebar .sb-close-btn{
-  margin-left:auto;flex-shrink:0;
-  width:26px;height:26px;
-  border-radius:7px;border:none;background:transparent;
-  cursor:pointer;color:var(--txt3);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .15s;
-}
-#sidebar .sb-close-btn:hover{background:var(--brand-l);color:var(--brand)}
-/* only show on mobile */
-#sidebar .sb-close-btn.mobile-only{display:none}
-
-.sb-scroll{flex:1;overflow-y:auto;padding:10px 8px;
-  scrollbar-width:thin;scrollbar-color:var(--border2) transparent}
-.sb-section-label{
-  font-size:9.5px;font-weight:700;letter-spacing:.08em;
-  text-transform:uppercase;color:var(--txt3);
-  padding:12px 10px 5px;
-  white-space:nowrap;overflow:hidden;
-  transition:opacity .2s;
-}
-#sidebar.collapsed .sb-section-label{opacity:0}
-.nav-link{
-  display:flex;align-items:center;gap:11px;
-  padding:9px 10px;border-radius:9px;
-  cursor:pointer;border:none;background:transparent;
-  width:100%;text-align:left;
-  font-size:13.5px;font-weight:500;color:var(--txt2);
-  transition:all .15s;white-space:nowrap;overflow:hidden;
-  position:relative;
-}
-.nav-link:hover{background:var(--brand-l);color:var(--brand)}
-.nav-link.active{background:var(--brand-l);color:var(--brand);font-weight:700}
-.nav-link.active::before{
-  content:'';position:absolute;left:0;top:6px;bottom:6px;
-  width:3px;background:var(--brand);border-radius:0 3px 3px 0;
-}
-.nav-link svg{width:17px;height:17px;flex-shrink:0;opacity:.75}
-.nav-link.active svg{opacity:1}
-.nav-link .nl-text{transition:opacity .2s,width .28s;overflow:hidden}
-#sidebar.collapsed .nl-text{opacity:0;width:0}
-.nav-link .nl-badge{
-  margin-left:auto;font-size:10px;font-weight:700;
-  min-width:18px;height:18px;padding:0 5px;
-  border-radius:100px;
-  background:var(--rose);color:#fff;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;transition:opacity .2s;
-}
-#sidebar.collapsed .nl-badge{opacity:0}
-
-.sb-footer{
-  padding:10px 8px;border-top:1px solid var(--border);flex-shrink:0;
-}
-.sb-user-row{
-  display:flex;align-items:center;gap:11px;
-  padding:9px 10px;border-radius:9px;
-  cursor:pointer;overflow:hidden;
-  transition:background .15s;
-}
-.sb-user-row:hover{background:var(--surface2)}
-.sb-av{
-  width:32px;height:32px;border-radius:9px;
-  background:linear-gradient(135deg,var(--brand),#7c3aed);
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:#fff;flex-shrink:0;
-}
-.sb-user-info{overflow:hidden;white-space:nowrap;transition:opacity .2s,width .28s}
-.sb-user-info .name{font-size:13px;font-weight:700;color:var(--txt)}
-.sb-user-info .uid{font-size:10.5px;color:var(--txt3);margin-top:1px}
-#sidebar.collapsed .sb-user-info{opacity:0;width:0}
-
-/* ─── Overlay ──────────────────────────────────────────────── */
-#overlay{
-  position:fixed;inset:0;background:rgba(10,14,35,.55);
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  z-index:199;opacity:0;pointer-events:none;
-  transition:opacity .28s ease;
-}
-#overlay.show{opacity:1;pointer-events:auto}
-
-/* ─── Main wrapper ─────────────────────────────────────────── */
-#main{
-  margin-left:var(--sb-w);
-  flex:1;display:flex;flex-direction:column;
-  min-height:100dvh;
-  transition:margin-left .28s cubic-bezier(.4,0,.2,1);
-}
-body.sb-collapsed #main{margin-left:var(--sb-w-sm)}
-
-/* ─── Topbar ───────────────────────────────────────────────── */
-#topbar{
-  height:var(--topbar-h);
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  gap:10px;padding:0 20px;
-  position:sticky;top:0;z-index:100;
-  backdrop-filter:blur(12px);
-}
-/* Hamburger */
-#hbg{
-  flex-shrink:0;width:36px;height:36px;
-  border-radius:9px;border:none;background:transparent;
-  cursor:pointer;color:var(--txt2);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .15s,color .15s;
-}
-#hbg:hover{background:var(--brand-l);color:var(--brand)}
-.hbg-lines{width:18px;height:13px;display:flex;flex-direction:column;justify-content:space-between;pointer-events:none}
-.hbg-lines span{display:block;height:2px;background:currentColor;border-radius:2px;transition:all .24s cubic-bezier(.4,0,.2,1);transform-origin:center}
-body.menu-open #hbg .hbg-lines span:nth-child(1){transform:translateY(5.5px) rotate(45deg)}
-body.menu-open #hbg .hbg-lines span:nth-child(2){opacity:0;transform:scaleX(0)}
-body.menu-open #hbg .hbg-lines span:nth-child(3){transform:translateY(-5.5px) rotate(-45deg)}
-
-/* Search */
-.tb-search{
-  flex:1;max-width:380px;position:relative;
-}
-.tb-search input{
-  width:100%;height:36px;
-  background:var(--surface2);
-  border:1.5px solid var(--border);
-  border-radius:9px;
-  padding:0 36px 0 34px;
-  font-size:13px;color:var(--txt);
-  font-family:'Be Vietnam Pro',sans-serif;
-  outline:none;transition:border .15s,box-shadow .15s;
-}
-.tb-search input::placeholder{color:var(--txt3)}
-.tb-search input:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-l)}
-.tb-search .s-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--txt3);pointer-events:none}
-.tb-search .s-kbd{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--txt3);background:var(--border);padding:1px 5px;border-radius:4px;font-weight:600}
-
-/* Topbar right actions */
-.tb-actions{display:flex;align-items:center;gap:6px;margin-left:auto}
-.tb-btn{
-  width:36px;height:36px;border-radius:9px;
-  border:none;background:transparent;
-  cursor:pointer;color:var(--txt2);
-  display:flex;align-items:center;justify-content:center;
-  transition:background .15s,color .15s;position:relative;
-}
-.tb-btn:hover{background:var(--surface2);color:var(--txt)}
-.tb-btn .dot{position:absolute;top:5px;right:5px;width:7px;height:7px;background:var(--rose);border-radius:50%;border:2px solid var(--surface)}
-.tb-user{
-  display:flex;align-items:center;gap:9px;
-  padding:5px 10px 5px 6px;border-radius:9px;cursor:pointer;
-  border:1.5px solid var(--border);background:var(--surface2);
-  transition:border .15s,background .15s;
-}
-.tb-user:hover{border-color:var(--brand-m);background:var(--brand-l)}
-.tb-user-av{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,var(--brand),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
-.tb-user-name{font-size:13px;font-weight:700;color:var(--txt)}
-.tb-user-id{font-size:10px;color:var(--txt3)}
-
-/* ─── Page content area ────────────────────────────────────── */
-#page-wrap{flex:1;overflow-y:auto}
-.page{display:none;animation:pi .22s ease}
-.page.active{display:block}
-@keyframes pi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-
-/* ─── Home layout (matches wireframe) ─────────────────────── */
-.home-inner{
-  max-width:1320px;margin:0 auto;
-  padding:24px 24px 0;
-  display:flex;flex-direction:column;gap:20px;
-}
-
-/* Hero */
-.hero{
-  border-radius:var(--r-lg);
-  background:linear-gradient(135deg,#1a2a6e 0%,#2e4fff 55%,#4d7fff 100%);
-  padding:32px 36px;
-  position:relative;overflow:hidden;
-}
-.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
-.hero::after{content:'';position:absolute;left:42%;bottom:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.04);pointer-events:none}
-.hero-inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.hero h1{font-size:22px;font-weight:800;color:#fff;margin-bottom:7px;line-height:1.25}
-.hero p{font-size:13.5px;color:rgba(255,255,255,.72);line-height:1.65;max-width:440px}
-.hero-pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
-.hpill{background:rgba(255,255,255,.14);color:rgba(255,255,255,.92);font-size:12px;font-weight:600;padding:6px 14px;border-radius:100px;border:1px solid rgba(255,255,255,.22);cursor:pointer;transition:background .15s}
-.hpill:hover{background:rgba(255,255,255,.24)}
-.hero-stats{display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap}
-.hstat{text-align:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 20px;min-width:90px;backdrop-filter:blur(8px)}
-.hstat .v{font-size:26px;font-weight:800;color:#fff;line-height:1}
-.hstat .l{font-size:11px;color:rgba(255,255,255,.6);margin-top:3px}
-
-/* Row: Lịch học | Thông báo */
-.row-2{display:grid;grid-template-columns:1fr 340px;gap:20px}
-
-/* Row: Tin tức | Truy cập nhanh */
-.row-news-qa{display:grid;grid-template-columns:1fr 280px;gap:20px}
-
-/* ─── Cards ────────────────────────────────────────────────── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:22px;transition:background .2s,border .2s}
-.card-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.card-title{font-size:14px;font-weight:800;color:var(--txt)}
-.card-link{font-size:12.5px;font-weight:700;color:var(--brand);cursor:pointer;transition:color .15s}
-.card-link:hover{color:var(--brand-d)}
-
-/* Schedule items */
-.sch-item{display:flex;align-items:flex-start;gap:13px;padding:11px 12px;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all .15s;margin-bottom:8px}
-.sch-item:last-child{margin-bottom:0}
-.sch-item:hover{background:var(--surface2);border-color:var(--border)}
-.sch-item.live{background:var(--green-l);border-color:rgba(26,173,107,.2)}
-.sch-num{width:42px;height:42px;border-radius:9px;background:var(--surface2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
-.sch-item.live .sch-num{background:rgba(26,173,107,.15)}
-.sch-num .n{font-size:18px;font-weight:800;color:var(--txt);line-height:1}
-.sch-num .c{font-size:9px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.05em}
-.sch-name{font-size:13.5px;font-weight:700;color:var(--txt);margin-bottom:5px}
-.sch-meta{display:flex;gap:12px;flex-wrap:wrap}
-.sch-meta span{font-size:11.5px;color:var(--txt2);display:flex;align-items:center;gap:4px}
-.sch-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;align-self:flex-start;flex-shrink:0}
-
-/* Notification list */
-.notif-row{padding:11px 12px;border-radius:10px;border-left:3px solid transparent;margin-bottom:8px;cursor:pointer;transition:background .15s}
-.notif-row:last-child{margin-bottom:0}
-.notif-row:hover{background:var(--surface2)}
-.notif-row.urgent{background:var(--rose-l);border-color:var(--rose)}
-.notif-row.warn{background:var(--amber-l);border-color:var(--amber)}
-.notif-row.info{border-color:var(--brand)}
-.notif-tag{display:inline-flex;align-items:center;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:100px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
-.tag-rose{background:var(--rose-l);color:var(--rose)}
-.tag-amber{background:var(--amber-l);color:var(--amber)}
-.tag-blue{background:var(--brand-l);color:var(--brand)}
-.tag-green{background:var(--green-l);color:var(--green)}
-.tag-violet{background:var(--violet-l);color:var(--violet)}
-.notif-title{font-size:12.5px;font-weight:700;color:var(--txt);margin-bottom:2px}
-.notif-time{font-size:11px;color:var(--txt3)}
-
-/* ─── News tabs ────────────────────────────────────────────── */
-.news-tabs{display:flex;gap:3px;background:var(--surface2);border-radius:9px;padding:3px;border:1px solid var(--border);margin-bottom:16px;overflow-x:auto;scrollbar-width:none}
-.news-tabs::-webkit-scrollbar{display:none}
-.ntab{padding:6px 13px;border-radius:7px;font-size:12.5px;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .15s;white-space:nowrap;border:none;background:transparent}
-.ntab.on{background:var(--surface);color:var(--brand);box-shadow:var(--shadow)}
-.ntab:not(.on):hover{color:var(--brand)}
-.npanel{display:none}
-.npanel.on{display:block;animation:pi .2s ease}
-
-/* News cards grid */
-.news-grid{display:flex;flex-direction:column;gap:10px}
-.ncard{display:flex;gap:12px;padding:11px 12px;border-radius:10px;cursor:pointer;border:1.5px solid var(--border);transition:all .15s;background:var(--surface)}
-.ncard:hover{border-color:var(--brand-m);box-shadow:var(--shadow)}
-.ncard-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
-.ncard-title{font-size:13px;font-weight:700;color:var(--txt);line-height:1.4;margin-bottom:3px}
-.ncard-sub{font-size:11.5px;color:var(--txt2);line-height:1.5}
-.ncard-date{font-size:11px;color:var(--txt3);margin-top:4px}
-.ncard-dot{width:4px;border-radius:100px;flex-shrink:0;margin:3px 0;min-height:40px}
-
-/* Quick access grid */
-.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.qa-item{display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 8px;border-radius:10px;cursor:pointer;border:1.5px solid var(--border);background:var(--surface);transition:all .15s;text-align:center}
-.qa-item:hover{border-color:var(--brand-m);background:var(--brand-l);transform:translateY(-1px);box-shadow:0 4px 14px rgba(46,79,255,.1)}
-.qa-ic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;transition:transform .15s}
-.qa-item:hover .qa-ic{transform:scale(1.08)}
-.qa-lbl{font-size:11.5px;font-weight:700;color:var(--txt2);line-height:1.3}
-.qa-item:hover .qa-lbl{color:var(--brand)}
-
-/* ─── Events section ───────────────────────────────────────── */
-.events-section{padding:0 24px}
-.events-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.events-hdr h2{font-size:16px;font-weight:800;color:var(--txt)}
-.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.ev-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;cursor:pointer;transition:all .2s}
-.ev-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.ev-card-top{height:5px}
-.ev-card-body{padding:18px}
-.ev-card-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
-.ev-card-date{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.ev-date-box{width:44px;height:44px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
-.ev-date-box .day{font-size:20px;font-weight:800;line-height:1;color:var(--txt)}
-.ev-date-box .month{font-size:10px;font-weight:700;color:var(--txt3);text-transform:uppercase}
-.ev-card-title{font-size:14px;font-weight:800;color:var(--txt);line-height:1.4;margin-bottom:7px}
-.ev-card-desc{font-size:12px;color:var(--txt2);line-height:1.55;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.ev-card-foot{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--border)}
-.ev-card-foot span{font-size:11.5px;color:var(--txt2)}
-.ev-card-btn{font-size:12px;font-weight:700;padding:6px 14px;border-radius:7px;border:none;cursor:pointer;transition:all .15s}
-
-/* ─── Footer ───────────────────────────────────────────────── */
-footer{
-  margin-top:32px;
-  background:var(--txt);
-  color:rgba(255,255,255,.7);
-  padding:40px 24px 24px;
-}
-.footer-inner{max-width:1320px;margin:0 auto}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px}
-.footer-brand .logo-row{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.footer-brand .logo-box{width:36px;height:36px;border-radius:9px;background:var(--brand);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff}
-.footer-brand h3{font-size:16px;font-weight:800;color:#fff}
-.footer-brand p{font-size:13px;line-height:1.65;max-width:260px}
-.footer-col h4{font-size:12.5px;font-weight:800;color:rgba(255,255,255,.9);margin-bottom:12px;text-transform:uppercase;letter-spacing:.05em}
-.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,.55);margin-bottom:8px;cursor:pointer;transition:color .15s}
-.footer-col a:hover{color:#fff}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.footer-bottom p{font-size:12.5px}
-.footer-tags{display:flex;gap:6px;flex-wrap:wrap}
-.ftag{font-size:11px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);padding:3px 9px;border-radius:100px}
-
-/* ─── Progress ring ────────────────────────────────────────── */
-.prog-track{height:6px;background:var(--surface2);border-radius:100px;overflow:hidden;margin-top:5px}
-.prog-fill{height:100%;border-radius:100px}
-
-/* ─── Other pages (grades, schedule, etc.) ────────────────── */
-.page-inner{max-width:1320px;margin:0 auto;padding:28px 24px}
-.page-hdr{margin-bottom:24px}
-.page-hdr h2{font-size:20px;font-weight:800;color:var(--txt)}
-.page-hdr p{font-size:13.5px;color:var(--txt2);margin-top:3px}
-table{width:100%;border-collapse:collapse}
-th{text-align:left;padding:9px 14px;font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid var(--border)}
-td{padding:12px 14px;font-size:13.5px;color:var(--txt);border-bottom:1px solid var(--border);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface2)}
-
-/* ─── Mobile bottom nav ────────────────────────────────────── */
-#bnav{
-  display:none;
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  z-index:150;
-  padding:6px 0;
-  padding-bottom:max(6px, env(safe-area-inset-bottom));
-}
-.bn-btn{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:6px 12px;border-radius:8px;
-  background:transparent;border:none;cursor:pointer;
-  color:var(--txt3);font-size:10px;font-weight:600;font-family:'Be Vietnam Pro',sans-serif;
-  transition:color .15s;
-}
-.bn-btn.active{color:var(--brand)}
-.bn-btn svg{width:20px;height:20px}
-
-/* ─── Responsive ───────────────────────────────────────────── */
-@media(max-width:1199px){
-  .row-2{grid-template-columns:1fr 300px}
-  .row-news-qa{grid-template-columns:1fr 260px}
-  .footer-top{grid-template-columns:1fr 1fr}
-}
-@media(max-width:1023px){
-  #sidebar{transform:translateX(-100%);width:var(--sb-w) !important}
-  #sidebar.mobile-open{transform:translateX(0);box-shadow:8px 0 40px rgba(10,14,35,.18)}
-  body.sb-collapsed #main,#main{margin-left:0 !important}
-  #bnav{display:flex;justify-content:space-around}
-  #page-wrap{padding-bottom:80px}
-  .row-2{grid-template-columns:1fr}
-  .row-news-qa{grid-template-columns:1fr}
-  .events-grid{grid-template-columns:1fr 1fr}
-  .footer-top{grid-template-columns:1fr 1fr}
-  .tb-user .tb-user-name,.tb-user .tb-user-id{display:none}
-  .tb-user{padding:5px}
-}
-@media(max-width:639px){
-  .home-inner{padding:16px 14px 0}
-  .events-section{padding:0 14px}
-  .hero{padding:22px 20px}
-  .hero-stats{display:none}
-  .hero h1{font-size:18px}
-  .events-grid{grid-template-columns:1fr}
-  footer{padding:28px 14px 20px}
-  .footer-top{grid-template-columns:1fr}
-  .tb-search{max-width:none;flex:1}
-  .tb-search input{font-size:12px}
-}
-@media(min-width:1024px){
-  body.sb-collapsed #main{margin-left:var(--sb-w-sm)}
-  #sidebar.collapsed{width:var(--sb-w-sm)}
-}
-
-/* ─── Scrollbar ────────────────────────────────────────────── */
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:100px}
-::-webkit-scrollbar-track{background:transparent}
-
-/* ─── Toast ────────────────────────────────────────────────── */
-#toast{
-  position:fixed;bottom:28px;right:28px;
-  background:#0f1523;color:#fff;
-  padding:12px 18px;border-radius:11px;
-  font-size:13.5px;font-weight:600;
-  display:flex;align-items:center;gap:10px;
-  box-shadow:0 8px 32px rgba(0,0,0,.3);
-  border:1px solid rgba(255,255,255,.08);
-  transform:translateY(16px);opacity:0;
-  transition:all .22s ease;z-index:2000;max-width:340px;
-}
-html.dark #toast{background:#1e2540;border-color:rgba(255,255,255,.1)}
-#toast.show{transform:translateY(0);opacity:1}
-
-/* ═══════════════════════════════════════════════════════════════
-   LOGIN SCREEN
-═══════════════════════════════════════════════════════════════ */
-#login-screen{
-  position:fixed;inset:0;z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  background:#05080f;
-}
-#login-screen.fade-out{
-  animation:loginFadeOut .55s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes loginFadeOut{
-  0%{opacity:1;transform:scale(1)}
-  100%{opacity:0;transform:scale(1.04);pointer-events:none}
-}
-/* Animated gradient mesh background */
-.login-bg{
-  position:absolute;inset:0;overflow:hidden;
-}
-.login-bg-blob{
-  position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;
-  animation:blobFloat 8s ease-in-out infinite alternate;
-}
-.login-bg-blob:nth-child(1){width:520px;height:520px;background:radial-gradient(circle,#2e4fff,#0d1a6b);top:-140px;left:-100px;animation-delay:0s}
-.login-bg-blob:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,#7c3aed,#3b1a7a);bottom:-120px;right:-80px;animation-delay:-3s}
-.login-bg-blob:nth-child(3){width:280px;height:280px;background:radial-gradient(circle,#0898a0,#023f42);bottom:20%;left:20%;animation-delay:-5.5s;opacity:.35}
-@keyframes blobFloat{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(30px,20px) scale(1.06)}
-}
-/* Dot grid overlay */
-.login-bg::after{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);
-  background-size:28px 28px;
-}
-/* Glass card */
-.login-card{
-  position:relative;z-index:1;
-  width:420px;max-width:calc(100vw - 32px);
-  background:rgba(255,255,255,.04);
-  backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:24px;
-  padding:40px 36px;
-  box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05) inset;
-  animation:cardIn .6s cubic-bezier(.34,1.56,.64,1) both;
-}
-@keyframes cardIn{
-  from{opacity:0;transform:translateY(32px) scale(.94)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-/* Logo */
-.login-logo{display:flex;align-items:center;gap:12px;margin-bottom:28px}
-.login-logo-mark{
-  width:44px;height:44px;border-radius:14px;
-  background:var(--brand);
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:900;color:#fff;
-  box-shadow:0 8px 24px rgba(46,79,255,.5);
-  flex-shrink:0;
-}
-.login-logo-text h2{font-size:18px;font-weight:900;color:#fff;line-height:1.15}
-.login-logo-text p{font-size:12px;color:rgba(255,255,255,.45);margin-top:1px}
-/* Heading */
-.login-heading{margin-bottom:24px}
-.login-heading h3{font-size:22px;font-weight:800;color:#fff;margin-bottom:4px}
-.login-heading p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.55}
-/* Form fields */
-.lf-group{margin-bottom:16px}
-.lf-label{display:block;font-size:12px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:7px;letter-spacing:.03em}
-.lf-input-wrap{position:relative}
-.lf-input-wrap svg{
-  position:absolute;left:13px;top:50%;transform:translateY(-50%);
-  width:15px;height:15px;color:rgba(255,255,255,.3);pointer-events:none;
-  transition:color .2s;
-}
-.lf-input{
-  width:100%;height:46px;
-  background:rgba(255,255,255,.07);
-  border:1.5px solid rgba(255,255,255,.1);
-  border-radius:11px;
-  padding:0 38px;
-  font-size:14px;font-weight:500;color:#fff;
-  font-family:'Be Vietnam Pro',sans-serif;
-  outline:none;
-  transition:border .2s,background .2s,box-shadow .2s;
-}
-.lf-input::placeholder{color:rgba(255,255,255,.25);font-weight:400}
-.lf-input:focus{
-  border-color:var(--brand);background:rgba(46,79,255,.1);
-  box-shadow:0 0 0 3px rgba(46,79,255,.2);
-}
-.lf-input:focus + svg,.lf-input-wrap:focus-within svg{color:var(--brand)}
-/* swap icon order so icon is before input in DOM but we need svg AFTER for sibling ~ trick → easier to put svg first */
-.lf-input-wrap .lf-ico{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:rgba(255,255,255,.3);pointer-events:none;transition:color .2s}
-.lf-input-wrap:focus-within .lf-ico{color:rgba(46,79,255,1)}
-.lf-input{padding-left:40px}
-.lf-pw-toggle{
-  position:absolute;right:12px;top:50%;transform:translateY(-50%);
-  background:transparent;border:none;cursor:pointer;
-  color:rgba(255,255,255,.3);padding:4px;border-radius:6px;
-  transition:color .15s;display:flex;align-items:center;
-}
-.lf-pw-toggle:hover{color:rgba(255,255,255,.7)}
-/* Remember + Forgot */
-.lf-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.lf-check-wrap{display:flex;align-items:center;gap:8px;cursor:pointer}
-.lf-check{width:16px;height:16px;border-radius:5px;border:1.5px solid rgba(255,255,255,.25);background:transparent;cursor:pointer;accent-color:var(--brand)}
-.lf-check-lbl{font-size:12.5px;color:rgba(255,255,255,.5);font-weight:500;user-select:none}
-.lf-forgot{font-size:12.5px;color:rgba(139,164,255,.9);font-weight:600;cursor:pointer;transition:color .15s}
-.lf-forgot:hover{color:#fff}
-/* Submit btn */
-.lf-btn{
-  width:100%;height:48px;border-radius:12px;
-  background:var(--brand);border:none;cursor:pointer;
-  font-size:15px;font-weight:800;color:#fff;
-  font-family:'Be Vietnam Pro',sans-serif;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:background .2s,transform .15s,box-shadow .2s;
-  box-shadow:0 8px 24px rgba(46,79,255,.45);
-  position:relative;overflow:hidden;
-}
-.lf-btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);
-}
-.lf-btn:hover{background:var(--brand-d);transform:translateY(-1px);box-shadow:0 12px 32px rgba(46,79,255,.55)}
-.lf-btn:active{transform:translateY(0)}
-.lf-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.lf-btn .lf-spinner{
-  width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);
-  border-top-color:#fff;border-radius:50%;
-  animation:spin .7s linear infinite;display:none;
-}
-@keyframes spin{to{transform:rotate(360deg)}}
-/* Error state */
-.lf-error{
-  background:rgba(224,45,91,.12);border:1px solid rgba(224,45,91,.3);
-  border-radius:9px;padding:10px 13px;
-  font-size:12.5px;color:#ff8aaa;font-weight:600;
-  margin-bottom:16px;display:none;
-  animation:shake .35s ease;
-}
-.lf-error.show{display:flex;align-items:center;gap:8px}
-@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
-/* Demo hint */
-.lf-demo{
-  margin-top:20px;padding:12px 14px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:10px;
-  display:flex;align-items:flex-start;gap:8px;
-}
-.lf-demo-ico{font-size:14px;flex-shrink:0;margin-top:1px}
-.lf-demo p{font-size:11.5px;color:rgba(255,255,255,.35);line-height:1.6}
-.lf-demo strong{color:rgba(255,255,255,.6);cursor:pointer}
-.lf-demo strong:hover{color:#fff;text-decoration:underline}
-/* Divider */
-.lf-divider{display:flex;align-items:center;gap:12px;margin:20px 0}
-.lf-divider span{font-size:12px;color:rgba(255,255,255,.2);white-space:nowrap}
-.lf-divider::before,.lf-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
-/* Social login */
-.lf-soc{
-  width:100%;height:42px;border-radius:10px;
-  background:rgba(255,255,255,.06);
-  border:1.5px solid rgba(255,255,255,.1);
-  color:rgba(255,255,255,.75);font-size:13.5px;font-weight:600;
-  font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  transition:background .15s,border .15s;
-  margin-bottom:10px;
-}
-.lf-soc:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
-
-/* ── Logout confirmation modal ── */
-#logout-modal{
-  position:fixed;inset:0;z-index:8888;
-  background:rgba(0,0,0,.6);backdrop-filter:blur(8px);
-  display:none;align-items:center;justify-content:center;
-}
-#logout-modal.show{display:flex;animation:fadeIn .2s ease}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.logout-dialog{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:20px;padding:32px;width:340px;max-width:calc(100vw - 32px);
-  box-shadow:var(--shadow-md);animation:cardIn .3s ease both;
-  text-align:center;
-}
-.logout-dialog .ld-ico{font-size:36px;margin-bottom:12px}
-.logout-dialog h3{font-size:18px;font-weight:800;color:var(--txt);margin-bottom:6px}
-.logout-dialog p{font-size:13px;color:var(--txt2);line-height:1.55;margin-bottom:24px}
-.ld-btns{display:flex;gap:10px}
-.ld-btns button{flex:1;height:42px;border-radius:10px;font-size:14px;font-weight:700;font-family:'Be Vietnam Pro',sans-serif;cursor:pointer;transition:all .15s}
-.ld-cancel{background:var(--surface2);border:1.5px solid var(--border);color:var(--txt)}
-.ld-cancel:hover{border-color:var(--border2)}
-.ld-confirm{background:var(--rose);border:none;color:#fff}
-.ld-confirm:hover{background:#c8264f}
-
-/* ── Notification panel ── */
-#notif-panel{
-  position:fixed;top:66px;right:16px;z-index:500;
-  width:360px;max-width:calc(100vw - 32px);
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;box-shadow:var(--shadow-md);
-  display:none;overflow:hidden;
-  animation:slideDown .2s cubic-bezier(.34,1.56,.64,1);
-}
-#notif-panel.show{display:block}
-@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.np-hdr{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.np-hdr h4{font-size:14px;font-weight:800;color:var(--txt)}
-.np-mark-all{font-size:12px;font-weight:700;color:var(--brand);cursor:pointer}
-.np-item{padding:13px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;display:flex;gap:12px}
-.np-item:last-child{border-bottom:none}
-.np-item:hover{background:var(--surface2)}
-.np-item.unread{background:var(--brand-l)}
-.np-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
-.np-item-body p{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:2px;line-height:1.4}
-.np-item-body span{font-size:11.5px;color:var(--txt3)}
-
-/* ── Search overlay ── */
-#search-overlay{
-  position:fixed;inset:0;z-index:600;
-  background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
-  display:none;flex-direction:column;align-items:center;
-  padding-top:80px;
-}
-#search-overlay.show{display:flex;animation:fadeIn .15s ease}
-.so-box{
-  width:600px;max-width:calc(100vw - 32px);
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:16px;overflow:hidden;
-  box-shadow:var(--shadow-md);
-  animation:cardIn .25s ease;
-}
-.so-input-row{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
-.so-input-row svg{color:var(--txt3);flex-shrink:0}
-.so-input{flex:1;border:none;background:transparent;font-size:16px;font-family:'Be Vietnam Pro',sans-serif;color:var(--txt);outline:none}
-.so-input::placeholder{color:var(--txt3)}
-.so-esc{font-size:11px;color:var(--txt3);background:var(--border);padding:2px 7px;border-radius:5px;flex-shrink:0;font-weight:600}
-.so-results{max-height:360px;overflow-y:auto}
-.so-section{padding:8px 0}
-.so-section-lbl{font-size:11px;font-weight:700;color:var(--txt3);text-transform:uppercase;letter-spacing:.06em;padding:6px 18px}
-.so-item{display:flex;align-items:center;gap:12px;padding:10px 18px;cursor:pointer;transition:background .1s}
-.so-item:hover,.so-item.focused{background:var(--brand-l)}
-.so-ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:var(--surface2);flex-shrink:0}
-.so-item-lbl{font-size:13.5px;font-weight:600;color:var(--txt)}
-.so-item-sub{font-size:12px;color:var(--txt3)}
-
-/* ── Profile dropdown ── */
-#profile-dropdown{
-  position:fixed;top:66px;right:16px;z-index:500;
-  width:240px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:14px;box-shadow:var(--shadow-md);
-  display:none;overflow:hidden;
-  animation:slideDown .2s cubic-bezier(.34,1.56,.64,1);
-}
-#profile-dropdown.show{display:block}
-.pd-header{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center}
-.pd-av{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
-.pd-name{font-size:13px;font-weight:700;color:var(--txt)}
-.pd-uid{font-size:11px;color:var(--txt3)}
-.pd-item{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;font-size:13px;font-weight:500;color:var(--txt2);transition:background .1s}
-.pd-item:hover{background:var(--surface2);color:var(--txt)}
-.pd-item svg{width:15px;height:15px;color:var(--txt3);flex-shrink:0}
-.pd-item.danger{color:var(--rose)}
-.pd-item.danger svg{color:var(--rose)}
-.pd-divider{height:1px;background:var(--border);margin:4px 0}
-</style>
-</head>
-<body>
-
-<!-- ══ LOGIN SCREEN ══════════════════════════════════════════════ -->
-<div id="login-screen">
-  <div class="login-bg">
-    <div class="login-bg-blob"></div>
-    <div class="login-bg-blob"></div>
-    <div class="login-bg-blob"></div>
-  </div>
-  <div class="login-card">
-    <!-- Logo -->
-    <div class="login-logo">
-      <div class="login-logo-mark">UIT</div>
-      <div class="login-logo-text">
-        <h2>UIT Portal</h2>
-        <p>Trường ĐH Công nghệ Thông tin</p>
-      </div>
-    </div>
-    <!-- Heading -->
-    <div class="login-heading">
-      <h3>Đăng nhập</h3>
-      <p>Sử dụng tài khoản sinh viên để truy cập hệ thống</p>
-    </div>
-    <!-- Error box -->
-    <div class="lf-error" id="loginError">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span id="loginErrorMsg">MSSV hoặc mật khẩu không đúng.</span>
-    </div>
-    <!-- MSSV -->
-    <div class="lf-group">
-      <label class="lf-label" for="lf-mssv">Mã số sinh viên (MSSV)</label>
-      <div class="lf-input-wrap">
-        <svg class="lf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <input class="lf-input" id="lf-mssv" type="text" placeholder="VD: 24521044" autocomplete="username" inputmode="numeric" maxlength="10" onkeydown="if(event.key==='Enter')document.getElementById('lf-pw').focus()"/>
-      </div>
-    </div>
-    <!-- Password -->
-    <div class="lf-group">
-      <label class="lf-label" for="lf-pw">Mật khẩu</label>
-      <div class="lf-input-wrap">
-        <svg class="lf-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-        <input class="lf-input" id="lf-pw" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
-        <button class="lf-pw-toggle" id="pwToggle" onclick="togglePw()" type="button" tabindex="-1">
-          <svg id="pwEye" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        </button>
-      </div>
-    </div>
-    <!-- Remember + Forgot -->
-    <div class="lf-row">
-      <label class="lf-check-wrap">
-        <input type="checkbox" class="lf-check" id="lf-remember"/>
-        <span class="lf-check-lbl">Ghi nhớ đăng nhập</span>
-      </label>
-      <span class="lf-forgot" onclick="toast('🔑','Vui lòng liên hệ phòng CNTT để đặt lại mật khẩu.')">Quên mật khẩu?</span>
-    </div>
-    <!-- Submit -->
-    <button class="lf-btn" id="loginBtn" onclick="doLogin()">
-      <span id="loginBtnText">Đăng nhập</span>
-      <div class="lf-spinner" id="loginSpinner"></div>
-      <svg id="loginArrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </button>
-    <!-- Divider -->
-    <div class="lf-divider"><span>hoặc đăng nhập bằng</span></div>
-    <!-- Social -->
-    <button class="lf-soc" onclick="doSocialLogin('Google')">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      Đăng nhập với Google (@uit.edu.vn)
-    </button>
-    <button class="lf-soc" onclick="doSocialLogin('Microsoft')">
-      <svg width="18" height="18" viewBox="0 0 24 24"><rect x="1" y="1" width="10" height="10" fill="#f25022"/><rect x="13" y="1" width="10" height="10" fill="#7fba00"/><rect x="1" y="13" width="10" height="10" fill="#00a4ef"/><rect x="13" y="13" width="10" height="10" fill="#ffb900"/></svg>
-      Đăng nhập với Microsoft 365
-    </button>
-    <!-- Demo hint -->
-    <div class="lf-demo">
-      <div class="lf-demo-ico">💡</div>
-      <p><strong>Demo nhanh:</strong> MSSV <strong onclick="fillDemo()">24521044</strong> · Mật khẩu <strong onclick="fillDemo()">uit2024</strong><br>Hoặc bấm vào để điền tự động.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ══ LOGOUT MODAL ════════════════════════════════════════════ -->
-<div id="logout-modal">
-  <div class="logout-dialog">
-    <div class="ld-ico">👋</div>
-    <h3>Đăng xuất?</h3>
-    <p>Bạn có chắc muốn đăng xuất khỏi UIT Portal không?<br>Dữ liệu phiên làm việc sẽ được lưu lại.</p>
-    <div class="ld-btns">
-      <button class="ld-cancel" onclick="closeLogoutModal()">Hủy bỏ</button>
-      <button class="ld-confirm" onclick="confirmLogout()">Đăng xuất</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ NOTIFICATION PANEL ══════════════════════════════════════ -->
-<div id="notif-panel">
-  <div class="np-hdr">
-    <h4>Thông báo <span style="background:var(--rose);color:#fff;font-size:10px;padding:2px 7px;border-radius:100px;margin-left:6px">3</span></h4>
-    <span class="np-mark-all" onclick="markAllRead()">Đánh dấu đã đọc</span>
-  </div>
-  <div class="np-item unread" onclick="closeNotifPanel();showPage('grades',null)">
-    <div class="np-dot" style="background:var(--rose)"></div>
-    <div class="np-item-body">
-      <p>📊 Điểm HK2 đã được cập nhật</p>
-      <span>IT007 · Hệ điều hành — vừa xong</span>
-    </div>
-  </div>
-  <div class="np-item unread" onclick="closeNotifPanel()">
-    <div class="np-dot" style="background:var(--amber)"></div>
-    <div class="np-item-body">
-      <p>⚠️ Nhắc nhở: Hạn nộp học phí</p>
-      <span>HK2 — còn 3 ngày · 30/04/2026</span>
-    </div>
-  </div>
-  <div class="np-item unread" onclick="closeNotifPanel()">
-    <div class="np-dot" style="background:var(--brand)"></div>
-    <div class="np-item-body">
-      <p>📅 Lịch thi cuối kỳ đã được đăng</p>
-      <span>Xem lịch thi HK2 2025–2026</span>
-    </div>
-  </div>
-  <div class="np-item" onclick="closeNotifPanel()">
-    <div class="np-dot" style="background:var(--green)"></div>
-    <div class="np-item-body">
-      <p>✅ Đăng ký môn thành công</p>
-      <span>IT007, JAN06, CE232 · 3 môn · 2 ngày trước</span>
-    </div>
-  </div>
-  <div style="padding:12px 18px;text-align:center;border-top:1px solid var(--border)">
-    <span style="font-size:12.5px;font-weight:700;color:var(--brand);cursor:pointer" onclick="closeNotifPanel();showPage('notifications',null)">Xem tất cả thông báo →</span>
-  </div>
-</div>
-
-<!-- ══ SEARCH OVERLAY ══════════════════════════════════════════ -->
-<div id="search-overlay" onclick="closeSearch(event)">
-  <div class="so-box" onclick="event.stopPropagation()">
-    <div class="so-input-row">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input class="so-input" id="so-input" placeholder="Tìm kiếm môn học, dịch vụ, tài liệu…" oninput="renderSearch(this.value)" onkeydown="handleSearchKey(event)"/>
-      <span class="so-esc" onclick="closeSearch()">ESC</span>
-    </div>
-    <div class="so-results" id="so-results">
-      <div class="so-section">
-        <div class="so-section-lbl">Truy cập nhanh</div>
-        <div class="so-item" onclick="closeSearch();showPage('schedule',null)"><div class="so-ic" style="background:var(--brand-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="so-item-lbl">Thời khóa biểu</div><div class="so-item-sub">HK2 · 2025–2026</div></div></div>
-        <div class="so-item" onclick="closeSearch();showPage('grades',null)"><div class="so-ic" style="background:var(--green-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></div><div><div class="so-item-lbl">Kết quả học tập</div><div class="so-item-sub">Xem điểm, bảng điểm</div></div></div>
-        <div class="so-item" onclick="closeSearch();showPage('finance',null)"><div class="so-ic" style="background:var(--amber-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/></svg></div><div><div class="so-item-lbl">Học phí</div><div class="so-item-sub">Tra cứu, thanh toán</div></div></div>
-        <div class="so-item" onclick="closeSearch();showPage('exam',null)"><div class="so-ic" style="background:var(--rose-l)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="so-item-lbl">Lịch thi</div><div class="so-item-sub">Tra cứu lịch thi cuối kỳ</div></div></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ PROFILE DROPDOWN ════════════════════════════════════════ -->
-<div id="profile-dropdown">
-  <div class="pd-header">
-    <div class="pd-av">TM</div>
-    <div>
-      <div class="pd-name">Trần Đức Mạnh</div>
-      <div class="pd-uid">24521044 · KTTT K24</div>
-    </div>
-  </div>
-  <div class="pd-item" onclick="closeProfileDropdown();showPage('profile',null)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-    Hồ sơ cá nhân
-  </div>
-  <div class="pd-item" onclick="closeProfileDropdown();showPage('settings',null)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-    Cài đặt
-  </div>
-  <div class="pd-item" onclick="closeProfileDropdown();toggleTheme()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-    Chế độ sáng / tối
-  </div>
-  <div class="pd-divider"></div>
-  <div class="pd-item danger" onclick="closeProfileDropdown();openLogoutModal()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-    Đăng xuất
-  </div>
-</div>
-
-<!-- ══ SIDEBAR ══════════════════════════════════════════════════ -->
-<aside id="sidebar">
-  <div class="sb-logo">
-    <div class="sb-mark">UIT</div>
-    <div class="sb-brand">
-      <h1>UIT Portal</h1>
-      <p>Quản lý Sinh viên</p>
-    </div>
-    <!-- close on mobile -->
-    <button class="sb-close-btn mobile-only" id="sbCloseBtn" onclick="closeSidebar()" aria-label="Đóng menu">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-
-  <div class="sb-scroll">
-    <!-- Main -->
-    <div class="sb-section-label">Tổng quan</div>
-    <button class="nav-link active" data-page="home" onclick="showPage('home',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="nl-text">Trang chủ</span>
-    </button>
-    <button class="nav-link" data-page="news" onclick="showPage('news',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h7"/><rect x="14" y="12" width="7" height="7" rx="1"/></svg>
-      <span class="nl-text">Tin tức</span>
-    </button>
-
-    <!-- Học vụ -->
-    <div class="sb-section-label">Học vụ</div>
-    <button class="nav-link" data-page="schedule" onclick="showPage('schedule',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-      <span class="nl-text">Thời khóa biểu</span>
-    </button>
-    <button class="nav-link" data-page="grades" onclick="showPage('grades',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-      <span class="nl-text">Kết quả học tập</span>
-      <span class="nl-badge">2</span>
-    </button>
-    <button class="nav-link" data-page="register" onclick="showPage('register',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      <span class="nl-text">Đăng ký môn học</span>
-    </button>
-    <button class="nav-link" data-page="exam" onclick="showPage('exam',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      <span class="nl-text">Lịch thi</span>
-    </button>
-
-    <!-- Dịch vụ -->
-    <div class="sb-section-label">Dịch vụ</div>
-    <button class="nav-link" data-page="finance" onclick="showPage('finance',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-      <span class="nl-text">Học phí</span>
-    </button>
-    <button class="nav-link" data-page="docs" onclick="showPage('docs',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-      <span class="nl-text">Hồ sơ & Giấy tờ</span>
-    </button>
-    <button class="nav-link" data-page="extracurr" onclick="showPage('extracurr',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <span class="nl-text">Ngoại khóa & DRL</span>
-    </button>
-    <button class="nav-link" data-page="health" onclick="showPage('health',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-      <span class="nl-text">Bảo hiểm Y tế</span>
-    </button>
-
-    <!-- Tài khoản -->
-    <div class="sb-section-label">Tài khoản</div>
-    <button class="nav-link" data-page="profile" onclick="showPage('profile',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="nl-text">Hồ sơ cá nhân</span>
-    </button>
-    <button class="nav-link" data-page="settings" onclick="showPage('settings',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M19.07 19.07l-1.41-1.41M4.93 19.07l1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-      <span class="nl-text">Cài đặt</span>
-    </button>
-    <button class="nav-link" data-page="notifications" onclick="showPage('notifications',this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-      <span class="nl-text">Thông báo</span>
-      <span class="nl-badge">3</span>
-    </button>
-  </div>
-
-  <div class="sb-footer">
-    <div class="sb-user-row" onclick="toggleProfileDropdown()">
-      <div class="sb-av">TM</div>
-      <div class="sb-user-info">
-        <div class="name">Trần Đức Mạnh</div>
-        <div class="uid">MSSV: 24521044</div>
-      </div>
-    </div>
-    <button class="nav-link" style="color:var(--rose);margin-top:4px" onclick="openLogoutModal()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      <span class="nl-text">Đăng xuất</span>
-    </button>
-  </div>
-</aside>
-
-<!-- ══ OVERLAY ══════════════════════════════════════════════════ -->
-<div id="overlay" onclick="closeSidebar()"></div>
-
-<!-- ══ MAIN ═════════════════════════════════════════════════════ -->
-<div id="main">
-
-  <!-- ── Topbar ──────────────────────────────────────────────── -->
-  <header id="topbar">
-    <!-- Hamburger -->
-    <button id="hbg" onclick="toggleSidebar()" aria-label="Menu">
-      <div class="hbg-lines"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Search -->
-    <div class="tb-search" onclick="openSearch()">
-      <svg class="s-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" placeholder="Tìm kiếm môn học, dịch vụ… (Ctrl K)" id="sInput" autocomplete="off" readonly onclick="openSearch()"/>
-      <span class="s-kbd">⌘K</span>
-    </div>
-
-    <div class="tb-actions">
-      <!-- Dark / light -->
-      <button class="tb-btn" onclick="toggleTheme()" title="Chế độ sáng/tối">
-        <svg id="themeIco" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-      </button>
-      <!-- Notifications -->
-      <button class="tb-btn" id="notifBtn" onclick="toggleNotifPanel()" title="Thông báo">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-        <span class="dot" id="notifDot"></span>
-      </button>
-      <!-- User -->
-      <div class="tb-user" id="profileBtn" onclick="toggleProfileDropdown()">
-        <div class="tb-user-av">TM</div>
-        <div>
-          <div class="tb-user-name">Trần Đức Mạnh</div>
-          <div class="tb-user-id">KTTT · HK2 2025–26</div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ── Page wrap ────────────────────────────────────────────── -->
-  <div id="page-wrap">
-
-    <!-- ════ HOME PAGE ════════════════════════════════════════ -->
-    <div class="page active" id="pg-home">
-      <div class="home-inner">
-
-        <!-- 1. HERO BANNER -->
-        <section class="hero" aria-label="Chào mừng">
-          <div class="hero-inner">
-            <div>
-              <h1>Chào buổi sáng, Đức Mạnh! 👋</h1>
-              <p>Thứ Hai, 20/04/2026 · Học kỳ 2 năm 2025–2026.<br>Hôm nay bạn có <strong style="color:#fff">2 lớp học</strong> — chúc học tốt!</p>
-              <div class="hero-pills">
-                <span class="hpill" onclick="showPage('schedule',null)">Xem TKB</span>
-                <span class="hpill" onclick="showPage('grades',null)">Kết quả</span>
-                <span class="hpill" onclick="showPage('register',null)">Đăng ký môn</span>
-                <span class="hpill" onclick="showPage('finance',null)">Học phí</span>
-              </div>
-            </div>
-            <div class="hero-stats">
-              <div class="hstat"><div class="v">7.88</div><div class="l">ĐTB HK1</div></div>
-              <div class="hstat"><div class="v">3.62</div><div class="l">GPA / 4.0</div></div>
-              <div class="hstat"><div class="v">95</div><div class="l">TC tích lũy</div></div>
-              <div class="hstat"><div class="v">87</div><div class="l">DRL</div></div>
-            </div>
-          </div>
-        </section>
-
-        <!-- 2. ROW: Lịch học | Thông báo -->
-        <div class="row-2">
-
-          <!-- Lịch học hôm nay -->
-          <div class="card">
-            <div class="card-hdr">
-              <span class="card-title">Lịch học hôm nay</span>
-              <div style="display:flex;align-items:center;gap:10px">
-                <span style="font-size:11.5px;color:var(--txt3)">Thứ Hai, 20/04</span>
-                <span class="card-link" onclick="showPage('schedule',null)">Xem TKB →</span>
-              </div>
-            </div>
-            <!-- Live -->
-            <div class="sch-item live" onclick="toast('📘','IT007 — Hệ điều hành · P.B3.22')">
-              <div class="sch-num"><div class="n">6</div><div class="c">Tiết</div></div>
-              <div style="flex:1">
-                <div class="sch-name">IT007.Q24 — Hệ điều hành</div>
-                <div class="sch-meta">
-                  <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>13:00 – 15:15</span>
-                  <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>P.B3.22</span>
-                  <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ThS. Nguyễn A</span>
-                </div>
-              </div>
-              <span class="sch-badge" style="background:var(--green-l);color:var(--green)">● Đang học</span>
-            </div>
-            <!-- Upcoming -->
-            <div class="sch-item" onclick="toast('📗','JAN06.Q23 — Tiếng Nhật 6 · P.E11.2')">
-              <div class="sch-num"><div class="n">9</div><div class="c">Tiết</div></div>
-              <div style="flex:1">
-                <div class="sch-name">JAN06.Q23 — Tiếng Nhật 6</div>
-                <div class="sch-meta">
-                  <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>15:30 – 17:45</span>
-                  <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>P.E11.2</span>
-                  <span><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>GV. Trần B</span>
-                </div>
-              </div>
-              <span class="sch-badge" style="background:var(--brand-l);color:var(--brand)">Sắp tới</span>
-            </div>
-            <!-- No more today -->
-            <div style="margin-top:8px;padding:10px 12px;background:var(--surface2);border-radius:9px;display:flex;align-items:center;justify-content:space-between">
-              <span style="font-size:12px;color:var(--green);font-weight:600">✓ Không còn lịch khác hôm nay</span>
-              <span style="font-size:11.5px;color:var(--txt3)">Tiếp theo: Thứ 3</span>
-            </div>
-            <!-- Progress -->
-            <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px"><span style="color:var(--txt2);font-weight:600">Tiến độ chương trình</span><strong style="color:var(--txt)">95 / 140 TC</strong></div>
-              <div class="prog-track"><div class="prog-fill" style="width:68%;background:var(--brand)"></div></div>
-              <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-top:4px;color:var(--txt3)"><span>68% hoàn thành</span><span style="color:var(--green);font-weight:600">Dự kiến TN: 06/2028</span></div>
-            </div>
-          </div>
-
-          <!-- Thông báo quan trọng -->
-          <div class="card">
-            <div class="card-hdr">
-              <span class="card-title">Thông báo quan trọng</span>
-              <span class="card-link" onclick="showPage('notifications',null)">Tất cả →</span>
-            </div>
-            <div class="notif-row urgent" onclick="toast('⚠️','Đăng ký bổ sung HK2 – Hạn hôm nay!')">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                <span class="notif-tag tag-rose">Gấp</span>
-                <span class="notif-time">Hôm nay</span>
-              </div>
-              <div class="notif-title">Đăng ký bổ sung HK2 – K16, K17</div>
-              <div class="notif-time">Hạn 21/04/2026 · 23:59</div>
-            </div>
-            <div class="notif-row warn" onclick="toast('💳','Học phí HK2 – Còn 5.200.000 VNĐ')">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                <span class="notif-tag tag-amber">Học phí</span>
-                <span class="notif-time">2 ngày trước</span>
-              </div>
-              <div class="notif-title">Còn 5.200.000 VNĐ chưa thanh toán</div>
-              <div class="notif-time">Hạn 30/04/2026</div>
-            </div>
-            <div class="notif-row info" onclick="toast('📊','Đã cập nhật điểm môn Trí tuệ NT')">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                <span class="notif-tag tag-blue">Điểm số</span>
-                <span class="notif-time">3 ngày trước</span>
-              </div>
-              <div class="notif-title">Điểm Trí tuệ Nhân tạo đã cập nhật</div>
-              <div class="notif-time">GPA tăng lên 3.62</div>
-            </div>
-            <div class="notif-row" onclick="toast('📝','Đánh giá CLGD HK1 2025–2026')">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                <span class="notif-tag tag-violet">Khảo sát</span>
-                <span class="notif-time">5 ngày trước</span>
-              </div>
-              <div class="notif-title">Đánh giá chất lượng giảng dạy HK1</div>
-              <div class="notif-time">Hạn 30/04/2026</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. ROW: Tin tức + hoạt động | Truy cập nhanh -->
-        <div class="row-news-qa">
-
-          <!-- Tin tức - hoạt động -->
-          <div class="card">
-            <div class="card-hdr">
-              <span class="card-title">Tin tức & Hoạt động</span>
-            </div>
-            <!-- Tabs -->
-            <div class="news-tabs">
-              <button class="ntab on" onclick="switchNewsTab('all',this)">Tất cả</button>
-              <button class="ntab" onclick="switchNewsTab('news',this)">Tin tức</button>
-              <button class="ntab" onclick="switchNewsTab('event',this)">Sự kiện</button>
-              <button class="ntab" onclick="switchNewsTab('scholarship',this)">Học bổng</button>
-              <button class="ntab" onclick="switchNewsTab('research',this)">Nghiên cứu</button>
-            </div>
-
-            <!-- All -->
-            <div class="npanel on" id="np-all">
-              <div class="news-grid">
-                <div class="ncard" onclick="toast('🏆','Đội UIT vô địch Hackathon Quốc gia 2026')">
-                  <div class="ncard-dot" style="background:var(--brand)"></div>
-                  <div style="flex:1">
-                    <div class="ncard-tag" style="color:var(--brand)">Sự kiện</div>
-                    <div class="ncard-title">Đội tuyển UIT giành giải Nhất Hackathon Sinh viên Quốc gia 2026</div>
-                    <div class="ncard-sub">Nhóm SV CNTT K2024 vượt qua 200+ đội thi toàn quốc, giành giải Nhất cuộc thi lập trình sáng tạo.</div>
-                    <div class="ncard-date">12/04/2026 · Ban truyền thông UIT</div>
-                  </div>
-                </div>
-                <div class="ncard" onclick="toast('🎓','Học bổng Vingroup 2026 – Hạn 30/04')">
-                  <div class="ncard-dot" style="background:var(--amber)"></div>
-                  <div style="flex:1">
-                    <div class="ncard-tag" style="color:var(--amber)">Học bổng</div>
-                    <div class="ncard-title">Học bổng Vingroup 2026 – Hạn nộp 30/04</div>
-                    <div class="ncard-sub">Trị giá 20 triệu VNĐ/năm dành cho SV có GPA ≥ 3.2 và không vi phạm kỷ luật.</div>
-                    <div class="ncard-date">10/04/2026</div>
-                  </div>
-                </div>
-                <div class="ncard" onclick="toast('🔬','Hội thảo ACIIDS 2026 tại UIT')">
-                  <div class="ncard-dot" style="background:var(--green)"></div>
-                  <div style="flex:1">
-                    <div class="ncard-tag" style="color:var(--green)">Nghiên cứu</div>
-                    <div class="ncard-title">Hội thảo quốc tế ACIIDS 2026 – Gọi nhận bài báo</div>
-                    <div class="ncard-sub">Chủ đề AI & Intelligent Information Systems. Deadline nộp bài: 01/06/2026.</div>
-                    <div class="ncard-date">08/04/2026</div>
-                  </div>
-                </div>
-                <div class="ncard" onclick="toast('🏫','UIT vào Top 3 ĐH CNTT Việt Nam')">
-                  <div class="ncard-dot" style="background:var(--teal)"></div>
-                  <div style="flex:1">
-                    <div class="ncard-tag" style="color:var(--teal)">Tin tức</div>
-                    <div class="ncard-title">UIT vào Top 3 đại học CNTT hàng đầu Việt Nam theo QS Asia 2026</div>
-                    <div class="ncard-sub">Thứ hạng QS Asia 2026 ghi nhận UIT thăng hạng mạnh trong lĩnh vực CNTT & Kỹ thuật.</div>
-                    <div class="ncard-date">03/04/2026</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Other panels -->
-            <div class="npanel" id="np-news">
-              <div class="news-grid">
-                <div class="ncard" onclick="toast('🏫','UIT Top 3 QS Asia 2026')"><div class="ncard-dot" style="background:var(--teal)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--teal)">Tin tức</div><div class="ncard-title">UIT vào Top 3 đại học CNTT Việt Nam QS Asia 2026</div><div class="ncard-date">03/04/2026</div></div></div>
-                <div class="ncard" onclick="toast('🌏','UIT & ĐH Osaka ký kết hợp tác')"><div class="ncard-dot" style="background:var(--violet)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--violet)">Tin tức</div><div class="ncard-title">UIT ký kết MOU hợp tác đào tạo với Đại học Osaka</div><div class="ncard-date">01/04/2026</div></div></div>
-                <div class="ncard" onclick="toast('🤖','Khai trương Trung tâm AI & Data Science')"><div class="ncard-dot" style="background:var(--brand)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--brand)">Tin tức</div><div class="ncard-title">UIT khai trương Trung tâm AI & Data Science mới</div><div class="ncard-date">28/03/2026</div></div></div>
-              </div>
-            </div>
-            <div class="npanel" id="np-event">
-              <div class="news-grid">
-                <div class="ncard" onclick="toast('🏆','Hackathon 2026 – 12/05')"><div class="ncard-dot" style="background:var(--amber)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--amber)">Sự kiện</div><div class="ncard-title">UIT Hackathon 2026 – AI Challenge · 12/05</div><div class="ncard-sub">08:00–20:00 · Hội trường Trần Chí Tín · +10 điểm DRL</div></div></div>
-                <div class="ncard" onclick="toast('🔬','Tuần lễ KHCN 10–16/05')"><div class="ncard-dot" style="background:var(--brand)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--brand)">Sự kiện</div><div class="ncard-title">Tuần lễ Khoa học Công nghệ UIT 2026 · 10–16/05</div><div class="ncard-sub">Hội trường A & khuôn viên trường</div></div></div>
-              </div>
-            </div>
-            <div class="npanel" id="np-scholarship">
-              <div class="news-grid">
-                <div class="ncard" onclick="toast('🎓','Vingroup 2026 – Hạn 30/04')"><div class="ncard-dot" style="background:var(--amber)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--amber)">Học bổng</div><div class="ncard-title">Học bổng Vingroup 2026 – 20tr/năm · Hạn 30/04</div></div></div>
-                <div class="ncard" onclick="toast('📚','Khuyến khích HK2 – Hạn 15/05')"><div class="ncard-dot" style="background:var(--green)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--green)">Học bổng</div><div class="ncard-title">Học bổng khuyến khích học tập HK2 · Hạn 15/05</div></div></div>
-                <div class="ncard" onclick="toast('🇯🇵','Trao đổi Osaka – Hạn 15/06')"><div class="ncard-dot" style="background:var(--violet)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--violet)">Trao đổi</div><div class="ncard-title">Học bổng trao đổi ĐH Osaka 2026–2027 · Hạn 15/06</div></div></div>
-              </div>
-            </div>
-            <div class="npanel" id="np-research">
-              <div class="news-grid">
-                <div class="ncard" onclick="toast('🔬','ACIIDS 2026 – Deadline 01/06')"><div class="ncard-dot" style="background:var(--green)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--green)">Hội thảo</div><div class="ncard-title">ACIIDS 2026 – Gọi nhận bài báo · Deadline 01/06</div></div></div>
-                <div class="ncard" onclick="toast('📋','Đề tài NCKH SV cấp trường 2026')"><div class="ncard-dot" style="background:var(--violet)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--violet)">Đề tài</div><div class="ncard-title">Đăng ký đề tài NCKH SV cấp trường 2026 · Hạn 01/05</div></div></div>
-                <div class="ncard" onclick="toast('🤖','AI Research Lab – Tuyển thành viên')"><div class="ncard-dot" style="background:var(--brand)"></div><div style="flex:1"><div class="ncard-tag" style="color:var(--brand)">Lab</div><div class="ncard-title">AI Research Lab tuyển thành viên HK2 2025–2026</div></div></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Truy cập nhanh -->
-          <div class="card">
-            <div class="card-hdr"><span class="card-title">Truy cập nhanh</span></div>
-            <div class="qa-grid">
-              <div class="qa-item" onclick="showPage('register',null)">
-                <div class="qa-ic" style="background:var(--brand-l)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
-                <span class="qa-lbl">Đăng ký môn</span>
-              </div>
-              <div class="qa-item" onclick="showPage('finance',null)">
-                <div class="qa-ic" style="background:var(--amber-l)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
-                <span class="qa-lbl">Học phí</span>
-              </div>
-              <div class="qa-item" onclick="toast('📄','Đang xuất bảng điểm PDF...')">
-                <div class="qa-ic" style="background:var(--teal-l)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
-                <span class="qa-lbl">Xuất điểm</span>
-              </div>
-              <div class="qa-item" onclick="toast('📚','Mở Thư viện số UIT...')">
-                <div class="qa-ic" style="background:var(--violet-l)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--violet)" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
-                <span class="qa-lbl">Thư viện số</span>
-              </div>
-              <div class="qa-item" onclick="showPage('exam',null)">
-                <div class="qa-ic" style="background:var(--rose-l)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--rose)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                <span class="qa-lbl">Lịch thi</span>
-              </div>
-              <div class="qa-item" onclick="showPage('extracurr',null)">
-                <div class="qa-ic" style="background:var(--green-l)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-                <span class="qa-lbl">Điểm DRL</span>
-              </div>
-              <div class="qa-item" onclick="showPage('docs',null)">
-                <div class="qa-ic" style="background:#e8f3ff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a6fc4" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
-                <span class="qa-lbl">Hồ sơ</span>
-              </div>
-              <div class="qa-item" onclick="showPage('health',null)">
-                <div class="qa-ic" style="background:#fce8ee"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#c42b5c" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
-                <span class="qa-lbl">BHYT</span>
-              </div>
-            </div>
-            <!-- Mini progress card -->
-            <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                <span style="font-size:12.5px;font-weight:700;color:var(--txt)">Học lực</span>
-                <span style="font-size:11.5px;color:var(--brand);font-weight:700">GPA 3.62 / 4.0</span>
-              </div>
-              <div style="display:flex;gap:8px;flex-wrap:wrap">
-                <span style="font-size:11.5px;background:var(--green-l);color:var(--green);padding:3px 9px;border-radius:100px;font-weight:700">Học lực: Giỏi</span>
-                <span style="font-size:11.5px;background:var(--brand-l);color:var(--brand);padding:3px 9px;border-radius:100px;font-weight:700">DRL: 87 — Tốt</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. SỰ KIỆN SẮP TỚI (below the two-column section) -->
-      <div class="events-section" style="margin-top:20px">
-        <div class="events-hdr">
-          <h2>Sự kiện sắp tới</h2>
-          <button onclick="toast('📅','Mở trang tất cả sự kiện')" style="background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:6px 14px;font-size:12.5px;font-weight:700;color:var(--txt2);cursor:pointer;transition:all .15s" onmouseover="this.style.borderColor='var(--brand);this.style.color='var(--brand)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--txt2)'">Xem tất cả</button>
-        </div>
-        <div class="events-grid">
-          <!-- Card 1 -->
-          <div class="ev-card" onclick="toast('🏆','Hackathon 2026 – Đăng ký ngay!')">
-            <div class="ev-card-top" style="background:var(--brand)"></div>
-            <div class="ev-card-body">
-              <div class="ev-card-tag" style="color:var(--brand)">Học thuật</div>
-              <div class="ev-card-date">
-                <div class="ev-date-box" style="background:var(--brand-l)">
-                  <div class="day" style="color:var(--brand)">12</div>
-                  <div class="month" style="color:var(--brand)">T5</div>
-                </div>
-                <div>
-                  <div style="font-size:12.5px;font-weight:700;color:var(--txt)">UIT Hackathon 2026</div>
-                  <div style="font-size:11.5px;color:var(--txt3)">08:00 – 20:00</div>
-                </div>
-              </div>
-              <div class="ev-card-title">AI Challenge – Hackathon Sinh viên UIT lần thứ 8</div>
-              <div class="ev-card-desc">Cuộc thi lập trình 12 giờ liên tục với chủ đề AI và Machine Learning. Giải thưởng tổng trị giá 100 triệu đồng. Đội từ 2–4 người.</div>
-              <div class="ev-card-foot">
-                <span>Hội trường Trần Chí Tín</span>
-                <button class="ev-card-btn" style="background:var(--brand);color:#fff" onclick="event.stopPropagation();toast('✅','Đã đăng ký Hackathon! +10 điểm DRL')">Đăng ký (+10đ)</button>
-              </div>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="ev-card" onclick="toast('🔬','Tuần lễ KHCN UIT 2026')">
-            <div class="ev-card-top" style="background:var(--green)"></div>
-            <div class="ev-card-body">
-              <div class="ev-card-tag" style="color:var(--green)">Khoa học</div>
-              <div class="ev-card-date">
-                <div class="ev-date-box" style="background:var(--green-l)">
-                  <div class="day" style="color:var(--green)">10</div>
-                  <div class="month" style="color:var(--green)">T5</div>
-                </div>
-                <div>
-                  <div style="font-size:12.5px;font-weight:700;color:var(--txt)">Tuần lễ KHCN UIT</div>
-                  <div style="font-size:11.5px;color:var(--txt3)">10 – 16/05/2026</div>
-                </div>
-              </div>
-              <div class="ev-card-title">Tuần lễ Khoa học Công nghệ UIT 2026</div>
-              <div class="ev-card-desc">Triển lãm đề tài nghiên cứu, trình diễn sản phẩm công nghệ, tọa đàm với doanh nghiệp và hội thảo chuyên ngành suốt cả tuần.</div>
-              <div class="ev-card-foot">
-                <span>Hội trường A & khuôn viên</span>
-                <button class="ev-card-btn" style="background:var(--green-l);color:var(--green)" onclick="event.stopPropagation();toast('📋','Đã đăng ký Tuần lễ KHCN!')">Đăng ký (+5đ)</button>
-              </div>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="ev-card" onclick="toast('🎵','UIT Music Festival – Giai điệu tuổi trẻ')">
-            <div class="ev-card-top" style="background:var(--rose)"></div>
-            <div class="ev-card-body">
-              <div class="ev-card-tag" style="color:var(--rose)">Văn nghệ</div>
-              <div class="ev-card-date">
-                <div class="ev-date-box" style="background:var(--rose-l)">
-                  <div class="day" style="color:var(--rose)">28</div>
-                  <div class="month" style="color:var(--rose)">T4</div>
-                </div>
-                <div>
-                  <div style="font-size:12.5px;font-weight:700;color:var(--txt)">UIT Music Festival</div>
-                  <div style="font-size:11.5px;color:var(--txt3)">18:30 – 22:00</div>
-                </div>
-              </div>
-              <div class="ev-card-title">Giai điệu Tuổi trẻ 2026 – UIT Music Festival</div>
-              <div class="ev-card-desc">Đêm nhạc hội sinh viên với sự tham gia của các ban nhạc, ca sĩ sinh viên và khách mời đặc biệt từ các trường đại học thành phố.</div>
-              <div class="ev-card-foot">
-                <span>Sân trường UIT</span>
-                <button class="ev-card-btn" style="background:var(--rose-l);color:var(--rose)" onclick="event.stopPropagation();toast('🎵','Xem chi tiết Music Festival (+5đ)')">Xem chi tiết</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. FOOTER -->
-      <footer>
-        <div class="footer-inner">
-          <div class="footer-top">
-            <div class="footer-brand">
-              <div class="logo-row">
-                <div class="logo-box">UIT</div>
-                <h3>UIT Portal</h3>
-              </div>
-              <p>Hệ thống Quản lý Sinh viên — Trường Đại học Công nghệ Thông tin, ĐHQG TP.HCM</p>
-              <p style="margin-top:8px;font-size:12px;opacity:.6">Khu phố 6, P. Linh Trung, TP. Thủ Đức, TP. HCM · (028) 3725 2002</p>
-            </div>
-            <div class="footer-col">
-              <h4>Học vụ</h4>
-              <a onclick="showPage('schedule',null)">Thời khóa biểu</a>
-              <a onclick="showPage('grades',null)">Kết quả học tập</a>
-              <a onclick="showPage('register',null)">Đăng ký môn học</a>
-              <a onclick="showPage('exam',null)">Lịch thi</a>
-            </div>
-            <div class="footer-col">
-              <h4>Dịch vụ</h4>
-              <a onclick="showPage('finance',null)">Học phí</a>
-              <a onclick="showPage('docs',null)">Hồ sơ & Giấy tờ</a>
-              <a onclick="showPage('health',null)">Bảo hiểm Y tế</a>
-              <a onclick="toast('📚','Mở Thư viện số UIT')">Thư viện số</a>
-            </div>
-            <div class="footer-col">
-              <h4>Liên kết</h4>
-              <a onclick="toast('🌐','Mở website uit.edu.vn')">uit.edu.vn</a>
-              <a onclick="toast('📘','Mở trang Facebook UIT')">Facebook UIT</a>
-              <a onclick="toast('📺','Mở YouTube UIT')">YouTube UIT</a>
-              <a onclick="toast('❓','Mở Trung tâm hỗ trợ')">Trung tâm hỗ trợ</a>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <p>© 2026 Trường ĐH Công nghệ Thông tin — ĐHQG TP.HCM. Bảo lưu mọi quyền.</p>
-            <div class="footer-tags">
-              <span class="ftag">v3.2.1</span>
-              <span class="ftag">HK2 2025–26</span>
-              <span class="ftag">MSSV: 24521044</span>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div><!-- /pg-home -->
-
-    <!-- ════ OTHER PAGES (stubs) ═══════════════════════════════ -->
-    <div class="page" id="pg-news"><div class="page-inner"><div class="page-hdr"><h2>Tin tức</h2><p>Tổng hợp tin tức và hoạt động mới nhất</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-schedule"><div class="page-inner"><div class="page-hdr"><h2>Thời khóa biểu</h2><p>HK2 – Năm học 2025–2026 · MSSV: 24521044</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-grades"><div class="page-inner"><div class="page-hdr"><h2>Kết quả học tập</h2><p>MSSV: 24521044</p></div>
-      <div class="card">
-        <table>
-          <thead><tr><th>Môn học</th><th>Mã MH</th><th>TC</th><th>Giữa kỳ</th><th>Cuối kỳ</th><th>Tổng kết</th><th>Xếp loại</th></tr></thead>
-          <tbody>
-            <tr><td style="font-weight:700">Lập trình HĐT</td><td style="color:var(--brand);font-size:12px;font-weight:700">IT002</td><td>3</td><td>8.0</td><td>8.2</td><td><strong>8.1</strong></td><td><span style="background:var(--brand-l);color:var(--brand);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">B+</span></td></tr>
-            <tr><td style="font-weight:700">CTDL & Giải thuật</td><td style="color:var(--brand);font-size:12px;font-weight:700">IT003</td><td>3</td><td>6.0</td><td>6.6</td><td><strong>6.3</strong></td><td><span style="background:var(--amber-l);color:var(--amber);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">C+</span></td></tr>
-            <tr><td style="font-weight:700">Tiếng Nhật 2</td><td style="color:var(--brand);font-size:12px;font-weight:700">JAN02</td><td>4</td><td>8.5</td><td>7.7</td><td><strong>7.9</strong></td><td><span style="background:var(--brand-l);color:var(--brand);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">B+</span></td></tr>
-            <tr><td style="font-weight:700">Cấu trúc rời rạc</td><td style="color:var(--brand);font-size:12px;font-weight:700">MA004</td><td>3</td><td>7.0</td><td>7.0</td><td><strong>7.0</strong></td><td><span style="background:var(--brand-l);color:var(--brand);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">B</span></td></tr>
-            <tr><td style="font-weight:700">Xác suất thống kê</td><td style="color:var(--brand);font-size:12px;font-weight:700">MA005</td><td>3</td><td>7.5</td><td>6.9</td><td><strong>7.1</strong></td><td><span style="background:var(--brand-l);color:var(--brand);padding:2px 8px;border-radius:100px;font-size:11px;font-weight:700">B</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div></div>
-    <div class="page" id="pg-register"><div class="page-inner"><div class="page-hdr"><h2>Đăng ký môn học</h2><p>HK2 – Năm học 2025–2026</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-exam"><div class="page-inner"><div class="page-hdr"><h2>Lịch thi</h2><p>MSSV: 24521044</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-finance"><div class="page-inner"><div class="page-hdr"><h2>Học phí</h2><p>HK2 – 2025–2026</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-docs"><div class="page-inner"><div class="page-hdr"><h2>Hồ sơ & Giấy tờ</h2></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-extracurr"><div class="page-inner"><div class="page-hdr"><h2>Ngoại khóa & DRL</h2></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-health"><div class="page-inner"><div class="page-hdr"><h2>Bảo hiểm Y tế</h2></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-profile"><div class="page-inner"><div class="page-hdr"><h2>Hồ sơ cá nhân</h2><p>MSSV: 24521044</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-settings"><div class="page-inner"><div class="page-hdr"><h2>Cài đặt</h2></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-    <div class="page" id="pg-notifications"><div class="page-inner"><div class="page-hdr"><h2>Thông báo</h2><p>Cập nhật từ trường và hệ thống</p></div><div class="card" style="padding:40px;text-align:center;color:var(--txt3)">Đang xây dựng…</div></div></div>
-
-  </div><!-- /page-wrap -->
-</div><!-- /main -->
-
-<!-- ══ MOBILE BOTTOM NAV ════════════════════════════════════════ -->
-<nav id="bnav">
-  <button class="bn-btn active" data-pg="home" onclick="showPage('home',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    Trang chủ
-  </button>
-  <button class="bn-btn" data-pg="schedule" onclick="showPage('schedule',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/></svg>
-    TKB
-  </button>
-  <button class="bn-btn" data-pg="grades" onclick="showPage('grades',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    Kết quả
-  </button>
-  <button class="bn-btn" data-pg="finance" onclick="showPage('finance',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-    Học phí
-  </button>
-  <button class="bn-btn" onclick="openSidebar()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    Menu
-  </button>
-</nav>
-
-<!-- ══ TOAST ════════════════════════════════════════════════════ -->
-<div id="toast"><span id="toastIco">✅</span><span id="toastMsg">OK</span></div>
-
-<script>
-// ─── Auth / Login ────────────────────────────────────────────
-const USERS = {
-  '24521044': { password: 'uit2024', name: 'Trần Đức Mạnh', initials: 'TM', major: 'KTTT K24', role: 'student' },
-  '22520001': { password: 'admin',   name: 'Admin UIT',     initials: 'AD', major: 'Quản trị', role: 'admin'   },
-};
-let currentUser = null;
-
-function doLogin() {
-  const mssv = document.getElementById('lf-mssv').value.trim();
-  const pw   = document.getElementById('lf-pw').value;
-  const errEl = document.getElementById('loginError');
-  errEl.classList.remove('show');
-  if (!mssv || !pw) {
-    showLoginError('Vui lòng nhập đầy đủ MSSV và mật khẩu.'); return;
-  }
-  // Show spinner
-  const btn = document.getElementById('loginBtn');
-  btn.disabled = true;
-  document.getElementById('loginBtnText').textContent = 'Đang xác thực…';
-  document.getElementById('loginSpinner').style.display = 'block';
-  document.getElementById('loginArrow').style.display  = 'none';
-  // Simulate network delay
-  setTimeout(() => {
-    const user = USERS[mssv];
-    if (user && user.password === pw) {
-      currentUser = { mssv, ...user };
-      if (document.getElementById('lf-remember').checked) {
-        localStorage.setItem('uit_mssv', mssv);
-        localStorage.setItem('uit_pw', pw);
-      }
-      loginSuccess();
-    } else {
-      btn.disabled = false;
-      document.getElementById('loginBtnText').textContent = 'Đăng nhập';
-      document.getElementById('loginSpinner').style.display = 'none';
-      document.getElementById('loginArrow').style.display  = '';
-      showLoginError('MSSV hoặc mật khẩu không đúng. Vui lòng thử lại.');
-    }
-  }, 900);
-}
-
-function showLoginError(msg) {
-  document.getElementById('loginErrorMsg').textContent = msg;
-  document.getElementById('loginError').classList.add('show');
-}
-
-function loginSuccess() {
-  const screen = document.getElementById('login-screen');
-  screen.classList.add('fade-out');
-  setTimeout(() => { screen.style.display = 'none'; }, 560);
-  toast('🎉', `Xin chào, ${currentUser.name}!`);
-}
-
-function fillDemo() {
-  document.getElementById('lf-mssv').value = '24521044';
-  document.getElementById('lf-pw').value   = 'uit2024';
-  document.getElementById('loginError').classList.remove('show');
-  document.getElementById('lf-pw').focus();
-}
-
-function togglePw() {
-  const inp = document.getElementById('lf-pw');
-  const eye = document.getElementById('pwEye');
-  if (inp.type === 'password') {
-    inp.type = 'text';
-    eye.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/>';
-  } else {
-    inp.type = 'password';
-    eye.innerHTML = '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
-  }
-}
-
-function doSocialLogin(provider) {
-  toast('🔒', `Đăng nhập ${provider} đang được triển khai…`);
-}
-
-// Auto-fill if remembered
-window.addEventListener('DOMContentLoaded', () => {
-  const s = localStorage.getItem('uit_mssv'), p = localStorage.getItem('uit_pw');
-  if (s && p) {
-    document.getElementById('lf-mssv').value = s;
-    document.getElementById('lf-pw').value   = p;
-    document.getElementById('lf-remember').checked = true;
-  }
-});
-
-// ─── Logout ──────────────────────────────────────────────────
-function openLogoutModal() {
-  document.getElementById('logout-modal').classList.add('show');
-}
-function closeLogoutModal() {
-  document.getElementById('logout-modal').classList.remove('show');
-}
-function confirmLogout() {
-  localStorage.removeItem('uit_mssv');
-  localStorage.removeItem('uit_pw');
-  currentUser = null;
-  closeLogoutModal();
-  // Reset login form
-  document.getElementById('lf-mssv').value = '';
-  document.getElementById('lf-pw').value   = '';
-  document.getElementById('loginError').classList.remove('show');
-  document.getElementById('loginBtn').disabled = false;
-  document.getElementById('loginBtnText').textContent = 'Đăng nhập';
-  document.getElementById('loginSpinner').style.display = 'none';
-  document.getElementById('loginArrow').style.display = '';
-  const screen = document.getElementById('login-screen');
-  screen.classList.remove('fade-out');
-  screen.style.display = 'flex';
-  toast('👋', 'Đã đăng xuất thành công.');
-}
-
-// ─── Notification Panel ──────────────────────────────────────
-let notifOpen = false;
-function toggleNotifPanel() {
-  notifOpen = !notifOpen;
-  document.getElementById('notif-panel').classList.toggle('show', notifOpen);
-  if (notifOpen) closeProfileDropdown();
-}
-function closeNotifPanel() {
-  notifOpen = false;
-  document.getElementById('notif-panel').classList.remove('show');
-}
-function markAllRead() {
-  document.querySelectorAll('.np-item.unread').forEach(i => i.classList.remove('unread'));
-  document.getElementById('notifDot').style.display = 'none';
-  toast('✅', 'Đã đánh dấu tất cả đã đọc.');
-}
-
-// ─── Profile Dropdown ────────────────────────────────────────
-let profileOpen = false;
-function toggleProfileDropdown() {
-  profileOpen = !profileOpen;
-  document.getElementById('profile-dropdown').classList.toggle('show', profileOpen);
-  if (profileOpen) closeNotifPanel();
-}
-function closeProfileDropdown() {
-  profileOpen = false;
-  document.getElementById('profile-dropdown').classList.remove('show');
-}
-
-// ─── Search Overlay ──────────────────────────────────────────
-const SEARCH_ITEMS = [
-  { icon:'📅', label:'Thời khóa biểu', sub:'HK2 · 2025–2026', page:'schedule', color:'var(--brand-l)', sc:'var(--brand)' },
-  { icon:'📊', label:'Kết quả học tập', sub:'Xem điểm, bảng điểm', page:'grades', color:'var(--green-l)', sc:'var(--green)' },
-  { icon:'💳', label:'Học phí', sub:'Tra cứu, thanh toán', page:'finance', color:'var(--amber-l)', sc:'var(--amber)' },
-  { icon:'📋', label:'Đăng ký môn học', sub:'HK2 2025–2026', page:'register', color:'var(--violet-l)', sc:'var(--violet)' },
-  { icon:'🛡️', label:'Lịch thi', sub:'Thi cuối kỳ HK2', page:'exam', color:'var(--rose-l)', sc:'var(--rose)' },
-  { icon:'🌟', label:'Ngoại khóa & DRL', sub:'Điểm rèn luyện', page:'extracurr', color:'var(--teal-l)', sc:'var(--teal)' },
-  { icon:'📄', label:'Hồ sơ & Giấy tờ', sub:'Yêu cầu xác nhận', page:'docs', color:'var(--amber-l)', sc:'var(--amber)' },
-  { icon:'❤️', label:'Bảo hiểm Y tế', sub:'Thông tin BHYT', page:'health', color:'var(--rose-l)', sc:'var(--rose)' },
-  { icon:'📰', label:'Tin tức – Hoạt động', sub:'Thông báo trường', page:'news', color:'var(--brand-l)', sc:'var(--brand)' },
-  { icon:'👤', label:'Hồ sơ cá nhân', sub:'MSSV 24521044', page:'profile', color:'var(--surface2)', sc:'var(--txt3)' },
-];
-let searchOpen = false;
-function openSearch() {
-  searchOpen = true;
-  document.getElementById('search-overlay').classList.add('show');
-  setTimeout(() => document.getElementById('so-input').focus(), 80);
-  renderSearch('');
-}
-function closeSearch(e) {
-  if (e && e.target !== document.getElementById('search-overlay')) return;
-  searchOpen = false;
-  document.getElementById('search-overlay').classList.remove('show');
-  document.getElementById('so-input').value = '';
-}
-function renderSearch(q) {
-  const res = document.getElementById('so-results');
-  const items = q ? SEARCH_ITEMS.filter(i => i.label.toLowerCase().includes(q.toLowerCase()) || i.sub.toLowerCase().includes(q.toLowerCase())) : SEARCH_ITEMS;
-  if (!items.length) { res.innerHTML = '<div style="padding:24px;text-align:center;color:var(--txt3)">Không tìm thấy kết quả</div>'; return; }
-  res.innerHTML = `<div class="so-section"><div class="so-section-lbl">${q ? 'Kết quả tìm kiếm' : 'Tất cả tính năng'}</div>${
-    items.map(i => `<div class="so-item" onclick="closeSearch({target:null});showPage('${i.page}',null)"><div class="so-ic" style="background:${i.color};font-size:16px">${i.icon}</div><div><div class="so-item-lbl">${i.label}</div><div class="so-item-sub">${i.sub}</div></div></div>`).join('')
-  }</div>`;
-}
-function handleSearchKey(e) {
-  if (e.key === 'Escape') { searchOpen=false; document.getElementById('search-overlay').classList.remove('show'); }
-}
-
-// ─── State ──────────────────────────────────────────────────
-let isDark = false;
-let sidebarOpen = false;
-let sidebarCollapsed = false;
-const isDesktop = () => window.innerWidth >= 1024;
-
-// ─── Theme ──────────────────────────────────────────────────
-function toggleTheme() {
-  isDark = !isDark;
-  document.documentElement.classList.toggle('dark', isDark);
-  document.getElementById('themeIco').innerHTML = isDark
-    ? '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
-    : '<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
-  localStorage.setItem('dark', isDark);
-}
-if (localStorage.getItem('dark') === 'true') toggleTheme();
-
-// ─── Sidebar ────────────────────────────────────────────────
-function openSidebar() {
-  document.getElementById('sidebar').classList.add('mobile-open');
-  document.getElementById('overlay').classList.add('show');
-  document.getElementById('sbCloseBtn').style.display = 'flex';
-  document.body.classList.add('menu-open');
-  document.body.style.overflow = 'hidden';
-  sidebarOpen = true;
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('mobile-open');
-  document.getElementById('overlay').classList.remove('show');
-  document.body.classList.remove('menu-open');
-  document.body.style.overflow = '';
-  sidebarOpen = false;
-}
-function toggleSidebar() {
-  if (isDesktop()) {
-    sidebarCollapsed = !sidebarCollapsed;
-    document.getElementById('sidebar').classList.toggle('collapsed', sidebarCollapsed);
-    document.body.classList.toggle('sb-collapsed', sidebarCollapsed);
-  } else {
-    sidebarOpen ? closeSidebar() : openSidebar();
-  }
-}
-function updateCloseBtn() {
-  const btn = document.getElementById('sbCloseBtn');
-  btn.style.display = window.innerWidth < 1024 ? 'flex' : 'none';
-}
-updateCloseBtn();
-window.addEventListener('resize', () => {
-  updateCloseBtn();
-  if (isDesktop() && sidebarOpen) closeSidebar();
-});
-
-// ─── Page navigation ────────────────────────────────────────
-function showPage(pg, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById('pg-' + pg);
-  if (el) el.classList.add('active');
-  document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-  const activeNav = document.querySelector(`.nav-link[data-page="${pg}"]`);
-  if (activeNav) activeNav.classList.add('active');
-  document.querySelectorAll('.bn-btn[data-pg]').forEach(b => b.classList.remove('active'));
-  const activeBn = document.querySelector(`.bn-btn[data-pg="${pg}"]`);
-  if (activeBn) activeBn.classList.add('active');
-  if (!isDesktop()) closeSidebar();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ─── News tabs ───────────────────────────────────────────────
-function switchNewsTab(id, btn) {
-  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('on'));
-  document.querySelectorAll('.npanel').forEach(p => p.classList.remove('on'));
-  if (btn) btn.classList.add('on');
-  const panel = document.getElementById('np-' + id);
-  if (panel) panel.classList.add('on');
-}
-
-// ─── Toast ──────────────────────────────────────────────────
-let toastTimer;
-function toast(ico, msg) {
-  clearTimeout(toastTimer);
-  document.getElementById('toastIco').textContent = ico;
-  document.getElementById('toastMsg').textContent = msg;
-  const el = document.getElementById('toast');
-  el.classList.add('show');
-  toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
-}
-
-// ─── Global click close ──────────────────────────────────────
-document.addEventListener('click', (e) => {
-  if (notifOpen && !e.target.closest('#notif-panel') && !e.target.closest('#notifBtn')) closeNotifPanel();
-  if (profileOpen && !e.target.closest('#profile-dropdown') && !e.target.closest('#profileBtn') && !e.target.closest('.sb-user-row')) closeProfileDropdown();
-  if (document.getElementById('logout-modal').classList.contains('show') && e.target === document.getElementById('logout-modal')) closeLogoutModal();
-});
-
-// ─── Keyboard ───────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if ((e.ctrlKey || e.metaKey) && e.key === 'k') { e.preventDefault(); openSearch(); }
-  if (e.key === 'Escape') {
-    closeSidebar();
-    closeNotifPanel();
-    closeProfileDropdown();
-    if (searchOpen) { searchOpen=false; document.getElementById('search-overlay').classList.remove('show'); }
-    if (document.getElementById('logout-modal').classList.contains('show')) closeLogoutModal();
-  }
-  // Enter on login screen
-  if (document.getElementById('login-screen').style.display !== 'none' && e.key === 'Enter') doLogin();
+  if (document.getElementById('login-screen').classList.contains('visible') && e.key === 'Enter') doLogin();
 });
 </script>
 </body>
